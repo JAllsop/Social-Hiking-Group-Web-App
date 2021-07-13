@@ -1,4 +1,4 @@
-# Software Developement III Defered Group Project
+# Software Developement III Deferred Group Project
 
 ### Authors
 - James Allsop (1110612)
@@ -27,32 +27,36 @@ This group projet is the developement of a web application for organizing and sh
 - It must be possible to access a log from the website which captures all actions taken in each study group. Each entry in the log should contain the date and time of the action, the nature of the action, and identify the study group member who initiated the action.
 
 ## Implemented Functionality
-n/a  
+Not applicable until end of sprint 1
 
 ## Deployment, Integration and Testing
 - The web app is hosted and deployed on Microsoft Azure
 - Unit tests are implmeneted using [Jest](https://jestjs.io/)
 - Automated testing and code coverage is performed using [Travis CI](https://travis-ci.org/) and Coveralls
 
-## File Structure
+## File Structure  
+  
 📦documenation  
  ┣ 📂ADRs  
- ┗ 📂meetings  
- ┃ ┗ 📜July_12_Initial_Meeting_and_Discussion.pdf  
+ ┃ ┗ Significant model/design choices and reasons for the decisions made  
+ ┗ 📂sprints  
+ ┃ ┣ User story map   
+ ┃ ┣ Sprint 0 (i.e. Pre-Sprint 1) discussions and planned tasks  
+ ┃ ┗  Sprint retroactives meeting minutes, scrum board screenshots \& user story map   
 📦src  
  ┣ 📂client  
- ┃ ┣ 📂model  
- ┃ ┃ ┗   
  ┃ ┣ 📂resources  
- ┃ ┃ ┗   
+ ┃ ┃ ┗ multimedia and css files needed by  
+ ┃ ┣ 📂model  
+ ┃ ┃ ┗ abstracts html methods for API calls  
  ┃ ┣ 📂view_model  
- ┃ ┃ ┗   
+ ┃ ┃ ┗ utilises model methods to dynamically update views i.e. html pages  
  ┃ ┗ 📂views  
- ┃ ┃ ┗   
+ ┃ ┃ ┗ html pages served to app user  
  ┗ 📂server  
- ┃ ┣ 📂respositories  
- ┃ ┃ ┗   
- ┃ ┣ 📂routes  
- ┃ ┃ ┗   
- ┃ ┗ 📂services  
- ┃ ┃ ┗   
+ ┃ ┣ 📂repositories  
+ ┃ ┃ ┗  abstracts SQL server database access commands  
+ ┃ ┣ 📂services  
+ ┃ ┃ ┗  utilises repositories to create fetch relevant information for database  
+ ┃ ┗ 📂routes  
+ ┗ ━  ┗  utlises services to fetch information required by API calls for client 
