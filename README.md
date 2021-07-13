@@ -1,4 +1,4 @@
-# Software Developement III Deffered Group Project
+# Software Developement III Defered Group Project
 
 ### Authors
 - James Allsop (1110612)
