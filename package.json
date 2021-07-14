@@ -1,0 +1,19 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "### Authors - James Allsop (1110612) - Stephen Hove (1665879) - Sinokubonga Mazibuko (1090327) - Sinazo Thungo (1632198) - Lungelo Chala (1586897)",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/witseie-elen4010/2021-001-project-def.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/witseie-elen4010/2021-001-project-def/issues"
+  },
+  "homepage": "https://github.com/witseie-elen4010/2021-001-project-def#readme"
+}
