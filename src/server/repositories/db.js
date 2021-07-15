@@ -6,8 +6,8 @@ const config = {
   server: '', // add details
   database: '', // add details
   // Put login details in env. variables for security
-  user: process.env.app_username,
-  password: process.env.app_password,
+  user: process.env.db_username,
+  password: process.env.db_password,
   port: 1433,
   // Required for Azure
   options: {

@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - "LTS"
+sudo: false
+language: node_js
+node_js:
+- '14.17.0'
+branches:
+  only:
+  - master
+cache:
+  directories:
+  - node_modules
+before_install:
+- npm update
+install:
+- npm install
+script:
+- npm test
+- npm run coveralls
+before_deploy:
+  - mv .gitignore.prod .gitignore
+deploy:
+  provider: azure_web_apps
+  on:
+    all_branches: false
+after_deploy: npm run test:staging
+
+notifications:
+  email: false
