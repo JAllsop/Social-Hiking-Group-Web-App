@@ -59,4 +59,4 @@ Not applicable until end of sprint 1
  ┃ ┣ 📂services  
  ┃ ┃ ┗  utilises repositories to create fetch relevant information for database  
  ┃ ┗ 📂routes  
- ┗ ━  ┗  utlises services to fetch information required by API calls for client 
+ ┗ ━  ┗  utilises services to fetch information required by API calls for client 
