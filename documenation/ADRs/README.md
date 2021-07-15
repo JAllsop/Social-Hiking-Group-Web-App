@@ -126,14 +126,18 @@ Accessing the features of the hiking web app requires the user to have an accoun
 ## SOLUTION: 
 Require the user to be logged in order to access the webpage  
 
-# SQL Server Layout ADR  
+# SQL Server Group Membership Tracking ADR  
 
 ## CONTEXT: 
-
+The Hiking web app requires a means to store and retrieve information - an SQL Server database is used to satisfy this requirement.
 
 ## PROBLEM: 
- 
+Tracking the membERship of groups in the app is difficult to in an SQL database structure as the number of members in a group is not fixed.
 
 ## SOLUTION: 
+Implementing a [many-to-many](https://support.airtable.com/hc/en-us/articles/218734758-Airtable-s-guide-to-many-to-many-relationships#manytomany) relationship enables the tracking of group members through the use of a "junction table" (example below)  
 
-
+<img src="https://support.airtable.com/hc/en-us/article_attachments/206766528/Screen_Shot_2016-04-26_at_3.03.32_PM.png"
+     alt="Markdown Monster icon"
+     style="float: left; margin-right: 10px;" />
+Airtable. (2021). many to many relationship. Retrieved from https://support.airtable.com/hc/en-us/article_attachments/206766528/Screen_Shot_2016-04-26_at_3.03.32_PM.png
