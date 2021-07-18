@@ -3,6 +3,10 @@
 const express = require('express')
 const app = express()
 const path = require('path')
+const socket = require('socket.io');
+const server = http.createServer(app);
+const io = socket(server);
+const appSockets = require('./server/services/AppSockets')
 
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
 
@@ -12,3 +16,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.listen(3000)
 console.log('Express server running on port 3000')
+
+io.on("connection", appSockets.connection);
+io.on("error", console.error);
