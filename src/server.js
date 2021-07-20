@@ -7,6 +7,7 @@ const socket = require('socket.io');
 const server = http.createServer(app);
 const io = socket(server);
 const appSockets = require('./server/services/AppSockets')
+const messageRouter = require('.server/routes/message-route')
 
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
 
@@ -19,3 +20,5 @@ console.log('Express server running on port 3000')
 
 io.on("connection", appSockets.connection);
 io.on("error", console.error);
+
+app.use("/messages", messageRouter);

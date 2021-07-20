@@ -53,7 +53,7 @@ body{
     padding: 2px;
     width:300px;
     height:100px;
-    background-color: coral;
+    background-color: gray;
 }
 
 .chat-left{
@@ -62,5 +62,18 @@ body{
     padding: 2px;
     width:300px;
     height:100px;
-    background-color: yellow;
+    background-color: lightgray;
+}
+
+.s{
+    font: italic small-caps bold 12px/30px Georgia, serif;
+}
+
+.nm{
+    font: 15px Arial, sans-serif;
+    text-decoration: underline;
+}
+
+.namepadding{
+    padding-left: 17px;
 }
