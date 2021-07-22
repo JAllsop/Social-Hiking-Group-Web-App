@@ -3,10 +3,10 @@
 
 <head>
     <title>Group Chat Home Page</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="../viewModel/createGroup.js"></script>
+    <script type='text/javascript' src="../view_model/createGroup.js" ></script>
 
     <script> 
 
@@ -62,7 +62,7 @@
 </style>
 
 <body >
-    <form id = "group-details" name='group-info' action="/group/addGroup" method="post">
+    <form id = "group-details" name='group-info' action="/group/add-group" method="post">
         <label for="groupName"class="error" >Group Name:</label><br>
         <input type="text" id="groupName_" name = "groupName" placeholder="Enter group name ..." class="form-control" size = '25' minlength="2" maxlength="20"  pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" ><br>
 
