@@ -38,13 +38,14 @@ body{
     margin: 60px;
 }
 
-#bottom-bar{
+.bottom-bar{
     position:absolute;
-    bottom:0;
+    bottom:0;    
 }
 
-#chat-area{
+.chat-area{
     position:relative;
+    
 }
 
 .chat-right{

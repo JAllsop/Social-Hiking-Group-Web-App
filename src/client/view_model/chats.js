@@ -8,28 +8,97 @@ socket.on("error", console.error);
 const sendButton = document.querySelector('send-button');
 
 sendButton.addEventListener('click', event => {
+    
    
 });
 
 
-displaySentMessage = (sender="me", content, dateTimeObject) =>{
-    let timeString = formatAMPM(messageDate);
-    let dateString = formatDate(messageDate);
-    let messagesSection  = document.getElementById( "message-section" );
+const displaySentMessage = (sender="me", content, dateTimeObject) =>{
 
+    let timeString = formatAMPM(dateTimeObject);
+    let dateString = formatDate(dateTimeObject);
+    let messagesSection  = document.getElementById("message-area");
+    let messageDiv = document.createElement('div');
+    messageDiv.setAttribute("class", "ml-auto position-relative chat-right text-white");
+
+    let senderDiv = document.createElement('div');
+    senderDiv.setAttribute("class", "namepadding")
+
+    let contentDiv = document.createElement('div');
+    contentDiv.setAttribute("class","d-flex align-items-center")
+
+    let dateDiv = document.createElement('div');
+    dateDiv.setAttribute("class","position-absolute bottom-0 end-0" )
+
+    let senderPTag = document.createElement('p');
+    senderPTag.setAttribute("class","nm")
+
+    let dateTextPTag = document.createElement('p');
+    dateTextPTag.setAttribute("class", "text-small mb-0 text-white")
+
+    let messageText = document.createTextNode(`${content}`);
+    let senderName = document.createTextNode(`${sender}`);
     let dateText = document.createTextNode(`${timeString} | ${dateString}`);
+
+    dateTextPTag.appendChild(dateText)
+    senderPTag.appendChild(senderName)
+
+    dateDiv.appendChild(dateTextPTag)
+    contentDiv.appendChild(messageText)
+    senderDiv.appendChild(senderPTag)
+
+    messagesSection.appendChild(dateDiv)
+    messagesSection.appendChild(contentDiv)
+    messagesSection.appendChild(senderPTag)
+    
+    
+    body.append(messagesSection);
 
 }
 
-displayRecievedMessage = (sender,content, dateTimeObject) =>{
-    let timeString = formatAMPM(messageDate);
-    let dateString = formatDate(messageDate);
-    let messagesSection  = document.getElementById( "message-section" );
+const displayRecievedMessage = (sender,content, dateTimeObject) =>{
+    let timeString = formatAMPM(dateTimeObject);
+    let dateString = formatDate(dateTimeObject);
+    let messagesSection  = document.getElementById("message-area");
+    let messageDiv = document.createElement('div');
+    messageDiv.setAttribute("class", "mr-auto position-relative chat-left text-white");
+
+    let senderDiv = document.createElement('div');
+    senderDiv.setAttribute("class", "namepadding")
+
+    let contentDiv = document.createElement('div');
+    contentDiv.setAttribute("class","d-flex align-items-center")
+
+    let dateDiv = document.createElement('div');
+    dateDiv.setAttribute("class","position-absolute bottom-0 end-0" )
+
+    let senderPTag = document.createElement('p');
+    senderPTag.setAttribute("class","nm")
+
+    let dateTextPTag = document.createElement('p');
+    dateTextPTag.setAttribute("class", "text-small mb-0 text-white")
+
+    let messageText = document.createTextNode(`${content}`);
+    let senderName = document.createTextNode(`${sender}`);
     let dateText = document.createTextNode(`${timeString} | ${dateString}`);
+
+    dateTextPTag.appendChild(dateText)
+    senderPTag.appendChild(senderName)
+
+    dateDiv.appendChild(dateTextPTag)
+    contentDiv.appendChild(messageText)
+    senderDiv.appendChild(senderPTag)
+
+    messagesSection.appendChild(dateDiv)
+    messagesSection.appendChild(contentDiv)
+    messagesSection.appendChild(senderPTag)
+    
+    
+    body.append(messagesSection);
     
 }
 
-formatAMPM = (date) => {
+const formatAMPM = (date) => {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var ampm = hours >= 12 ? 'PM' : 'AM';

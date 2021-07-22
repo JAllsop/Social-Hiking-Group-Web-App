@@ -33,7 +33,7 @@
                   
                 </div>
 
-                <div id="chat-area" class="col-7 div-border-msg">
+                <div id="chat-area" class="col-7 div-border-msg position-relative">
                     <div id="top-bar" class="row justify-content-between">
                         <div id="chat-group-name" class="col-6">
                            <h2> Group name </h2>
@@ -52,41 +52,43 @@
                         </div>
                     </div>
                     <div id="message-area">
-                        <div id="message-main-div-left" class="chat-left d-flex justify-content-start">
-                            <div id="sender-name">
-                                Sino Mazibuko
+                        <div id="message-main-div-left" class="mr-auto chat-left position-relative text-white">
+                            <div id="sender-name" class="namepadding">
+                                <p class="nm"> Sino Mazibuko </p>
                             </div>
-                            <div id="message-content">
+                            <div id="message-content" class="d-flex align-items-center">
                                 This is a message oh!
                             </div>
-                            <div id="message-time-date">
-                                23/05/2021
+                            <div id="message-time-date" class="position-absolute bottom-0 end-0">
+                                <p class="text-small mb-0 text-white"> 23/05/2021 </p>
                             </div>
                             
                         </div>
                         <br>
                         <br>
-                         <div id="message-main-div-right" class="position-relative chat-right">
+                        <div id="message-main-div-right" class="ml-auto position-relative chat-right text-white">
                             <div id="sender-name-right" class="namepadding">
-                               <p class="nm"> Sino Mazibuko </p>
+                               <p class="nm"> Me </p>
                             </div>
                             <div id="message-content-right" class="d-flex align-items-center">
                                  This is a message oh!
                             </div>
                             <div id="message-time-date-right" class="position-absolute bottom-0 end-0">
-                                <p class="s"> 23/05/2021 </p>
+                                <p class="text-small mb-0 text-white"> 23/05/2021 </p>
                             </div>
                         </div>
                     </div>
-                    <div id="bottom-bar" class="row justify-content-between">
+                    <div>
+                        <div id="bottom-bar" class="clearfix">
 
-                            <div id="text-box" class="col-9 form-group amber-textarea active-amber-textarea">
-                                <textarea class="md-textarea form-control" id="message-content" rows="4"></textarea> 
-                              
-                            </div>
-                            <div id="send-bottom" class="col-3">
-                              <button id="send-button" type="button" class="btn btn-success"> send </button>
-                            </div>
+                                <span id="text-box" class="float-left w-75">
+                                    <textarea class="md-textarea form-control" id="message-content" rows="4"></textarea> 
+
+                                </span>
+                                <span id="send-bottom" class="float-right">
+                                <button id="send-button" type="button" class="btn btn-success"> send </button>
+                                </span>
+                        </div>
                     </div>
                     
                 </div>
