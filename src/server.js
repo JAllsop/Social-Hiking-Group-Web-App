@@ -1,6 +1,7 @@
 'use strict'
 
 const express = require('express')
+const cors = require('cors');
 const app = express()
 const path = require('path')
 const socket = require('socket.io');
@@ -8,6 +9,14 @@ const server = http.createServer(app);
 const io = socket(server);
 const appSockets = require('./server/services/AppSockets')
 const messageRouter = require('.server/routes/message-route')
+
+app.use(cors({
+    "origin": "*",
+    "methods": ["GET","HEAD","PUT","PATCH","POST","DELETE", "OPTIONS"],
+    "headers": ["origin", "x-requested-with", "accept", "create", "request", "doPoll", "poll", "open", "doOpen"],
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  }));
 
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
 

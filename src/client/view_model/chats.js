@@ -1,4 +1,3 @@
-import ClientSockets from '../model/client-sockets'
 import { io } from "socket.io-client";
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
@@ -8,7 +7,9 @@ socket.on("error", console.error);
 const sendButton = document.querySelector('send-button');
 
 sendButton.addEventListener('click', event => {
-    
+   let message = message-content.value
+   const dateObject = new Date();
+   displaySentMessage("Sino Mazibuko",message,dateObject)
    
 });
 
@@ -47,12 +48,21 @@ const displaySentMessage = (sender="me", content, dateTimeObject) =>{
     contentDiv.appendChild(messageText)
     senderDiv.appendChild(senderPTag)
 
-    messagesSection.appendChild(dateDiv)
-    messagesSection.appendChild(contentDiv)
-    messagesSection.appendChild(senderPTag)
+    messageDiv.appendChild(dateDiv)
+    messageDiv.appendChild(contentDiv)
+    messageDiv.appendChild(senderPTag)
+
+    let breakTag1 = document.createElement('br')
+    let breakTag2 = document.createElement('br')
+
+    messagesSection.appendChild(messageDiv)
+    messagesSection.appendChild(breakTag1)
+    messagesSection.appendChild(breakTag2)
     
+  
     
     body.append(messagesSection);
+    
 
 }
 
@@ -89,11 +99,17 @@ const displayRecievedMessage = (sender,content, dateTimeObject) =>{
     contentDiv.appendChild(messageText)
     senderDiv.appendChild(senderPTag)
 
-    messagesSection.appendChild(dateDiv)
-    messagesSection.appendChild(contentDiv)
-    messagesSection.appendChild(senderPTag)
-    
-    
+    messageDiv.appendChild(dateDiv)
+    messageDiv.appendChild(contentDiv)
+    messageDiv.appendChild(senderPTag)
+
+    let breakTag1 = document.createElement('br')
+    let breakTag2 = document.createElement('br')
+
+    messagesSection.appendChild(messageDiv)
+    messagesSection.appendChild(breakTag1)
+    messagesSection.appendChild(breakTag2)
+
     body.append(messagesSection);
     
 }
