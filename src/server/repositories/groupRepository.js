@@ -18,3 +18,9 @@ export async function create(group) {
   sql += `VALUES ('${group.groupName}','${group.description}')`
   return await dbQuery(sql)
 }
+
+export async function get(group) {
+  let sql = 'SELECT * FROM dbo.GROUPS WHERE '
+  sql += `groupName='${group}'`
+  return await dbQuery(sql)
+}
