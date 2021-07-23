@@ -1,17 +1,29 @@
+// import { io } from "local-module/socket.io-client";
+
 import { io } from "socket.io-client";
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
-socket.on("connection", ClientSockets.connection);
+socket.on("connection", ()=>{
+    console.log("connection made")
+})
 socket.on("error", console.error);
+socket.on("retrieveGroupMessages", (groupID) =>{
+  
+})
 
-const sendButton = document.querySelector('send-button');
 
-sendButton.addEventListener('click', event => {
+document.getElementById('send-button').addEventListener('onclick', () => {
+   console.log("Send Button Clicked!")
    let message = message-content.value
    const dateObject = new Date();
-   displaySentMessage("Sino Mazibuko",message,dateObject)
+   let sender = "Sino Mazibuko"
+   displaySentMessage(sender,message,dateObject);
+     let data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
+   socket.on("sendTextMessage", (data)=>{
+       socket.broadcast.emit(data)
+   })
    
-});
+})
 
 
 const displaySentMessage = (sender="me", content, dateTimeObject) =>{
@@ -127,7 +139,7 @@ const formatAMPM = (date) => {
 
   
 
-formatDate = (date) =>{
+const formatDate = (date) =>{
     var day = date.getDate();
     var month = date.getMonth();
     var year = date.getFullYear();
@@ -136,3 +148,4 @@ formatDate = (date) =>{
 }
 
 
+module.exports = {formatAMPM, formatDate}
