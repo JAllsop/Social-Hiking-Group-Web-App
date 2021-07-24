@@ -10,5 +10,11 @@ app.use('/cdn', express.static(path.join(__dirname, 'client')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.listen(3000)
+// Loading Routes
+const userRoutes = require('../src/server/routes/userRoutes.js')
+
+// Mounting routes
+app.use('/user', userRoutes)
+
+app.listen(3010)
 console.log('Express server running on port 3000')
