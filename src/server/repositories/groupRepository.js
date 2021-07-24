@@ -14,8 +14,8 @@ const dbQuery = async (sql) => {
 }
 
 export async function create(group) {
-  let sql = 'INSERT INTO dbo.GROUPS (groupName,groupDescription)'
-  sql += `VALUES ('${group.groupName}','${group.description}')`
+  let sql = 'INSERT INTO dbo.GROUPS (groupName,groupDescription,generalLocation)'
+  sql += `VALUES ('${group.groupName}','${group.description}','${group.location}')`
   return await dbQuery(sql)
 }
 
