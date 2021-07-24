@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // loading routers
 import homeRouter from './server/routes/homeRoute.js'
-import groupRouter from './server/routes/groupRotes.js'
+import groupRouter from './server/routes/groupRoutes.js'
 
 //mounting routers
 app.use('/',homeRouter)

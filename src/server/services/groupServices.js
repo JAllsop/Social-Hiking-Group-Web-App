@@ -11,3 +11,8 @@ export async function isGroupNameAvailable (group_name,callback) {
   if(result !='') callback(true)
   else callback(false)
 }
+
+export async function getLast(callback) {
+  let result = await db.getLast()
+  if(result) callback(result)
+}

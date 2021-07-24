@@ -17,6 +17,8 @@ router.get('/search-group', function (req, res) {
 
 router.post('/add-group', function (req, res) {
     groupService.createGroup(req.body)
+    //res.redirect('/groupchat/'+`${req.body.groupName}`)
+    res.redirect('/group/group-homePage')
 })
 
 router.get('/validate-groupName/:group_name', function (req, res) {
@@ -27,6 +29,21 @@ router.get('/validate-groupName/:group_name', function (req, res) {
         else res.send(false)
    })
 
+})
+
+router.get('/group-homePage', (req,res)=>{
+    res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupChat.html'))
+})
+
+router.get('/get-groupName',(req,res)=>{
+    groupService.getLast(function getGroupname(groupName) {
+        res.send(groupName)
+        console.log(groupName)
+    })
+})
+
+router.get('/information',(req,res)=>{
+    res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupInformation.html'))
 })
 
 export default router;

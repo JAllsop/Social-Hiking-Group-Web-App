@@ -24,3 +24,8 @@ export async function get(group) {
   sql += `groupName='${group}'`
   return await dbQuery(sql)
 }
+
+export async function getLast() {
+  let sql = 'SELECT TOP (1) [groupName]  FROM [dbo].[GROUPS]'
+  return await dbQuery(sql)
+}
