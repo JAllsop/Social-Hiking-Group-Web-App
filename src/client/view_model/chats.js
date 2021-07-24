@@ -1,6 +1,7 @@
 // import { io } from "local-module/socket.io-client";
 
 import { io } from "socket.io-client";
+import {retrieveGroupMessages} from "../model/chat-functions"
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
 socket.on("connection", ()=>{
@@ -8,22 +9,34 @@ socket.on("connection", ()=>{
 })
 socket.on("error", console.error);
 socket.on("retrieveGroupMessages", (groupID) =>{
-  
+   retrieveGroupMessages(groupID)
+   .then(data=> console.log(data)) // display messages for respective groups.
+})
+socket.on("sendTextMessage", (data)=>{
+    displayRecievedMessage(data.sender,data.content,data.date)
+
+})
+socket.on("subscribe", (groupID) =>{
+
+    socket.emit("groupID", groupID)
 })
 
+$(document).ready(function(){
+    $("#button-send").click(function(){
+        console.log("Send Button Clicked!")
+        let message = $("#message-content").val()
+        const dateObject = new Date();
+        let sender = "Sino Mazibuko"
+        displaySentMessage(sender,message,dateObject);
+            let data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
+        socket.on("sendTextMessage", (data)=>{
+            socket.broadcast.emit(data)
+        })
 
-document.getElementById('send-button').addEventListener('onclick', () => {
-   console.log("Send Button Clicked!")
-   let message = message-content.value
-   const dateObject = new Date();
-   let sender = "Sino Mazibuko"
-   displaySentMessage(sender,message,dateObject);
-     let data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
-   socket.on("sendTextMessage", (data)=>{
-       socket.broadcast.emit(data)
-   })
+    })
    
 })
+
 
 
 const displaySentMessage = (sender="me", content, dateTimeObject) =>{

@@ -19,9 +19,9 @@ class AppSockets{
             client.emit("groupMessage", res)
            
          });
-         client.on("subscribe", (roomID) => {
+         client.on("subscribe", (groupID) => {
         
-            client.join(roomID);
+            client.join(groupID);
           });
 
 
