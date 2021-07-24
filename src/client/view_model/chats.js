@@ -1,7 +1,8 @@
-// import { io } from "local-module/socket.io-client";
+
 
 import { io } from "socket.io-client";
 import {retrieveGroupMessages} from "../model/chat-functions"
+
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
 socket.on("connection", ()=>{
@@ -22,15 +23,16 @@ socket.on("subscribe", (groupID) =>{
 })
 
 $(document).ready(function(){
-    $("#button-send").click(function(){
+    $("#button-addon2").click(function(){
         console.log("Send Button Clicked!")
         let message = $("#message-content").val()
         const dateObject = new Date();
         let sender = "Sino Mazibuko"
         displaySentMessage(sender,message,dateObject);
-            let data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
+            
         socket.on("sendTextMessage", (data)=>{
-            socket.broadcast.emit(data)
+           data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
+           socket.broadcast.emit(data)
         })
 
     })
