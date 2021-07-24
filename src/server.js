@@ -1,14 +1,13 @@
 'use strict'
-
 const express = require('express')
-const cors = require('cors');
+import cors from 'cors';
 const app = express()
-const path = require('path')
-const socket = require('socket.io');
+const path = require('path');
+import socket from 'socket.io';
 const server = http.createServer(app);
 const io = socket(server);
-const appSockets = require('./server/services/AppSockets')
-const messageRouter = require('.server/routes/message-route')
+import { connection } from './server/services/AppSockets';
+import messageRouter from '.server/routes/message-route';
 
 app.use(cors({
     "origin": "*",
@@ -21,13 +20,13 @@ app.use(cors({
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
 
 // tell Express to use bodyParser for JSON and URL encoded form bodies
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(json())
+app.use(urlencoded({ extended: true }))
 
 app.listen(3000)
 console.log('Express server running on port 3000')
 
-io.on("connection", appSockets.connection);
+io.on("connection", connection);
 io.on("error", console.error);
 
 app.use("/messages", messageRouter);

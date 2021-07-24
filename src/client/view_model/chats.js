@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 
 
-const displaySentMessage = (sender="me", content, dateTimeObject) =>{
+const displaySentMessage = (sender, content, dateTimeObject) =>{
 
     let timeString = formatAMPM(dateTimeObject);
     let dateString = formatDate(dateTimeObject);
@@ -87,7 +87,6 @@ const displaySentMessage = (sender="me", content, dateTimeObject) =>{
     messagesSection.appendChild(breakTag2)
     
   
-    
     body.append(messagesSection);
     
 
