@@ -78,3 +78,10 @@ body{
 .namepadding{
     padding-left: 17px;
 }
+
+.type-space-position{
+    position: absolute;
+    bottom: 0;
+    width: 580px;
+    padding: 2px;
+}
