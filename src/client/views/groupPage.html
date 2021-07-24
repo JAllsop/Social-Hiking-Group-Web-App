@@ -14,8 +14,50 @@
 
     <title>View Group Info</title>
     <script defer src="groupPage.js"></script>
-  </head>
-  <body>
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+    fetch('/view/fetch-details')
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(_value){
+        display(_value)
+        console.log(_value)
+
+    })
+    }, false);
+
+  function display(_value){
+    // console.log(_value.groupN)
+    let groupname = document.createElement('p')
+    let text1 = document.createTextNode(`${_value[0].groupName}`)
+    let groupnameTitle = document.createTextNode('Group name: ')
+    groupname.appendChild(groupnameTitle)
+    groupname.appendChild(text1)
+    document.getElementsByTagName('body')[0].appendChild(groupname)
+
+    let groupDescription = document.createElement('p')
+    let text2 = document.createTextNode(`${_value[0].groupDescription}`)
+    let groupDescriptionTitle = document.createTextNode('Group description: ')
+    groupDescription.appendChild(groupDescriptionTitle)
+    groupDescription.appendChild(text2)
+
+    document.getElementsByTagName('body')[0].appendChild(groupDescription)
+
+    let groupLocation = document.createElement('p')
+    let text3 = document.createTextNode(`${_value[0].generalLocation}`)
+    let groupLocationTitle = document.createTextNode('Group location: ')
+    groupLocation.appendChild(groupLocationTitle)
+    groupLocation.appendChild(text3)
+
+    document.getElementsByTagName('body')[0].appendChild(groupLocation)
+
+  } 
+</script>  
+
+</head>
+<body>
+<!--     
     <div class ="groupname">
       <h1>Group Name</h1>
     </div>
@@ -37,24 +79,12 @@
         <button>Add Member</button>
         <br/>
       </div>
-      <div class = "date">Date Created:
-        <br/>
-        <br/>
-        <div class = "getDate">
-          
-        </div>
-      </div>
+      
       <div class = "search">Search User:
         <br/>
         <button>Search</button>
         <br/>
       </div>
-      <div class = "activities">Activities Completed:
-        <br/>
-        <br/>
-        <div class = "getActivities">
-        </div>
-      </div>
-    </div>
+    </div> -->
   </body>
 </html>
