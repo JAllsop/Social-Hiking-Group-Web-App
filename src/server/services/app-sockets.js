@@ -1,7 +1,7 @@
 'use strict'
 const MessageService = require('../services/message-service').default;
 class AppSockets{
-    application(client){
+     connection = function(client){
 
         client.on("sendTextMessage", (message) => {
             req = {"messageContent":message.messageText, "date":message.messageDate, "sender":message.senderID}

@@ -7,8 +7,8 @@ const socket = require('socket.io');
 const http = require('http')
 const server = http.createServer(app);
 const io = socket(server);
-const AppSockets  = require('./server/services/app-sockets').default;
-const messageRouter = require('./server/routes/message-route').default;
+const AppSockets  = require('./server/services/app-sockets');
+const messageRouter = require('./server/routes/message-route');
 
 app.use(cors({
     "origin": "*",
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }))
 app.listen(3000)
 console.log('Express server running on port 3000')
 
-io.on("connection", AppSockets.application);
+io.on("connection", AppSockets.connection);
 io.on("error", console.error);
 
 app.use("/messages", messageRouter);
