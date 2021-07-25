@@ -1,6 +1,8 @@
 'use strict'
 const io = require ("socket.io-client")
 const retrieveGroupMessages = require("../model/chat-functions")
+const formatAMPM = require("./chat-formatting")
+const formatDate = require("./chat-formatting")
 
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
@@ -23,7 +25,10 @@ socket.on("subscribe", (groupID) =>{
 
 
 
-$(document).ready(function(){
+document.addEventListener('DOMContentLoaded', (event) => {
+    event.target.addEventListener('click', ()=>{
+        console.log("button click")
+    })
     const sendButton = document.querySelector('#button-addon2')
     sendButton.addEventListener('click',()=>{
         console.log("Send Button Clicked!")
@@ -142,26 +147,3 @@ const displayRecievedMessage = (sender,content, dateTimeObject) =>{
     
 }
 
-const formatAMPM = (date) => {
-    var hours = date.getHours();
-    var minutes = date.getMinutes()
-    var ampm = hours >= 12 ? 'PM' : 'AM'
-    hours = hours % 12
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes
-    var strTime = hours + ':' + minutes + ' ' + ampm
-    return strTime
-  }
-
-  
-
-const formatDate = (date) =>{
-    var day = date.getDate()
-    var month = date.getMonth()
-    var year = date.getFullYear()
-
-    return `${day}/${month}/${year}`
-}
-
-
-module.exports = [formatAMPM, formatDate]
