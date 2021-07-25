@@ -38,7 +38,6 @@ router.get('/group-homePage', (req,res)=>{
 router.get('/get-groupName',(req,res)=>{
     groupService.getLast(function getGroupname(groupName) {
         res.send(groupName)
-        console.log(groupName)
     })
 })
 

@@ -4,12 +4,7 @@
 <head>
     <title>Group Chat Home Page</title>
     <meta charset="utf-8"/>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/cdn/view_model/createGroup.js" ></script>
-    <!-- <script defer src='../model/validateGroup.js' ></script> -->
 
     <script> 
 
@@ -31,42 +26,27 @@
             }
         }
 
-$(document).ready(function(){
+        function validateName(){
+            let groupname_ = document.getElementById('groupName_').value
+            let groupField = document.getElementById('groupName_')
 
-var submit_bt = document.getElementById('submitGCId');
+            if(groupname_ != ''){
+            fetch('/group/validate-groupName/'+`${groupname_}`)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(_value){
+                if(_value){
+                    document.getElementById('group-details').reset()
+                    groupField.setCustomValidity('Group name already exists')
+                }
+                else {
+                    groupField.setCustomValidity('');
+                }
 
-$('#groupName_').on('focusout', function(){
-
-  if($('#groupName_').val() != ""){
-
-        let groupname_ = $('#groupName_').val();
-
-        fetch('/group/validate-groupName/'+`${groupname_}`)
-         .then(function(response){
-             return response.json()
-         })
-         .then(function(_value){
-             if(_value == true){
-
-                $("#groupIDFields").trigger("reset");
-                //submit-groupDetails.disabled = true;
-
-                $('.error').text('Group name already exists.');
-                $('.error').fadeIn('slow');
-             }
-             else{
-                $('.error').fadeOut('slow');
-             }
-         })                  
-
-    }else{
-        $('.error').text('Group name equired..!');
-        $('.error').fadeIn("slow");
-    }
-
-});
-
-});
+            })
+            }
+        }
 
     </script>
 
@@ -104,7 +84,7 @@ $('#groupName_').on('focusout', function(){
 <body >
     <form id = "group-details" name='group-info' action="/group/add-group" method="post">
         <label for="groupName"class="error" >Group Name:</label><br>
-        <input type="text" id="groupName_" name = "groupName" placeholder="Enter group name ..." class="form-control" size = '25' minlength="2" maxlength="20"  pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" ><br>
+        <input type="text" id="groupName_" name = "groupName" placeholder="Enter group name ..." class="form-control" size = '25' minlength="2" maxlength="20"  pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" onfocusout="validateName()" ><br>
 
         <label for="location" >Location:</label><br>
         <input type="text" id="location" name= "location" placeholder="Enter general location for hiking trails ..." size = '25' minlength="20" maxlength="50" pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" ><br>
