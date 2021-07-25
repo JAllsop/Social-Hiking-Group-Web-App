@@ -21,12 +21,12 @@ router.get('/groupList/:filter', function (req,res) {
         })
     }
 
-    // if(req.params.filter === 'groupLocation') {
-    //     groupService.getGroupList(req.params.filter,function(locationList) {
-    //         res.send(locationList)            
-    //     })
+    if(req.params.filter === 'generalLocation') {
+        groupService.getGroupList(generalLocation,function(locationList) {
+            res.send(locationList)            
+        })
         
-    // }
+    }
 })
 
 export default router;
