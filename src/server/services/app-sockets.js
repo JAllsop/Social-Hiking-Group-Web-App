@@ -1,7 +1,7 @@
 'use strict'
-import MessageService from '../services/message-service';
+const MessageService = require('../services/message-service').default;
 class AppSockets{
-    connection(client){
+    application(client){
 
         client.on("sendTextMessage", (message) => {
             req = {"messageContent":message.messageText, "date":message.messageDate, "sender":message.senderID}
@@ -29,4 +29,4 @@ class AppSockets{
 
 }
 
-export default new AppSockets();
+module.exports = new AppSockets();

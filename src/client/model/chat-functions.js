@@ -1,8 +1,9 @@
 'use strict'
 
-import { response } from "express"
+const express = require("express")
+const response = express().response
 
-retrieveGroupMessages = async (groupID) =>{
+const retrieveGroupMessages = async (groupID) =>{
     let results = []
     data = {"groupID": groupID}
     const response = await fetch('http://localhost:3000/messages/get-messages',{
@@ -19,4 +20,4 @@ retrieveGroupMessages = async (groupID) =>{
     })   
 }
 
-export default retrieveGroupMessages
+module.exports = retrieveGroupMessages

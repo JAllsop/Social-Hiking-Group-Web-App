@@ -1,12 +1,12 @@
-import express from 'express';
+const express = require('express');
 // controllers
-import MessageService from '../services/message-service';
+const MessageService = require('../services/message-service');
 
 const router = express.Router();
 
 router
-  .post('/save', MessageService.saveMessage)
+  .post('/save', MessageService.postGroupMessage)
   .get('/get-messages', MessageService.getGroupMessages)
   
 
-export default router;
+  module.exports = router;

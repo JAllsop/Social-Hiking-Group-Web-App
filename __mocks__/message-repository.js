@@ -28,3 +28,5 @@ getGroupMessages = (res,req) =>{
 
     return Promise.resolve(res)
 }
+
+module.exports = [postGroupMessage, getGroupMessages]

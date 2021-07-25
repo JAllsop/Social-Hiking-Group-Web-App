@@ -1,9 +1,13 @@
-import assert from "assert"
+
+const assert =  require("assert")
+jest.mock("../../../__mocks__/message-repository")
 
 describe("Post message and await an OK response", ()=>{
+
+    it("returns AM time", () =>{
+    const dummyDate = new Date(2018, 11, 24, 10, 33);
     let messageOneGroupOne = {"messageID":1, "content":"Sino sent a message", "senderID":2,"dateTime":dummyDate, "groupID":1}
 
-    let results = []
     let outcome = []
 
     postGroupMessage(results, messageOneGroupOne)
@@ -12,7 +16,7 @@ describe("Post message and await an OK response", ()=>{
     })
 
     assert(outcome, "OK")
-
+   })
 
 })
 

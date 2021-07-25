@@ -1,4 +1,4 @@
-import db from "./db.js"
+const db = require("./db.js")
 
 class MessageRepository {
     // ...    
@@ -44,4 +44,4 @@ async postGroupMessage(req,res){
 
 };
 
-export default new MessageRepository();
+module.exports = new MessageRepository();

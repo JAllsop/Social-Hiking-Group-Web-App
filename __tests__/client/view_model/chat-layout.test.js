@@ -1,11 +1,9 @@
 'use strict'
-const should = require('should')
-const request = require('supertest')
-import assert from 'assert'
-import * as chatformat from '../../../src/client/view_model/chats'
+const assert =  require("assert")
+const chatformat = require('../../../src/client/view_model/chats').default
 
 describe("Format chat time", function() {
-    describe("returns AM time", () =>{
+    test('returns AM time', ()=>{
         const d = new Date(2018, 11, 24, 10, 33);
 
         let timeString = chatformat.formatAMPM(d);
@@ -14,7 +12,7 @@ describe("Format chat time", function() {
 
     })
 
-    it("returns PM time", () =>{
+    test('returns PM time', ()=>{
         const d = new Date(2018, 11, 24, 22, 33);
 
         let timeString = chatformat.formatAMPM(d);
@@ -26,7 +24,7 @@ describe("Format chat time", function() {
 })
 
 describe("Format chat date", () =>{
-    it("returns slash separated date", () =>{
+    test("returns slash separated date", () =>{
     const d = new Date(2018, 11, 24, 10, 33);
 
     let dateString = chatformat.formatDate()
