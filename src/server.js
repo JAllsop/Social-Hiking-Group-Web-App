@@ -1,8 +1,13 @@
 'use strict'
 
 const express = require('express')
-const app = express()
 const path = require('path')
+const session = require('./session').session
+
+const app = express()
+
+// session management
+app.use(session)
 
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
 
@@ -10,5 +15,10 @@ app.use('/cdn', express.static(path.join(__dirname, 'client')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.listen(3000)
+const authRouter = require('./server/routes/authRoutes.js')
+
+app.use('/', authRouter)
+
+const port = process.env.PORT || 3000
+app.listen(port)
 console.log('Express server running on port 3000')
