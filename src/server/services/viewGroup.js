@@ -1,9 +1,11 @@
 'use strict'
 
-import * as db from '../repositories/viewGroupRepository.js'
+const db = require('../repositories/viewGroupRepository.js')
 
-export async function getGroupDetails (callback) {
+async function getGroupDetails (callback) {
   let result = await db.getDetails()
   if(result !='') callback(result)
-  //else callback(false)
+  
 }
+
+module.exports = getGroupDetails

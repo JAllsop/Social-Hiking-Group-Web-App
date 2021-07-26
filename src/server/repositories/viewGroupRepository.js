@@ -1,6 +1,6 @@
 'use strict'
 
-import * as db from './db.js'
+const db = require('./db.js')
 
 // standard query function for database
 const dbQuery = async (sql) => {
@@ -13,9 +13,11 @@ const dbQuery = async (sql) => {
   }
 }
 
-export async function getDetails() {
+async function getDetails() {
   let sql = 'SELECT TOP (1) [groupName],[groupDescription],[generalLocation] FROM [dbo].[GROUPS]'
 //  sql += `groupName='${group}'`
   return await dbQuery(sql)
   
 }
+
+module.exports = getDetails

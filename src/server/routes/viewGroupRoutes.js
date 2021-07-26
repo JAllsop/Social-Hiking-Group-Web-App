@@ -1,11 +1,9 @@
 'use strict'
 
-import express from 'express'
-import path from 'path'
+const express = require('express')
+const path = require('path')
 
-import * as viewGroup from '../services/viewGroup.js'
-
-const __dirname = path.resolve()
+const viewGroup = require('../services/viewGroup.js')
 
 const router = express.Router()
 
@@ -31,4 +29,4 @@ router.get('/fetch-details', function (req, res) {
 })
 
 // /fetch-details
-export default router;
+module.exports = router;

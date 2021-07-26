@@ -1,16 +1,8 @@
 'use strict'
 
-import mssql from 'mssql'
-import path from 'path'
+const mssql = require('mssql')
+require('dotenv').config()
 
-const __dirname = path.resolve()
-
-
-// require('dotenv').config({ path: path.resolve(__dirname, './.env') })
-import dotenv from 'dotenv'
-dotenv.config({ path: path.resolve(__dirname, './.env') })
-// db_username=admin1
-// db_password=ELEN4010!
 const config = {
   server: 'eie-software-3.database.windows.net', // add details
   database: 'Hiking', // add details
@@ -46,9 +38,9 @@ const pools = new mssql.ConnectionPool(config)
     console.log(err)
   })
 
-  export {
-  mssql as sql,
-  pools as pools,
-  isConnected as isConnected,
-  connectionError as connectionError
+  module.exports =  {
+  sql : mssql,
+  pools : pools,
+  isConnected : isConnected,
+  connectionError : connectionError
 }
