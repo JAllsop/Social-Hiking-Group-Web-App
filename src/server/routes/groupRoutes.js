@@ -1,3 +1,4 @@
+import { Console } from 'console'
 import express from 'express'
 import path from 'path'
 
@@ -6,6 +7,12 @@ import * as groupService from '../services/groupServices.js'
 const __dirname = path.resolve()
 
 const router = express.Router()
+
+
+export const dummy = () => {
+    return 1
+  }
+  
 
 router.get('/create-group', function (req, res) {
     res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'createGroup.html'))
