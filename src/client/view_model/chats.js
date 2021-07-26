@@ -25,12 +25,9 @@ socket.on("subscribe", (groupID) =>{
 
 
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    event.target.addEventListener('click', ()=>{
-        console.log("button click")
-    })
-    const sendButton = document.querySelector('#button-addon2')
-    sendButton.addEventListener('click',()=>{
+document.addEventListener('DOMContentLoaded', () => {
+   
+ document.querySelector('#button-addon2').onclick= () =>{
         console.log("Send Button Clicked!")
         let message = $("#message-content").val()
         const dateObject = new Date()
@@ -42,7 +39,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
            socket.broadcast.emit(data)
         })
 
-    })
+    }
 })  
 
 
