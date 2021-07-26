@@ -1,3 +1,4 @@
 node_modules
 .vscode
-./src/server/.env
+.env
+coverage
