@@ -1,8 +1,8 @@
 'use strict'
 const io = require ("socket.io-client")
 const retrieveGroupMessages = require("../model/chat-functions")
-const formatAMPM = require("./chat-formatting")
-const formatDate = require("./chat-formatting")
+const format = require("./chat-formatting")
+
 
 
 const socket = io('http://localhost:3000', {transports:["websocket"]});
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const displaySentMessage = (sender, content, dateTimeObject) =>{
 
-    let timeString = formatAMPM(dateTimeObject);
-    let dateString = formatDate(dateTimeObject);
+    let timeString = format.formatAMPM(dateTimeObject);
+    let dateString = format.formatDate(dateTimeObject);
     let messagesSection  = document.getElementById("message-area")
     let messageDiv = document.createElement('div')
     messageDiv.setAttribute("class", "ml-auto position-relative chat-right text-white")
@@ -97,8 +97,8 @@ const displaySentMessage = (sender, content, dateTimeObject) =>{
 }
 
 const displayRecievedMessage = (sender,content, dateTimeObject) =>{
-    let timeString = formatAMPM(dateTimeObject);
-    let dateString = formatDate(dateTimeObject);
+    let timeString = format.formatAMPM(dateTimeObject);
+    let dateString = fromat.formatDate(dateTimeObject);
     let messagesSection  = document.getElementById("message-area");
     let messageDiv = document.createElement('div')
     messageDiv.setAttribute("class", "mr-auto position-relative chat-left text-white")
