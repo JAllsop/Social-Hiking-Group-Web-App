@@ -8,16 +8,13 @@ branches:
 cache:
   directories:
   - node_modules
-before_install:
-- npm update
 install:
 - npm install
 script:
 - npm run test-on-travis
 deploy:
   provider: azure_web_apps
-  on:
-    all_branches: false
+  skip_cleanup: true
 
 notifications:
   email: false
