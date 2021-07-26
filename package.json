@@ -4,7 +4,8 @@
   "description": "Web App for organising hiking sessions, group laboratory for Software Developement III",
   "main": "./src/server.js",
   "scripts": {
-    "test": "jest --coverage && coveralls < coverage/lcov.info",
+    "test": "jest --coverage --coverageDirectory=./coverage",
+    "test-on-travis": "jest --coverage && coveralls < coverage/lcov.info",
     "start": "node ./src/server.js"
   },
   "type": "commonjs",

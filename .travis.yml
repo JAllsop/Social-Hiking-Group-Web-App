@@ -13,7 +13,7 @@ before_install:
 install:
 - npm install
 script:
-- npm test
+- npm test-on-travis
 before_deploy:
   - mv .gitignore.prod .gitignore
 deploy:
