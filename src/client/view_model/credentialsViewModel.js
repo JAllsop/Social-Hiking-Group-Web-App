@@ -40,6 +40,64 @@ const addLoginElements = () => {
   document.body.innerHTML += '</div>'
 }
 
+// Generate Register Elements
+const addRegisterElements = () => {
+  document.body.innerHTML = '<h1> Register A New Account <h1>'
+
+  document.body.innerHTML += ('Username: <br>')
+  addInput('text', 'username')
+
+  document.body.innerHTML += ('Email: <br>')
+  addInput('email', 'email')
+
+  document.body.innerHTML += ('Password: <br>')
+  addInput('password', 'password')
+
+  document.body.innerHTML += ('Confirm Password: <br>')
+  addInput('password', 'passwordConfirm')
+
+  const signUpButton = document.createElement('button')
+  signUpButton.setAttribute('id', 'signUpButton')
+  signUpButton.innerHTML = 'Sign Up'
+  document.body.appendChild(signUpButton)
+
+  const signInButton = document.createElement('button')
+  signInButton.setAttribute('id', 'signInButton')
+  signInButton.innerHTML = 'Return to Log In'
+  document.body.appendChild(signInButton)
+}
+
+// Add Register Event listeners
+const addRegisterListeners = () => {
+  document.getElementById('signInButton').addEventListener('click', () => {
+    addLoginElements()
+    addLoginListeners()
+  })
+
+  import('../model/registerModel.js').then(({ postRegisterDetails }) => {
+    // Send register information via registerModel
+    document.getElementById('signUpButton').addEventListener('click', () => {
+      const username = document.getElementById('username').value
+      const email = document.getElementById('email').value
+
+      const pass = document.getElementById('password').value
+      const passConfirm = document.getElementById('passwordConfirm').value
+      if (pass !== passConfirm) {
+          alert('Passwords do NOT match') // eslint-disable-line
+      } else {
+        postRegisterDetails(username, pass, email)
+          .then((code) => {
+            // Add Login Elements if Registration Successful
+            if (code === 'Account Registered') {
+              addLoginElements()
+              addLoginListeners()
+            }
+          })
+      }
+    }, false)
+  })
+}
+
 // Add Login Event Listeners
 const addLoginListeners = () => {
   // password reveal/hide via radio button
@@ -81,7 +139,8 @@ const addLoginListeners = () => {
   })
 
   document.getElementById('registerButton').addEventListener('click', () => {
-
+    addRegisterElements()
+    addRegisterListeners()
   })
 }
 
