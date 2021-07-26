@@ -1,23 +1,19 @@
-dist: focal
 language: node_js
+os: "linux"
+dist: "focal"  
 node_js:
 - "14.17.0"
-branches:
-  only:
-  - master
 cache:
   directories:
-  - node_modules
-before_install:
-- npm update
+    - node_modules
 install:
 - npm install
 script:
 - npm run test-on-travis
+before_deploy:
+  - git add . 
+  - git commit -m 'Travis'
 deploy:
   provider: azure_web_apps
   on:
-    all_branches: false
-
-notifications:
-  email: false
+    branch: master
