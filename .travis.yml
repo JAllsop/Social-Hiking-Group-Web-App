@@ -1,5 +1,6 @@
-dist: focal
 language: node_js
+os: "linux"
+dist: "focal"  
 node_js:
 - "14.17.0"
 branches:
@@ -7,14 +8,17 @@ branches:
   - master
 cache:
   directories:
-  - node_modules
+    - node_modules
 install:
 - npm install
 script:
 - npm run test-on-travis
+before_deploy:
+  - mv .gitignore .old
+  - mv .productiongitignore .gitignore
 deploy:
   provider: azure_web_apps
   skip_cleanup: true
-
-notifications:
-  email: false
+  verbose: true
+  on:
+    node: '14.17.0'
