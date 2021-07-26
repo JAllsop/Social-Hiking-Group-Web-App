@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 // Loading Routes
-const userRoutes = require('../server/routes/userRoutes.js')
+const userRoutes = require('../server/routes/userRoutes.js').router
 
 // Mounting routes
 app.use('/user', userRoutes)

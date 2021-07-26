@@ -18,4 +18,12 @@ router.get('/api/list', function (req, res) {
     })
 })
 
-module.exports = router
+const dummy = () => {
+  return 1
+}
+
+module.exports =
+{
+  dummy: dummy,
+  router: router
+}

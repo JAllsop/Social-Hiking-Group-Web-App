@@ -1,7 +1,9 @@
 /* eslint-env jest */
+
+const dummy = require('../src/server/routes/userRoutes').dummy
+
 describe('Placeholder', () => {
   test('Search text does not match any user', () => {
-    const test = 1
-    expect(test).toBe(1)
+    expect(dummy()).toBe(1)
   })
 })
