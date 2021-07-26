@@ -14,8 +14,6 @@ install:
 - npm install
 script:
 - npm run test-on-travis
-before_deploy:
-  - mv .gitignore
 deploy:
   provider: azure_web_apps
   on:
