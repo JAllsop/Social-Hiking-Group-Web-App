@@ -1,6 +1,9 @@
 language: node_js
 os: "linux"
 dist: "focal"  
+branches:
+  only:
+  - master
 node_js:
 - "14.17.0"
 cache:
