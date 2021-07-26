@@ -1,5 +1,5 @@
 /* eslint-env jest */
-describe('Login Verification', () => {
+describe('Placeholder', () => {
   test('Search text does not match any user', () => {
 
   })
