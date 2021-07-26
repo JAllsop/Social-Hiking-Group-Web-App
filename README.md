@@ -1,6 +1,6 @@
 
 # Software Developement III Deferred Group Project
-[![Build Status](https://travis-ci.com/witseie-elen4010/2021-001-project-def.svg?branch=master)](https://travis-ci.com/witseie-elen4010/2021-001-project-def.svg?token=jHshAe29hHKkgqJyWxpK&branch=master)
+![Build Status](https://travis-ci.com/witseie-elen4010/2021-001-project-def.svg?token=jHshAe29hHKkgqJyWxpK&branch=master)
 [![Coverage Status](https://coveralls.io/repos/github/witseie-elen4010/2021-001-project-def/badge.svg?t=gxw4vs)](https://coveralls.io/github/witseie-elen4010/2021-001-project-def)
 
 ### Authors
