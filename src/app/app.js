@@ -15,7 +15,7 @@ app.use('/cdn', express.static(path.join(__dirname, 'client')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const authRouter = require('./server/routes/authRoutes.js')
+const authRouter = require('../server/routes/authRoutes.js')
 
 app.use('/', authRouter)
 
