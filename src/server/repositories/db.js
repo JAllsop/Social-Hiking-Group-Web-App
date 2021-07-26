@@ -1,10 +1,11 @@
 'use strict'
 
+require('dotenv').config()
 const mssql = require('mssql')
 
 const config = {
-  server: '', // add details
-  database: '', // add details
+  server: 'eie-software-3.database.windows.net',
+  database: 'Hiking',
   // Put login details in env. variables for security
   user: process.env.db_username,
   password: process.env.db_password,
