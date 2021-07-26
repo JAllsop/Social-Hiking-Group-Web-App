@@ -2,12 +2,9 @@
 
 const express = require('express')
 const path = require('path')
-const session = require('./session').session
 
 const app = express()
 
-// session management
-app.use(session)
 
 app.use('/cdn', express.static(path.join(__dirname, '../', 'client')))
 
@@ -15,8 +12,12 @@ app.use('/cdn', express.static(path.join(__dirname, '../', 'client')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-const authRouter = require('../server/routes/authRoutes.js')
 
-app.use('/', authRouter)
+// Loading Routes
+const userRoutes = require('../server/routes/userRoutes.js')
+
+// Mounting routes
+app.use('/user', userRoutes)
 
 module.exports = { app }
+
