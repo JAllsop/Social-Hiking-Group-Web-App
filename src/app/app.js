@@ -34,7 +34,6 @@ app.use('/view', viewRoutes)
 app.use('/', authRouter)
 app.use('/user', userRoutes)
 app.use('/messages', messageRouter)
-app.use('/', authRouter)
 
 io.on('connection', AppSockets.connection)
 io.on('error', console.error)
