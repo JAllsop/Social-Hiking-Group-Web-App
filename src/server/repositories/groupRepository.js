@@ -1,9 +1,10 @@
 'use strict'
 
-import * as dbQuery from './dbQuery.js'
+const dbQuery = require('./dbQuery.js')
 
-  export async function getList(filter) {
-    let sql = `SELECT ${filter} FROM dbo.GROUPS`
+module.exports = {
+  getList: async function getList (filter) {
+    const sql = `SELECT ${filter} FROM dbo.GROUPS`
     return await dbQuery.dbQuery(sql)
   }
-  
+}

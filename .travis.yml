@@ -1,30 +1,22 @@
 language: node_js
-node_js:
-  - "LTS"
-sudo: false
-language: node_js
-node_js:
-- '14.17.0'
+os: "linux"
+dist: "focal"  
 branches:
   only:
   - master
+node_js:
+- "14.17.0"
 cache:
   directories:
-  - node_modules
-before_install:
-- npm update
+    - node_modules
 install:
 - npm install
 script:
-- npm test
-- npm run coveralls
+- npm run test-on-travis
 before_deploy:
-  - mv .gitignore.prod .gitignore
+  - git add . 
+  - git commit -m 'Travis'
 deploy:
   provider: azure_web_apps
   on:
-    all_branches: false
-after_deploy: npm run test:staging
-
-notifications:
-  email: false
+    branch: master

@@ -1,8 +1,10 @@
 'use strict'
 
-import * as db from '../repositories/groupRepository.js'
+const db = require('../repositories/groupRepository.js')
 
-export async function getGroupList (filter,callback) {
-    let result = await db.getList(filter)
-    if(result !='') callback(result)
+module.export = {
+  getGroupList: async function getGroupList (filter, callback) {
+    const result = await db.getList(filter)
+    if (result !== '') callback(result)
   }
+}
