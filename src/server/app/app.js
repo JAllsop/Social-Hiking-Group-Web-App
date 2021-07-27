@@ -1,11 +1,9 @@
 'use strict'
 
-// const express = require('express')
-import express from 'express'
+const express = require('express')
 const app = express()
 
-// const path = require('path')
-import path from 'path'
+const path = require('path')
 const __dirname = path.resolve()
 
 app.use('/cdn', express.static(path.join(__dirname, 'client')))
@@ -15,11 +13,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // loading routers
-import homeRouter from '../routes/homeRoute.js'
-import groupRouter from '../routes/groupRoutes.js'
+const homeRouter = require('../routes/homeRoute.js')
+const groupRouter = require('../routes/groupRoutes.js')
 
-//mounting routers
-app.use('/',homeRouter)
-app.use('/group',groupRouter)
+// mounting routers
+app.use('/', homeRouter)
+app.use('/group', groupRouter)
 
-export default app
+module.exports = app

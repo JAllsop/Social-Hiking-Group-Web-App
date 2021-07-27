@@ -2,17 +2,16 @@
 
 import * as db from '../repositories/groupRepository.js'
 
-export async function createGroup(group) {
+export async function createGroup (group) {
   return await db.create(group)
 }
 
-export async function isGroupNameAvailable (group_name,callback) {
-  let result = await db.get(group_name)
-  if(result !='') callback(true)
-  else callback(false)
+export async function isGroupNameAvailable (groupName, callback) {
+  const result = await db.get(groupName)
+  if (result !== '') { callback(true) } else { callback(false) }
 }
 
-export async function getLast(callback) {
-  let result = await db.getLast()
-  if(result) callback(result)
+export async function getLast (callback) {
+  const result = await db.getLast()
+  if (result) callback(result)
 }
