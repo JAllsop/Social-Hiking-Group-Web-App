@@ -9,8 +9,14 @@ node_js:
 cache:
   directories:
     - node_modules
+before_install:
+- npm install npm@latest -g
+- npm --version
 install:
 - npm install
+before_script:
+- export TZ=Africa/Maseru
+- date
 script:
 - npm run test-on-travis
 before_deploy:
