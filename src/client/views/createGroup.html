@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Group Chat Home Page</title>
+    <meta charset="utf-8"/>
+    <script src="/cdn/view_model/createGroup.js" ></script>
+
+    <script> 
+
+        const form = document.getElementById('group-details');
+
+        function manage(txt) {
+            var submit_btn = document.getElementById('submit-groupDetails');
+            var inputElement = document.getElementsByTagName('input'); 
+              
+            for (i = 0; i < inputElement.length; i++) {
+
+                if (inputElement[i].type == 'text' && inputElement[i].value == '') {
+                    submit_btn.disabled = true;    // Disable the button.
+                    return false;
+                }
+                else {
+                  submit_btn.disabled = false;   // Enable the button.
+                }
+            }
+        }
+
+        function validateName(){
+            let groupname_ = document.getElementById('groupName_').value
+            let groupField = document.getElementById('groupName_')
+            
+            if(groupname_ != ''){
+            fetch('/group/validate-groupName/'+`${groupname_}`)
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(_value){
+                if(_value){
+                    document.getElementById('group-details').reset()
+                    groupField.setCustomValidity('Group name already exists')
+                }
+                else {
+                    groupField.setCustomValidity('');
+                }
+
+            })
+            }
+        }
+
+    </script>
+
+</head>
+
+<style> 
+    textarea {
+      width: 42%;
+      height: 100px;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      resize: none;
+    }
+    input{
+      padding: 5px 10px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      resize: none;
+    }
+
+    description{
+      height:250px;
+      width: 150px;
+    }
+
+    
+
+</style>
+
+<body >
+    <form id = "group-details" name='group-info' action="/group/add-group" method="post">
+        <label for="groupName"class="error" >Group Name:</label><br>
+        <input type="text" id="groupName_" name = "groupName" placeholder="Enter group name ..." class="form-control" size = '25' minlength="2" maxlength="20"  pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" onfocusout="validateName()" ><br>
+
+        <label for="location" >Location:</label><br>
+        <input type="text" id="location" name= "location" placeholder="Enter general location for hiking trails ..." size = '25' minlength="20" maxlength="50" pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" ><br>
+
+        <label for="d" >Description:</label><br>
+        <input id="description" name= "description" placeholder="Group description ..." size = '25' minlength="20" maxlength="600" pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" ><br>
+
+        <input type="submit" id="submit-groupDetails" value="Submit" disabled >
+    </form> 
+
+</body>
+
+
+</html>
