@@ -33,12 +33,13 @@ This group projet is the developement of a web application for organizing and sh
 Not applicable until end of sprint 1
 
 ## Deployment, Integration and Testing
-- The web app is hosted and deployed on Microsoft Azure
+- The web app is hosted and deployed on [Microsoft Azure](https://azure.microsoft.com/en-us/)
 - Unit tests are implmeneted using [Jest](https://jestjs.io/)
 - Automated testing and code coverage is performed using [Travis CI](https://travis-ci.org/) and Coveralls
 
 ## File Structure  
-  
+📦__tests__  
+ ┣━ Jest Unit Tests  
 📦documenation  
  ┣ 📂ADRs  
  ┃ ┗ Significant model/design choices and reasons for the decisions made  
@@ -47,6 +48,8 @@ Not applicable until end of sprint 1
  ┃ ┣ Sprint 0 (i.e. Pre-Sprint 1) discussions and planned tasks  
  ┃ ┗  Sprint retroactives meeting minutes, scrum board screenshots \& user story map   
 📦src  
+ ┣ 📂app  
+ ┃ ┣ express app and app specific implementations for its use  
  ┣ 📂client  
  ┃ ┣ 📂resources  
  ┃ ┃ ┗ multimedia and css files needed by  
@@ -62,4 +65,4 @@ Not applicable until end of sprint 1
  ┃ ┣ 📂services  
  ┃ ┃ ┗  utilises repositories to create fetch relevant information for database  
  ┃ ┗ 📂routes  
- ┗ ━  ┗  utilises services to fetch information required by API calls for client 
+ ┗━  ┗  utilises services to fetch information required by API calls for client 
