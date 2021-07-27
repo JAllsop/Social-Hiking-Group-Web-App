@@ -14,10 +14,7 @@ router.get('/view-group', function (req, res) {
 router.get('/getInfo', function (req, res) {
     console.log('Here')
     res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupPage.html'))
-    // viewGroup.getGroupDetails(function(groupDetails){
-    //     //res.send(groupDetails)
-    //     console.log('Get info')
-    // })
+
 })
 
 router.get('/fetch-details', function (req, res) {

@@ -2,14 +2,13 @@
 
 require('dotenv').config()
 const mssql = require('mssql')
-require('dotenv').config()
 
 const config = {
   server: 'eie-software-3.database.windows.net',
   database: 'Hiking',
   // Put login details in env. variables for security
-  user: 'admin1', //process.env.db_username,
-  password: 'ELEN4010!', //process.env.db_password,
+  user: process.env.db_username,
+  password: process.env.db_password,
   port: 1433,
   // Required for Azure
   options: {
@@ -39,9 +38,9 @@ const pools = new mssql.ConnectionPool(config)
     console.log(err)
   })
 
-  module.exports =  {
-  sql : mssql,
-  pools : pools,
-  isConnected : isConnected,
-  connectionError : connectionError
+module.exports = {
+  sql: mssql,
+  pools: pools,
+  isConnected: isConnected,
+  connectionError: connectionError
 }
