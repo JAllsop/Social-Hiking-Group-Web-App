@@ -16,12 +16,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // loading routers
-const groupRouter = require('../server/routes/groupRoutes.js').router
 const userRoutes = require('../server/routes/userRoutes.js').router
 const authRouter = require('../server/routes/authRoutes.js')
+const viewRoutes = require('../server/routes/viewGroupRoutes')
+const groupRouter = require('../server/routes/groupRoutes.js').router
 
 //mounting routers
 app.use('/group', groupRouter)
+app.use('/view',viewRoutes)
 app.use('/', authRouter)
 app.use('/user', userRoutes)
 
