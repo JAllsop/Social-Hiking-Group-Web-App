@@ -6,11 +6,11 @@ const groupService = require('../services/groupServices.js')
 const router = express.Router()
 
 router.get('/create-group', function (req, res) {
-  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'createGroup.html'))
+  res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'createGroup.html'))
 })
 
 router.get('/search-group', function (req, res) {
-  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'searchGroup.html'))
+  res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'searchGroup.html'))
 })
 
 router.get('/groupList/:filter', function (req, res) {
