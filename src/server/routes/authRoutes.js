@@ -3,6 +3,7 @@
 const path = require('path')
 const express = require('express')
 const loginService = require('../services/loginService')
+const registerService = require('../services/registerService')
 
 const router = express.Router()
 
@@ -46,7 +47,16 @@ router.get('/home', (req, res) => {
 
 // // Register call to create user accouint
 router.post('/api/register', async (req, res) => {
-
+  const { username, password, email } = req.body
+  // register new account details
+  const regResult = await registerService.createAccount(username, password, email)
+  if (regResult !== 'valid') {
+    // return error status and error reason
+    res.status(400).json({ code: regResult })
+  } else {
+    // return result of attempt to register
+    res.json({ code: 'Account Registered' })
+  }
 })
 
 module.exports = router
