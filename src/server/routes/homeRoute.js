@@ -1,6 +1,5 @@
 const express = require('express')
 const path = require('path')
-const __dirname = path.resolve()
 
 const router = express.Router()
 

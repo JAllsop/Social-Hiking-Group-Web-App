@@ -3,11 +3,9 @@ const path = require('path')
 
 const groupService = require('../services/groupServices.js')
 
-const __dirname = path.resolve()
-
 const router = express.Router()
 
-export const dummy = () => {
+const dummy = () => {
   return 1
 }
 
@@ -47,4 +45,4 @@ router.get('/information', (req, res) => {
   res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupInformation.html'))
 })
 
-module.exports = router
+module.exports = { router, dummy }
