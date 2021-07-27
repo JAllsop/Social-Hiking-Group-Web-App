@@ -19,7 +19,6 @@ app.use(express.urlencoded({ extended: true }))
 const authRouter = require('../server/routes/authRoutes.js')
 const viewRoutes = require('../server/routes/viewGroupRoutes')
 const groupRouter = require('../server/routes/groupRoutes.js').router
-const authRouter = require('../server/routes/authRoutes.js')
 
 //mounting routers
 app.use('/group', groupRouter)
