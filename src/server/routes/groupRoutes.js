@@ -14,7 +14,7 @@ router.get('/create-group', function (req, res) {
 })
 
 router.get('/search-group', function (req, res) {
-  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'searchGroup.html'))
+  res.sendFile(path.join(__dirname, '../', '../', 'client','views', 'searchGroup.html'))
 })
 
 router.post('/add-group', function (req, res) {
@@ -42,7 +42,7 @@ router.get('/get-groupName', (req, res) => {
 })
 
 router.get('/information', (req, res) => {
-  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupInformation.html'))
+  res.sendFile(path.join(__dirname, '../', '../', 'client','views', 'groupInformation.html'))
 })
 
 module.exports = { router, dummy }
