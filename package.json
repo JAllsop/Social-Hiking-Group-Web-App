@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Web App for organising hiking sessions, group laboratory for Software Developement III",
   "main": "./src/server.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "test": "jest --coverage --coverageDirectory=./coverage",
     "test-on-travis": "jest --coverage && coveralls < coverage/lcov.info",
