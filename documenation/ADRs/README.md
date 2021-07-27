@@ -7,7 +7,7 @@ Good development practices requires Separation of Concerns (SoCs) to enable the 
 Source code can become unreadable, long and difficult to edit - making testing and maintenance difficult  
 
 ## SOLUTION: 
-### The Front End utlizes a Model-View-ViewModel View (M-V-VM) architecture pattern
+### The Front End Utilizes a Model-View-ViewModel View (M-V-VM) architecture pattern
 - Model abstracts html methods for API calls
 - View-Model utilises model methods to dynamically update views i.e. html pages  
 - View refers to the html pages served to the app user
@@ -96,13 +96,13 @@ Several tools and libraries are needed to develop a web app.
 ## SOLUTION:  
 ### Use specified tools and libraries (as per brief)  
 - JavaScript \& Node.js for web development  
-- Travis-CI as a CI/CD tool  
-- Express Framework with CSS bootstrap  
-- Socket.io for websocket message implementation  
-- Azure web server deployment  
-- MS SQL Database  
-- Jest testing framework  
-- Coveralls for code coverage and testing history  
+- [Travis-CI](https://www.travis-ci.com/) as a CI/CD tool  
+- [Express](https://expressjs.com/) Framework with CSS [bootstrap](https://getbootstrap.com/)  
+- [Socket.io](https://socket.io/) for websocket message implementation  
+- [Azure](https://azure.microsoft.com/en-us/services/app-service/web/) web server deployment  
+- [MSSQL](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) Database  
+- [Jest](https://jestjs.io/) testing framework  
+- [Coveralls](https://coveralls.io/) for code coverage and testing history  
 
 # User Story Map Creation, Access \& Editing  
 
