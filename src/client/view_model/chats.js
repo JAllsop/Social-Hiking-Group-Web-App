@@ -1,146 +1,129 @@
 'use strict'
-const io = require ("socket.io-client")
-const retrieveGroupMessages = require("../model/chat-functions")
-const format = require("./chat-formatting")
+const io = require('socket.io-client')
+const retrieveGroupMessages = require('../model/chat-functions')
+const format = require('./chat-formatting')
 
-
-
-const socket = io('http://localhost:3000', {transports:["websocket"]});
-socket.on("connection", ()=>{
-    console.log("connection made")
+const socket = io('http://localhost:3000', { transports: ['websocket'] })
+socket.on('connection', () => {
+  console.log('connection made')
 })
-socket.on("error", console.error);
-socket.on("retrieveGroupMessages", (groupID) =>{
-   retrieveGroupMessages(groupID)
-   .then(data=> console.log(data)) // display messages for respective groups.
+socket.on('error', console.error)
+socket.on('retrieveGroupMessages', (groupID) => {
+  retrieveGroupMessages(groupID)
+    .then(data => console.log(data)) // display messages for respective groups.
 })
-socket.on("sendTextMessage", (data)=>{
-    displayRecievedMessage(data.sender,data.content,data.date)
-
+socket.on('sendTextMessage', (data) => {
+  displayRecievedMessage(data.sender, data.content, data.date)
 })
-socket.on("subscribe", (groupID) =>{
-
-    socket.emit("groupID", groupID)
+socket.on('subscribe', (groupID) => {
+  socket.emit('groupID', groupID)
 })
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
-   
- document.querySelector('#button-addon2').onclick= () =>{
-        console.log("Send Button Clicked!")
-        let message = $("#message-content").val()
-        const dateObject = new Date()
-        let sender = "Sino Mazibuko"
-        displaySentMessage(sender,message,dateObject)
-            
-        socket.on("sendTextMessage", (data)=>{
-           data = {"sender":`${sender}`, "content":`${message}`,"date":dateObject} 
-           socket.broadcast.emit(data)
-        })
+  document.querySelector('#button-addon2').onclick = () => {
+    console.log('Send Button Clicked!')
+    const message = document.querySelector('#message-content').val()
+    const dateObject = new Date()
+    const sender = 'Sino Mazibuko'
+    displaySentMessage(sender, message, dateObject)
 
-    }
-})  
+    socket.on('sendTextMessage', (data) => {
+      data = { sender: `${sender}`, content: `${message}`, date: dateObject }
+      socket.broadcast.emit(data)
+    })
+  }
+})
 
+const displaySentMessage = (sender, content, dateTimeObject) => {
+  const timeString = format.formatAMPM(dateTimeObject)
+  const dateString = format.formatDate(dateTimeObject)
+  const messagesSection = document.getElementById('message-area')
+  const messageDiv = document.createElement('div')
+  messageDiv.setAttribute('class', 'ml-auto position-relative chat-right text-white')
 
+  const senderDiv = document.createElement('div')
+  senderDiv.setAttribute('class', 'namepadding')
 
+  const contentDiv = document.createElement('div')
+  contentDiv.setAttribute('class', 'd-flex align-items-center')
 
-const displaySentMessage = (sender, content, dateTimeObject) =>{
+  const dateDiv = document.createElement('div')
+  dateDiv.setAttribute('class', 'position-absolute bottom-0 end-0')
 
-    let timeString = format.formatAMPM(dateTimeObject);
-    let dateString = format.formatDate(dateTimeObject);
-    let messagesSection  = document.getElementById("message-area")
-    let messageDiv = document.createElement('div')
-    messageDiv.setAttribute("class", "ml-auto position-relative chat-right text-white")
+  const senderPTag = document.createElement('p')
+  senderPTag.setAttribute('class', 'nm')
 
-    let senderDiv = document.createElement('div')
-    senderDiv.setAttribute("class", "namepadding")
+  const dateTextPTag = document.createElement('p')
+  dateTextPTag.setAttribute('class', 'text-small mb-0 text-white')
 
-    let contentDiv = document.createElement('div')
-    contentDiv.setAttribute("class","d-flex align-items-center")
+  const messageText = document.createTextNode(`${content}`)
+  const senderName = document.createTextNode(`${sender}`)
+  const dateText = document.createTextNode(`${timeString} | ${dateString}`)
 
-    let dateDiv = document.createElement('div')
-    dateDiv.setAttribute("class","position-absolute bottom-0 end-0" )
+  dateTextPTag.appendChild(dateText)
+  senderPTag.appendChild(senderName)
 
-    let senderPTag = document.createElement('p')
-    senderPTag.setAttribute("class","nm")
+  dateDiv.appendChild(dateTextPTag)
+  contentDiv.appendChild(messageText)
+  senderDiv.appendChild(senderPTag)
 
-    let dateTextPTag = document.createElement('p')
-    dateTextPTag.setAttribute("class", "text-small mb-0 text-white")
+  messageDiv.appendChild(dateDiv)
+  messageDiv.appendChild(contentDiv)
+  messageDiv.appendChild(senderPTag)
 
-    let messageText = document.createTextNode(`${content}`)
-    let senderName = document.createTextNode(`${sender}`)
-    let dateText = document.createTextNode(`${timeString} | ${dateString}`)
+  const breakTag1 = document.createElement('br')
+  const breakTag2 = document.createElement('br')
 
-    dateTextPTag.appendChild(dateText)
-    senderPTag.appendChild(senderName)
+  messagesSection.appendChild(messageDiv)
+  messagesSection.appendChild(breakTag1)
+  messagesSection.appendChild(breakTag2)
 
-    dateDiv.appendChild(dateTextPTag)
-    contentDiv.appendChild(messageText)
-    senderDiv.appendChild(senderPTag)
-
-    messageDiv.appendChild(dateDiv)
-    messageDiv.appendChild(contentDiv)
-    messageDiv.appendChild(senderPTag)
-
-    let breakTag1 = document.createElement('br')
-    let breakTag2 = document.createElement('br')
-
-    messagesSection.appendChild(messageDiv)
-    messagesSection.appendChild(breakTag1)
-    messagesSection.appendChild(breakTag2)
-    
-  
-    body.append(messagesSection);
-    
-
+  document.body.append(messagesSection)
 }
 
-const displayRecievedMessage = (sender,content, dateTimeObject) =>{
-    let timeString = format.formatAMPM(dateTimeObject);
-    let dateString = fromat.formatDate(dateTimeObject);
-    let messagesSection  = document.getElementById("message-area");
-    let messageDiv = document.createElement('div')
-    messageDiv.setAttribute("class", "mr-auto position-relative chat-left text-white")
+const displayRecievedMessage = (sender, content, dateTimeObject) => {
+  const timeString = format.formatAMPM(dateTimeObject)
+  const dateString = format.formatDate(dateTimeObject)
+  const messagesSection = document.getElementById('message-area')
+  const messageDiv = document.createElement('div')
+  messageDiv.setAttribute('class', 'mr-auto position-relative chat-left text-white')
 
-    let senderDiv = document.createElement('div')
-    senderDiv.setAttribute("class", "namepadding")
+  const senderDiv = document.createElement('div')
+  senderDiv.setAttribute('class', 'namepadding')
 
-    let contentDiv = document.createElement('div')
-    contentDiv.setAttribute("class","d-flex align-items-center")
+  const contentDiv = document.createElement('div')
+  contentDiv.setAttribute('class', 'd-flex align-items-center')
 
-    let dateDiv = document.createElement('div')
-    dateDiv.setAttribute("class","position-absolute bottom-0 end-0" )
+  const dateDiv = document.createElement('div')
+  dateDiv.setAttribute('class', 'position-absolute bottom-0 end-0')
 
-    let senderPTag = document.createElement('p')
-    senderPTag.setAttribute("class","nm")
+  const senderPTag = document.createElement('p')
+  senderPTag.setAttribute('class', 'nm')
 
-    let dateTextPTag = document.createElement('p')
-    dateTextPTag.setAttribute("class", "text-small mb-0 text-white")
+  const dateTextPTag = document.createElement('p')
+  dateTextPTag.setAttribute('class', 'text-small mb-0 text-white')
 
-    let messageText = document.createTextNode(`${content}`)
-    let senderName = document.createTextNode(`${sender}`)
-    let dateText = document.createTextNode(`${timeString} | ${dateString}`)
+  const messageText = document.createTextNode(`${content}`)
+  const senderName = document.createTextNode(`${sender}`)
+  const dateText = document.createTextNode(`${timeString} | ${dateString}`)
 
-    dateTextPTag.appendChild(dateText)
-    senderPTag.appendChild(senderName)
+  dateTextPTag.appendChild(dateText)
+  senderPTag.appendChild(senderName)
 
-    dateDiv.appendChild(dateTextPTag)
-    contentDiv.appendChild(messageText)
-    senderDiv.appendChild(senderPTag)
+  dateDiv.appendChild(dateTextPTag)
+  contentDiv.appendChild(messageText)
+  senderDiv.appendChild(senderPTag)
 
-    messageDiv.appendChild(dateDiv)
-    messageDiv.appendChild(contentDiv)
-    messageDiv.appendChild(senderPTag)
+  messageDiv.appendChild(dateDiv)
+  messageDiv.appendChild(contentDiv)
+  messageDiv.appendChild(senderPTag)
 
-    let breakTag1 = document.createElement('br')
-    let breakTag2 = document.createElement('br')
+  const breakTag1 = document.createElement('br')
+  const breakTag2 = document.createElement('br')
 
-    messagesSection.appendChild(messageDiv)
-    messagesSection.appendChild(breakTag1)
-    messagesSection.appendChild(breakTag2)
+  messagesSection.appendChild(messageDiv)
+  messagesSection.appendChild(breakTag1)
+  messagesSection.appendChild(breakTag2)
 
-    body.append(messagesSection);
-    
+  document.body.append(messagesSection)
 }
-
