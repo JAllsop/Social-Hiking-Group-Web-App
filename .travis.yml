@@ -10,16 +10,15 @@ cache:
   directories:
     - node_modules
 before_install:
-  - npm install npm@latest -g
-  - nvm install
-  - nmv -v
-  - npm -v
-  - node -v
-  - date
+- npm install npm@latest -g
+- nmv -v
+- npm -v
+- node -v
 install:
-  - npm install
+- npm install
 before_script:
 - export TZ=Africa/Maseru
+- date
 script:
 - npm run test-on-travis
 before_deploy:
