@@ -16,7 +16,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 const authRouter = require('../server/routes/authRoutes.js')
-
+const userRoutes = require('../server/routes/userRoutes.js').router
 app.use('/', authRouter)
-
+app.use('/user', userRoutes)
 module.exports = { app }
