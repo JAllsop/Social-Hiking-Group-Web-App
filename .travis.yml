@@ -11,10 +11,9 @@ cache:
     - node_modules
 before_install:
 - npm install npm@latest -g
-- npm -v
+- npm --version
 install:
 - npm install
-- npm --version
 before_script:
 - export TZ=Africa/Maseru
 - date
