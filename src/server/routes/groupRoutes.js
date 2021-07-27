@@ -45,4 +45,18 @@ router.get('/information', (req, res) => {
   res.sendFile(path.join(__dirname, '../', '../', 'client','views', 'groupInformation.html'))
 })
 
+router.get('/groupList/:filter', function (req, res) {
+  if (req.params.filter === 'groupName') {
+    groupService.getGroupList(req.params.filter, function (nameList) {
+      res.send(nameList)
+    })
+  }
+
+  if (req.params.filter === 'generalLocation') {
+    groupService.getGroupList(req.params.filter, function (locationList) {
+      res.send(locationList)
+    })
+  }
+})
+
 module.exports = { router, dummy }

@@ -24,4 +24,5 @@ const authRouter = require('../server/routes/authRoutes.js')
 app.use('/group', groupRouter)
 app.use('/', authRouter)
 app.use('/user', userRoutes)
+
 module.exports = { app }

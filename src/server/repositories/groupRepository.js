@@ -28,5 +28,10 @@ module.exports =
   getLast: async function getLast () {
     const sql = 'SELECT TOP (1) [groupName]  FROM [dbo].[GROUPS]'
     return await dbQuery.dbQuery(sql)
+  },
+    
+  getList: async function getList (filter) {
+    const sql = `SELECT ${filter} FROM dbo.GROUPS`
+    return await dbQuery.dbQuery(sql)
   }
 }

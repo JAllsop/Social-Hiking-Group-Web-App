@@ -20,5 +20,10 @@ module.exports =
   getLast: async function getLast (callback) {
     const result = await db.getLast()
     if (result) callback(result)
+
+  },
+  getGroupList: async function getGroupList (filter, callback) {
+    const result = await db.getList(filter)
+    if (result !== '') callback(result)
   }
 }
