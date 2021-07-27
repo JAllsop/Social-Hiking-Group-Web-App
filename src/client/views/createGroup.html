@@ -29,7 +29,7 @@
         function validateName(){
             let groupname_ = document.getElementById('groupName_').value
             let groupField = document.getElementById('groupName_')
-
+            
             if(groupname_ != ''){
             fetch('/group/validate-groupName/'+`${groupname_}`)
             .then(function(response){

@@ -8,9 +8,13 @@ module.exports =
     return await db.create(group)
   },
 
+  // addToGroup: async function addToGroup(user,group) {
+  //   return await db.addToGroup(user,group)    
+  // },
+
   isGroupNameAvailable: async function isGroupNameAvailable (groupName, callback) {
     const result = await db.get(groupName)
-    if (result !== '') { callback(true) } else { callback(false) }
+    if (result != '') { callback(true) } else { callback(false) }
   },
 
   getLast: async function getLast (callback) {
