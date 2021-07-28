@@ -12,7 +12,7 @@
 
 ## Hiking Group Web App
 
-This group projet is the developement of a web application for organizing and sharing hiking groups to allow hikers to connect with other like-minded hikers. It is already hard to meet people to form hiking groups due to busy modern life, and the Covid-19 pandemic has made it worse. This web app is designed to solve this problem.
+This group project is the developement of a web application for organizing and sharing hiking groups to allow hikers to connect with other like-minded hikers. It is already hard to meet people to form hiking groups due to busy modern life, and the Covid-19 pandemic has made it worse. This web app is designed to solve this problem.
 
 ## Functionality Requirements (as per brief)
 
@@ -30,7 +30,9 @@ This group projet is the developement of a web application for organizing and sh
 - It must be possible to access a log from the website which captures all actions taken in each study group. Each entry in the log should contain the date and time of the action, the nature of the action, and identify the study group member who initiated the action.
 
 ## Implemented Functionality
-Not applicable until end of sprint 1
+- Each hiker should have an account on the app.  
+- A hiker should be able to either create a new hiking group and search ~~and apply to join the~~ existing hiking groups.  
+- A member should be able post any links to the external content relevant to the hiking group (e.g., pictures of hiking trails), however, the users are not allowed to host multimedia and document files on the platform due to IP related risks.
 
 ## Deployment, Integration and Testing
 - The web app is hosted and deployed on [Microsoft Azure](https://azure.microsoft.com/en-us/)
