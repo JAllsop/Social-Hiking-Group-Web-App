@@ -1,18 +1,13 @@
 
 # Software Developement III Deferred Group Project
 ![Build Status](https://travis-ci.com/witseie-elen4010/2021-001-project-def.svg?token=jHshAe29hHKkgqJyWxpK&branch=master)
-[![Coverage Status](https://coveralls.io/repos/github/witseie-elen4010/2021-001-project-def/badge.svg?t=gxw4vs)](https://coveralls.io/github/witseie-elen4010/2021-001-project-def)
-
-### Authors
-- James Allsop (1110612)
-- Stephen Hove (1665879)
-- Sinokubonga Mazibuko (1090327)
-- Sinazo Thungo (1632198)
-- Lungelo Chala (1586897)  
+[![Coverage Status](https://coveralls.io/repos/github/witseie-elen4010/2021-001-project-def/badge.svg?t=gxw4vs)](https://coveralls.io/github/witseie-elen4010/2021-001-project-def)  
 
 ## Hiking Group Web App
 
-This group projet is the developement of a web application for organizing and sharing hiking groups to allow hikers to connect with other like-minded hikers. It is already hard to meet people to form hiking groups due to busy modern life, and the Covid-19 pandemic has made it worse. This web app is designed to solve this problem.
+This group project is the developement of a web application for organizing and sharing hiking groups to allow hikers to connect with other like-minded hikers. It is already hard to meet people to form hiking groups due to busy modern life, and the Covid-19 pandemic has made it worse. This web app is designed to solve this problem.
+
+Available At: https://hikingapp.azurewebsites.net/ 
 
 ## Functionality Requirements (as per brief)
 
@@ -30,7 +25,9 @@ This group projet is the developement of a web application for organizing and sh
 - It must be possible to access a log from the website which captures all actions taken in each study group. Each entry in the log should contain the date and time of the action, the nature of the action, and identify the study group member who initiated the action.
 
 ## Implemented Functionality
-Not applicable until end of sprint 1
+- Each hiker should have an account on the app.  
+- A hiker should be able to either create a new hiking group and search ~~and apply to join the~~ existing hiking groups.  
+- A member should be able post any links to the external content relevant to the hiking group (e.g., pictures of hiking trails), however, the users are not allowed to host multimedia and document files on the platform due to IP related risks.
 
 ## Deployment, Integration and Testing
 - The web app is hosted and deployed on [Microsoft Azure](https://azure.microsoft.com/en-us/)
@@ -66,3 +63,10 @@ Not applicable until end of sprint 1
  ┃ ┃ ┗  utilises repositories to create fetch relevant information for database  
  ┃ ┗ 📂routes  
  ┗━  ┗  utilises services to fetch information required by API calls for client 
+
+ ### Authors
+- James Allsop (1110612)
+- Stephen Hove (1665879)
+- Sinokubonga Mazibuko (1090327)
+- Sinazo Thungo (1632198)
+- Lungelo Chala (1586897) 
