@@ -15,10 +15,12 @@ router.get('/getInfo', function (req, res) {
   res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupPage.html'))
 })
 
-router.get('/fetch-details', function (req, res) {
+router.get('/fetch-details::groupName', function (req, res) {
   viewGroup.getGroupDetails(function (groupDetails) {
+    console.log(groupDetails)
     res.send(groupDetails)
-  })
+  }
+  , groupName)
 })
 
 // /fetch-details
