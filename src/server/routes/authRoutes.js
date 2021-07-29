@@ -42,7 +42,7 @@ router.get('/home', (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'home.html'))
   // respond with not found if user not logged in
-  } else { res.status(404).json('not found') }
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
 // // Register call to create user accouint
