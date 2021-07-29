@@ -14,7 +14,7 @@ module.exports =
 
   isGroupNameAvailable: async function isGroupNameAvailable (groupName, callback) {
     const result = await db.get(groupName)
-    if (result !== '') { callback(true) } else { callback(false) }
+    if (result.length === 0) { callback(false) } else { callback(true) }
   },
 
   getLast: async function getLast (callback) {

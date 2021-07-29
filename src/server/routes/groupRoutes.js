@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 const path = require('path')
 
@@ -25,9 +27,7 @@ router.post('/add-group', async function (req, res) {
 
 router.get('/validate-groupName/:group_name', function (req, res) {
   groupService.isGroupNameAvailable(`${req.params.group_name}`, function (isNameTaken) {
-    if (isNameTaken !== '') {
-      res.send(true)
-    } else res.send(false)
+    if (isNameTaken) { res.send(true) } else { res.send(false) }
   })
 })
 
