@@ -23,7 +23,7 @@ router.get('/api/list', function (req, res) {
         res.json(data)
       })
     // respond with not found if user not logged in
-  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+  } else { res.status(404).json('You need to be Logged In To Access This Page, Refreshing The Page Might Help') }
 })
 
 const dummy = () => {
