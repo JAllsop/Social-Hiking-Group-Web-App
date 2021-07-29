@@ -35,6 +35,8 @@ Available At: https://hikingapp.azurewebsites.net/
 - Automated testing and code coverage is performed using [Travis CI](https://travis-ci.org/) and Coveralls
 
 ## File Structure  
+📦__mocks__  
+ ┣━ Mock functions for testing  
 📦__tests__  
  ┣━ Jest Unit Tests  
 📦documenation  
