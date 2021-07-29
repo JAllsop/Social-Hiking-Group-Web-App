@@ -16,6 +16,7 @@ router.get('/getInfo', function (req, res) {
 })
 
 router.get('/fetch-details::groupName', function (req, res) {
+  const groupName = req.params.groupName
   viewGroup.getGroupDetails(function (groupDetails) {
     console.log(groupDetails)
     res.send(groupDetails)
