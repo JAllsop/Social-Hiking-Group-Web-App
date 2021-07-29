@@ -3,22 +3,24 @@ os: "linux"
 dist: "focal"  
 branches:
   only:
-  - master
+    - master
 node_js:
-- "14.17.0"
+  - "14.17.0"
 cache:
   directories:
     - node_modules
 before_install:
-- npm install npm@latest -g
-- npm --version
+  - npm install npm@latest -g
+  - npm --version
 install:
-- npm install
+  - npm install
 before_script:
-- export TZ=Africa/Maseru
-- date
+  - export TZ=Africa/Maseru
+  - date
 script:
-- npm run test-on-travis
+  - npm run test-on-travis
+after_script:
+  - sed -i '$d' .gitignore
 deploy:
   provider: azure_web_apps
   on:
