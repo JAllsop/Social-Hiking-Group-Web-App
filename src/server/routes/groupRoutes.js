@@ -20,7 +20,7 @@ router.get('/search-group', function (req, res) {
 router.post('/add-group', async function (req, res) {
   await groupService.createGroup(req.body)
   groupService.addToGroup(req.session.username, req.body)
-  res.redirect('/group/group-homePage')
+  res.redirect('/view/view-group')
 })
 
 router.get('/validate-groupName/:group_name', function (req, res) {
