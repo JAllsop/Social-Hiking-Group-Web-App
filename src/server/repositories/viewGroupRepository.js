@@ -3,9 +3,8 @@
 const dbQuery = require('./dbQuery.js').dbQuery
 
 module.exports = {
-  getDetails: async () => {
-    const sql = 'SELECT TOP (1) [groupName],[groupDescription],[generalLocation] FROM [dbo].[GROUPS]'
-    //  sql += `groupName='${group}'`
+  getDetails: async (groupName) => {
+    const sql = `SELECT * FROM [dbo].[GROUPS] WHERE groupName= '${groupName}'`
     return await dbQuery(sql)
   }
 }
