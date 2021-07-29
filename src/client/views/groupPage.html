@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="shortcut icon" type="image/png" href="img/icon2.png" />
 
-    <!-- <link
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="shortcut icon" type="image/png" href="img/icon2.png" />
+
+  <!-- <link
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
       rel="stylesheet"
     />
     <link href="groupPage.css" rel="stylesheet" /> -->
 
-    <title>View Group Info</title>
-    <!-- <script defer src="groupPage.js"></script> -->
-<script>
-    document.addEventListener('DOMContentLoaded',function(){
-    fetch('/view/fetch-details')
-    .then(function(response){
-        return response.json()
-    })
-    .then(function(_value){
-        display(_value)
-        console.log(_value)
+  <title>View Group Info</title>
+  <!-- <script defer src="groupPage.js"></script> -->
+  <script>
+    //to be edited by server when sent to client (contain group page name) 
+    //NEEDS to be changed when javascript is moved to separate file!
+    const groupName = 'groupNamePlaceholder'
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch(`/view/fetch-details:${groupName}`)
+        .then(function (response) {
+          return response.json()
+        })
+        .then(function (_value) {
+          display(_value)
+          console.log(_value)
 
-    })
+        })
     }, false);
 
-  function display(_value){
-    // console.log(_value.groupN)
-    let groupname = document.createElement('p')
-    let text1 = document.createTextNode(`${_value[0].groupName}`)
-    let groupnameTitle = document.createTextNode('Group name: ')
-    groupname.appendChild(groupnameTitle)
-    groupname.appendChild(text1)
-    document.getElementsByTagName('body')[0].appendChild(groupname)
+    function display(_value) {
+      // console.log(_value.groupN)
+      let groupname = document.createElement('p')
+      let text1 = document.createTextNode(`${_value[0].groupName}`)
+      let groupnameTitle = document.createTextNode('Group name: ')
+      groupname.appendChild(groupnameTitle)
+      groupname.appendChild(text1)
+      document.getElementsByTagName('body')[0].appendChild(groupname)
 
-    let groupDescription = document.createElement('p')
-    let text2 = document.createTextNode(`${_value[0].groupDescription}`)
-    let groupDescriptionTitle = document.createTextNode('Group description: ')
-    groupDescription.appendChild(groupDescriptionTitle)
-    groupDescription.appendChild(text2)
+      let groupDescription = document.createElement('p')
+      let text2 = document.createTextNode(`${_value[0].groupDescription}`)
+      let groupDescriptionTitle = document.createTextNode('Group description: ')
+      groupDescription.appendChild(groupDescriptionTitle)
+      groupDescription.appendChild(text2)
 
-    document.getElementsByTagName('body')[0].appendChild(groupDescription)
+      document.getElementsByTagName('body')[0].appendChild(groupDescription)
 
-    let groupLocation = document.createElement('p')
-    let text3 = document.createTextNode(`${_value[0].generalLocation}`)
-    let groupLocationTitle = document.createTextNode('Group location: ')
-    groupLocation.appendChild(groupLocationTitle)
-    groupLocation.appendChild(text3)
+      let groupLocation = document.createElement('p')
+      let text3 = document.createTextNode(`${_value[0].generalLocation}`)
+      let groupLocationTitle = document.createTextNode('Group location: ')
+      groupLocation.appendChild(groupLocationTitle)
+      groupLocation.appendChild(text3)
 
-    document.getElementsByTagName('body')[0].appendChild(groupLocation)
+      document.getElementsByTagName('body')[0].appendChild(groupLocation)
 
-  } 
-</script>  
+    }
+  </script>
 
 </head>
+
 <body>
 
-  </body>
+</body>
+
 </html>
