@@ -17,8 +17,8 @@ router.get('/search-group', function (req, res) {
   res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'searchGroup.html'))
 })
 
-router.post('/add-group', function (req, res) {
-  groupService.createGroup(req.body)
+router.post('/add-group', async function (req, res) {
+  await groupService.createGroup(req.body)
   groupService.addToGroup(req.session.username, req.body)
   res.redirect('/group/group-homePage')
 })
