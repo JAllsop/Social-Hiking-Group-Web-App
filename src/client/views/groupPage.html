@@ -16,41 +16,41 @@
   <title>View Group Info</title>
   <!-- <script defer src="groupPage.js"></script> -->
   <script>
+    let groupDetails = []
 
     //to be edited by server when sent to client (contains group page name) 
     //NEEDS to be changed when javascript is moved to separate file!
     const groupName = 'groupNamePlaceholder'
-    
+
     document.addEventListener('DOMContentLoaded', async () => {
 
       const response = await fetch(`/view/fetch-details:${groupName}`)
-      const details = await response.json()
-      display(details)
-      console.log(details)
+      groupDetails = await response.json()
+      display(groupDetails)
     }, false)
 
-    function display(_value) {
-      // console.log(_value.groupN)
-      let groupname = document.createElement('p')
-      let text1 = document.createTextNode(`${_value[0].groupName}`)
-      let groupnameTitle = document.createTextNode('Group name: ')
+    function display(groupDetails) {
+      // console.log(groupDetails.groupN)
+      const groupname = document.createElement('p')
+      const name = document.createTextNode(`${groupDetails[0].groupName}`)
+      const groupnameTitle = document.createTextNode('Group name: ')
       groupname.appendChild(groupnameTitle)
-      groupname.appendChild(text1)
+      groupname.appendChild(name)
       document.getElementsByTagName('body')[0].appendChild(groupname)
 
-      let groupDescription = document.createElement('p')
-      let text2 = document.createTextNode(`${_value[0].groupDescription}`)
-      let groupDescriptionTitle = document.createTextNode('Group description: ')
+      const groupDescription = document.createElement('p')
+      const description = document.createTextNode(`${groupDetails[0].groupDescription}`)
+      const groupDescriptionTitle = document.createTextNode('Group description: ')
       groupDescription.appendChild(groupDescriptionTitle)
-      groupDescription.appendChild(text2)
+      groupDescription.appendChild(description)
 
       document.getElementsByTagName('body')[0].appendChild(groupDescription)
 
-      let groupLocation = document.createElement('p')
-      let text3 = document.createTextNode(`${_value[0].generalLocation}`)
-      let groupLocationTitle = document.createTextNode('Group location: ')
+      const groupLocation = document.createElement('p')
+      const location = document.createTextNode(`${groupDetails[0].generalLocation}`)
+      const groupLocationTitle = document.createTextNode('Group location: ')
       groupLocation.appendChild(groupLocationTitle)
-      groupLocation.appendChild(text3)
+      groupLocation.appendChild(location)
 
       document.getElementsByTagName('body')[0].appendChild(groupLocation)
 
@@ -59,7 +59,17 @@
       membersButton.innerHTML = 'View Group Members'
       document.getElementsByTagName('body')[0].appendChild(membersButton)
 
-      
+      membersButton.addEventListener('click', () => {
+
+        // const listContainer = document.createElement('div')
+        // document.getElementsByTagName('body')[0].appendChild(listContainer)
+
+        // let groupMembers = document.createElement('ul')
+        // let members = document.createTextNode(`${groupDetails[0].generalLocation}`)
+        // let groupLocationTitle = document.createTextNode('Group location: ')
+        // groupLocation.appendChild(groupLocationTitle)
+        // groupLocation.appendChild(members)
+      })
     }
   </script>
 
