@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 const path = require('path')
 
@@ -26,9 +28,7 @@ router.post('/add-group', async function (req, res) {
 
 router.get('/validate-groupName/:group_name', function (req, res) {
   groupService.isGroupNameAvailable(`${req.params.group_name}`, function (isNameTaken) {
-    if (isNameTaken !== '') {
-      res.send(true)
-    } else res.send(false)
+    if (isNameTaken) { res.send(true) } else { res.send(false) }
   })
 })
 
@@ -46,18 +46,10 @@ router.get('/information', (req, res) => {
   res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'groupInformation.html'))
 })
 
-router.get('/groupList/:filter', function (req, res) {
-  if (req.params.filter === 'groupName') {
-    groupService.getGroupList(req.params.filter, function (nameList) {
-      res.send(nameList)
+router.get('/groupList', function (req, res) {
+    groupService.getGroupList(function (groups) {
+      res.send(groups)
     })
-  }
-
-  if (req.params.filter === 'generalLocation') {
-    groupService.getGroupList(req.params.filter, function (locationList) {
-      res.send(locationList)
-    })
-  }
 })
 
 module.exports = { router, dummy }
