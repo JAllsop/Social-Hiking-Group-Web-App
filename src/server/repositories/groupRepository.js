@@ -28,7 +28,7 @@ module.exports =
   },
 
   getList: async function getList (filter) {
-    const sql = `SELECT ${filter} FROM dbo.GROUPS`
+    const sql = `SELECT * FROM dbo.GROUPS`
     return await dbQuery.dbQuery(sql)
   }
 }

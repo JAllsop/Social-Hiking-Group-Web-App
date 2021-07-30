@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express')
 const path = require('path')
 
@@ -40,9 +42,7 @@ router.get('/validate-groupName/:group_name', function (req, res) {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
     groupService.isGroupNameAvailable(`${req.params.group_name}`, function (isNameTaken) {
-      if (isNameTaken !== '') {
-        res.send(true)
-      } else res.send(false)
+      if (isNameTaken) { res.send(true) } else { res.send(false) }
     })
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
@@ -74,20 +74,12 @@ router.get('/information', (req, res) => {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
-router.get('/groupList/:filter', function (req, res) {
+router.get('/groupList', function (req, res) {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
-    if (req.params.filter === 'groupName') {
-      groupService.getGroupList(req.params.filter, function (nameList) {
-        res.send(nameList)
-      })
-    }
-
-    if (req.params.filter === 'generalLocation') {
-      groupService.getGroupList(req.params.filter, function (locationList) {
-        res.send(locationList)
-      })
-    }
+    groupService.getGroupList(function (groups) {
+      res.send(groups)
+    })
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
