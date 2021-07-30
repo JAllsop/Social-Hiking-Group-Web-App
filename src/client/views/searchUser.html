@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+  <title>User List</title>
 
-<head>
-    <title>User List</title>
-</head>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/cdn/view_model/searchUserViewModel.js" ></script>
+    
+  </head>
 
 <body>
     <h1>Hiking App Users:</h1>
@@ -16,63 +22,7 @@
 
     <ol id="userList">
     </ol>
-
-    <script>
-      'use strict'
-
-  async function fetchUserList () {
-    const config = {
-    method: 'get', // specify method to use
-    headers: { // headers to specify the type of data needed
-      'Content-Type': 'application/json'
-    },
-  }
-  try {
-    const response = await fetch('/user/api/list') // Returns a Promise for the GET request
-    // Check if the request returned a valid code
-    if (!response.ok) {
-      throw new Error('Failed to connect to search api and get list of users')
-    }
-    // Return the response parse as JSON if code is valid
-    return await response.json()
-  } catch (e) {
-    console.log(e)
-  }
-}
-  document.querySelector('#search-text').addEventListener('input', () => {
-    fetchUserList()
-      .then(function (data) {
-        // filtering based on selected filter type
-        switch (document.getElementById('categories').value) {
-          case ('Username'):
-            data = data.filter(user =>
-              user.username.toLowerCase().startsWith(document.getElementById('search-text').value.toLowerCase()))
-            break
-          case ('Email Address'):
-            data = data.filter(user =>
-              user.email.toString().toLowerCase().startsWith(document.getElementById('search-text').value.toLowerCase()))
-            break
-        }
-
-        const userList = document.getElementById('userList')
-        userList.innerHTML = ''
-
-        // Iterate through all students
-        data.forEach(function (user) {
-        // Create a new list entry
-          const li = document.createElement('LI')
-          const liText = document.createTextNode(`${user.username}`)//: ${user.email}
-
-          // Append the class to the list element
-          li.className += 'user'
-
-          // Append list text to list item and list item to list
-          li.appendChild(liText)
-          userList.appendChild(li)
-        })
-      })
-  }, false)
-    </script>
+    
 </body>
 
 </html>
