@@ -56,18 +56,46 @@
 
       let membersButton = document.createElement('button')
       membersButton.setAttribute('id', 'membersButton')
-      membersButton.innerHTML = 'View Group Members'
+      membersButton.innerHTML = 'Show Group Members'
+      membersButton.value = 'show'
       document.getElementsByTagName('body')[0].appendChild(membersButton)
+      document.getElementsByTagName('body')[0].append(document.createElement('p'))
 
       membersButton.addEventListener('click', () => {
+        if (membersButton.value === 'show') {
+          // changing button to notify client it will now hide group members
+          membersButton.value = 'hidden'
+          membersButton.innerHTML = 'Hide Group Members'
 
-        // const listContainer = document.createElement('div')
-        // document.getElementsByTagName('body')[0].appendChild(listContainer)
+          // creating elements to display list of group members
+          const listContainer = document.createElement('div')
+          const title = document.createTextNode('Members: ')
+          document.getElementsByTagName('body')[0].append(title)
+          document.getElementsByTagName('body')[0].appendChild(listContainer)
+          let membersList = document.createElement('ul')
+
+          const data = ['Ram', 'Shyam', 'Sita', 'Gita']
+          data.forEach((item) => {
+            let members = document.createElement("li");
+            members.innerText = item;
+            membersList.appendChild(members);
+          })
+
+          document.body.appendChild(membersList)
+        }
+        else if (membersButton.value === 'hidden') {
+          // clearing page
+          document.body.innerHTML = ''
+
+          // displaying just group details again
+          display(groupDetails)
+        }
+
+
 
         // let groupMembers = document.createElement('ul')
-        // let members = document.createTextNode(`${groupDetails[0].generalLocation}`)
-        // let groupLocationTitle = document.createTextNode('Group location: ')
-        // groupLocation.appendChild(groupLocationTitle)
+        // let members = document.createTextNode(`${groupDetails[0].members}`)
+
         // groupLocation.appendChild(members)
       })
     }
