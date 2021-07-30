@@ -74,11 +74,11 @@
           document.getElementsByTagName('body')[0].appendChild(listContainer)
           let membersList = document.createElement('ul')
 
-          const data = ['Ram', 'Shyam', 'Sita', 'Gita']
-          data.forEach((item) => {
-            let members = document.createElement("li");
-            members.innerText = item;
-            membersList.appendChild(members);
+          const members = groupDetails[1]
+          members.forEach((item) => {
+            let members = document.createElement("li")
+            members.innerText = item.username
+            membersList.appendChild(members)
           })
 
           document.body.appendChild(membersList)
@@ -90,13 +90,6 @@
           // displaying just group details again
           display(groupDetails)
         }
-
-
-
-        // let groupMembers = document.createElement('ul')
-        // let members = document.createTextNode(`${groupDetails[0].members}`)
-
-        // groupLocation.appendChild(members)
       })
     }
   </script>
