@@ -54,6 +54,7 @@
 
       document.getElementsByTagName('body')[0].appendChild(groupLocation)
 
+      // creating memebers button and attaching event listening to display list of members on click
       let membersButton = document.createElement('button')
       membersButton.setAttribute('id', 'membersButton')
       membersButton.innerHTML = 'Show Group Members'
@@ -62,6 +63,7 @@
       document.getElementsByTagName('body')[0].append(document.createElement('p'))
 
       membersButton.addEventListener('click', () => {
+
         if (membersButton.value === 'show') {
           // changing button to notify client it will now hide group members
           membersButton.value = 'hidden'
@@ -74,13 +76,17 @@
           document.getElementsByTagName('body')[0].appendChild(listContainer)
           let membersList = document.createElement('ul')
 
+          // list of members is appended to group details
           const members = groupDetails[1]
+
+          // for each members create a list item and append it to the group members list
           members.forEach((item) => {
             let members = document.createElement("li")
             members.innerText = item.username
             membersList.appendChild(members)
           })
 
+          // display group member's list
           document.body.appendChild(membersList)
         }
         else if (membersButton.value === 'hidden') {
