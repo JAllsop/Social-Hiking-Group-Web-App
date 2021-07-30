@@ -16,20 +16,18 @@
   <title>View Group Info</title>
   <!-- <script defer src="groupPage.js"></script> -->
   <script>
-    //to be edited by server when sent to client (contain group page name) 
+
+    //to be edited by server when sent to client (contains group page name) 
     //NEEDS to be changed when javascript is moved to separate file!
     const groupName = 'groupNamePlaceholder'
-    document.addEventListener('DOMContentLoaded', function () {
-      fetch(`/view/fetch-details:${groupName}`)
-        .then(function (response) {
-          return response.json()
-        })
-        .then(function (_value) {
-          display(_value)
-          console.log(_value)
+    
+    document.addEventListener('DOMContentLoaded', async () => {
 
-        })
-    }, false);
+      const response = await fetch(`/view/fetch-details:${groupName}`)
+      const details = await response.json()
+      display(details)
+      console.log(details)
+    }, false)
 
     function display(_value) {
       // console.log(_value.groupN)
