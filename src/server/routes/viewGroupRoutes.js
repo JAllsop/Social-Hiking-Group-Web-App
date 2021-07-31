@@ -8,22 +8,26 @@ const viewGroup = require('../services/viewGroup.js')
 const router = express.Router()
 
 router.get('/view-group', function (req, res) {
-    res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'starter.html'))
+  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'starter.html'))
 })
 
 router.get('/getInfo', function (req, res) {
-    console.log('Here')
-    res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupPage.html'))
+  console.log('Here')
+  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'groupPage.html'))
+})
 
+router.get('/getQuestions', function (req, res) {
+  console.log('Here')
+  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'covidQuestions.html'))
 })
 
 router.get('/fetch-details', function (req, res) {
-    console.log('Inside')
-    viewGroup.getGroupDetails(function(groupDetails){
-        console.log(groupDetails)
-        res.send(groupDetails)
-    })
+  console.log('Inside')
+  viewGroup.getGroupDetails(function (groupDetails) {
+    console.log(groupDetails)
+    res.send(groupDetails)
+  })
 })
 
 // /fetch-details
-module.exports = router;
+module.exports = router
