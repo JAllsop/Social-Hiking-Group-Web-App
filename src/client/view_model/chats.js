@@ -1,42 +1,44 @@
 'use strict'
-const io = require('socket.io-client')
-const retrieveGroupMessages = require('../model/chat-functions')
-const format = require('./chat-formatting')
+import { io } from 'socket.io-client'
+// import retrieveGroupMessages from '../model/chat-functions'
+import { formatAMPM, formatDate } from './chat-formatting'
+
+const chatForm = document.getElementById('group-chat') // message area form.
 
 const socket = io('http://localhost:3000', { transports: ['websocket'] })
 socket.on('connection', () => {
   console.log('connection made')
 })
 socket.on('error', console.error)
-socket.on('retrieveGroupMessages', (groupID) => {
-  retrieveGroupMessages(groupID)
-    .then(data => console.log(data)) // display messages for respective groups.
-})
-socket.on('sendTextMessage', (data) => {
+// socket.on('retrieveGroupMessages', (groupID) => {
+//   retrieveGroupMessages(groupID)
+//     .then(data => console.log(data)) // display messages for respective groups.
+// })
+socket.on('message', (data) => {
+  console.log(data)
   displayRecievedMessage(data.sender, data.content, data.date)
 })
-socket.on('subscribe', (groupID) => {
+socket.on('subscribe', (groupID) => { // groupID is equivalent to group name in this case.
   socket.emit('groupID', groupID)
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#button-addon2').onclick = () => {
-    console.log('Send Button Clicked!')
-    const message = document.querySelector('#message-content').val()
-    const dateObject = new Date()
-    const sender = 'Sino Mazibuko'
-    displaySentMessage(sender, message, dateObject)
+chatForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  const msg = e.target.elements.content.value
+  const dateObject = new Date()
+  const sender = 'Sino Mazibuko'
+  displaySentMessage(sender, msg, dateObject)
 
-    socket.on('sendTextMessage', (data) => {
-      data = { sender: `${sender}`, content: `${message}`, date: dateObject }
-      socket.broadcast.emit(data)
-    })
-  }
+  socket.on('sendTextMessage', (data) => {
+    data = { sender: `${sender}`, content: `${msg}`, date: dateObject }
+  })
+  e.target.elements.content.value = ''
+  e.target.elements.content.value.focus()
 })
 
 const displaySentMessage = (sender, content, dateTimeObject) => {
-  const timeString = format.formatAMPM(dateTimeObject)
-  const dateString = format.formatDate(dateTimeObject)
+  const timeString = formatAMPM(dateTimeObject)
+  const dateString = formatDate(dateTimeObject)
   const messagesSection = document.getElementById('message-area')
   const messageDiv = document.createElement('div')
   messageDiv.setAttribute('class', 'ml-auto position-relative chat-right text-white')
@@ -82,8 +84,8 @@ const displaySentMessage = (sender, content, dateTimeObject) => {
 }
 
 const displayRecievedMessage = (sender, content, dateTimeObject) => {
-  const timeString = format.formatAMPM(dateTimeObject)
-  const dateString = format.formatDate(dateTimeObject)
+  const timeString = formatAMPM(dateTimeObject)
+  const dateString = formatDate(dateTimeObject)
   const messagesSection = document.getElementById('message-area')
   const messageDiv = document.createElement('div')
   messageDiv.setAttribute('class', 'mr-auto position-relative chat-left text-white')

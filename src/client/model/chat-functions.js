@@ -20,5 +20,4 @@ const retrieveGroupMessages = async (groupID) => {
       .catch((error) => console.error('Error:', error))
   })
 }
-
-module.exports = retrieveGroupMessages
+export default retrieveGroupMessages

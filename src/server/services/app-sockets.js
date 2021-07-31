@@ -4,12 +4,13 @@ class AppSockets {
   connection (client) {
     client.on('sendTextMessage', (message) => {
       const req = { messageContent: message.messageText, date: message.messageDate, sender: message.senderID }
+      client.emit('message', req)
       const res = []
       MessageService.saveMessage(res, req)
         .then((value) => console.log(value))
     })
 
-    client.on('retrieveGroupMessages', (groupID) => {
+    client.on('retrieveGroupMessages', (groupID) => { // GroupID is equivalent to Group Name.
       const req = { groupID: groupID }
       const res = {}
       MessageService.getGroupMessages(res, req)
