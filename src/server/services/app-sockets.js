@@ -2,9 +2,9 @@
 const MessageService = require('../services/message-service').default
 class AppSockets {
   connection (client) {
-    client.on('sendTextMessage', (message) => {
+    client.on('sendTextMessage', (message, groupID) => {
       const req = { messageContent: message.messageText, date: message.messageDate, sender: message.senderID }
-      client.emit('message', req)
+      client.broadcast.to(groupID).emit('message', req)
       const res = []
       MessageService.saveMessage(res, req)
         .then((value) => console.log(value))
@@ -20,6 +20,10 @@ class AppSockets {
     })
     client.on('subscribe', (groupID) => {
       client.join(groupID)
+    })
+
+    client.on('initiateVote', () => {
+
     })
   }
 }

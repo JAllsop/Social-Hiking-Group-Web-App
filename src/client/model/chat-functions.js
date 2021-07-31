@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express')
-const response = express().response
+let response = express().response
 
 const retrieveGroupMessages = async (groupID) => {
   let results = []
@@ -19,5 +19,16 @@ const retrieveGroupMessages = async (groupID) => {
       })
       .catch((error) => console.error('Error:', error))
   })
+  return response
 }
-export default retrieveGroupMessages
+
+const getUsername = async () => {
+  response = await fetch('http://localhost:3000/user/api/username', { //eslint-disable-line
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  return response
+}
+export default { retrieveGroupMessages, getUsername }

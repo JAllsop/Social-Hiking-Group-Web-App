@@ -18,9 +18,12 @@ socket.on('message', (data) => {
   console.log(data)
   displayRecievedMessage(data.sender, data.content, data.date)
 })
-socket.on('subscribe', (groupID) => { // groupID is equivalent to group name in this case.
-  socket.emit('groupID', groupID)
-})
+
+// const joinGroup = (groupID) => {
+//   socket.on('subscribe', (groupID) => { // groupID is equivalent to group name in this case.
+//     socket.emit('groupID', groupID)
+//   })
+// }
 
 chatForm.addEventListener('submit', (e) => {
   e.preventDefault()

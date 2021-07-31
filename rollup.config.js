@@ -1,5 +1,6 @@
 import babel from '@rollup/plugin-babel'
 import nodeResolve from 'rollup-plugin-node-resolve'
+import commonjs from '@rollup/plugin-commonjs'
 
 export default {
   input: './src/client/view_model/chats.js',
@@ -12,7 +13,9 @@ export default {
     babel(),
     nodeResolve({
       include: ['**.js', 'node_modules/**'],
-      browser: true
-    })
+      browser: true,
+      moduleResolution: 'node'
+    }),
+    commonjs()
   ]
 }
