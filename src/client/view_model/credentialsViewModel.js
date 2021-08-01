@@ -1,5 +1,8 @@
 'use strict'
 
+// NEED TO TEST!
+// const { postLoginDetails, postRegisterDetails } = import('/cdn/model/loginModel.js')
+
 // Divider creation helper function
 const createDiv = (classList) => {
   const divider = document.createElement('div')
@@ -18,7 +21,7 @@ const createInput = (type, id, classList = []) => {
 }
 
 // Generate Login Elements
-const addLoginElements = () => {
+const createLoginElements = () => {
   /* Login Divider (all elements appended to):
       set divider height to 100% of page (needed for alignment)
       assigns d-flex class (bootstrap 5.0)
@@ -27,7 +30,9 @@ const addLoginElements = () => {
       aligns elements in the (vertical) center */
   const loginElements = createDiv(['h-100', 'd-flex', 'flex-column', 'align-items-center', 'justify-content-center'])
 
-  // Heading
+  /* Heading:
+      assigned bootstrap display class
+      adds space below */
   const heading = document.createElement('h1')
   heading.classList.add('display-1', 'mb-5')
   heading.textContent = 'Hiking Organiser'
@@ -65,7 +70,7 @@ const addLoginElements = () => {
       sets bootstrap class
       increases size according to loginPage-style.css
       adds space below */
-  const switchDiv = createDiv(['form-check', 'form-switch', 'form-switch-md', 'mb-5'])
+  const switchDiv = createDiv(['form-check', 'form-switch', 'form-switch-lg', 'mb-5'])
   const viewPass = createInput('checkbox', 'viewPass', ['form-check-input'])
   // Checkbox Text
   const viewPassLabel = document.createElement('label')
@@ -107,47 +112,123 @@ const addLoginElements = () => {
       makes button large */
   registerButton.classList.add('btn', 'btn-secondary', 'btn-lg')
   registerButton.text = 'Register A New Account'
+
+  // Attach registerButton to modal register form
+  registerButton.setAttribute('data-bs-toggle', 'modal')
+  registerButton.setAttribute('data-bs-target', '#registerForm')
   // appending to container
   buttonContainer.appendChild(registerButton)
 
   // appending container to loginElements
   loginElements.appendChild(buttonContainer)
 
-  // appending login elements to document body
-  document.body.appendChild(loginElements)
+  return loginElements
 }
 
 // Generate Register Elements
-// const addRegisterElements = () => {
-//   document.body.innerHTML = '<h1> Register A New Account <h1>'
+const addRegisterElements = () => {
+  /* Register Divider (all elements appended to):
+      set divider height to 100% of page (needed for alignment)
+      assigns d-flex class (bootstrap 5.0)
+      assigns flex-column class (for alzignment)
+      aligns elements in the (horizontal) center
+      aligns elements in the (vertical) center */
+  const registerElements = createDiv(['h-100', 'd-flex', 'flex-column', 'align-items-center', 'justify-content-center'])
 
-//   document.body.innerHTML += ('Username: <br>')
-//   createInput('text', 'username')
+  /* Heading:
+          assigned bootstrap display class
+          adds space below */
+  const heading = document.createElement('h1')
+  heading.classList.add('display-1', 'mb-5')
+  heading.textContent = 'Register A New Account'
+  // appending to registerElements
+  registerElements.appendChild(heading)
 
-//   document.body.innerHTML += ('Email: <br>')
-//   createInput('email', 'email')
+  const fieldContainer = createDiv(['input-group-vertical', 'w-25', 'mb-3'])
+  /* Username Input Field:
+      set bootstrap input class (large version)
+      adds space below
+      applies backgound gradient for 3D effect */
+  const usernameField = createInput('text', 'Username', ['form-control', 'form-control-lg', 'mb-2', 'field-gradient-custom'])
+  // appending to container
+  fieldContainer.appendChild(usernameField)
 
-//   document.body.innerHTML += ('Password: <br>')
-//   createInput('password', 'password')
+  /* Username Input Field:
+      set bootstrap input class (large version)
+      adds space below
+      applies backgound gradient for 3D effect */
+  const emailField = createInput('text', 'Email', ['form-control', 'form-control-lg', 'mb-2', 'field-gradient-custom'])
+  // appending to container
+  fieldContainer.appendChild(emailField)
 
-//   document.body.innerHTML += ('Confirm Password: <br>')
-//   createInput('password', 'passwordConfirm')
+  /* Password Input Field:
+      set bootstrap input class (large version)
+      adds space below
+      applies backgound gradient for 3D effect */
+  const passwordField = createInput('password', 'Password', ['form-control', 'form-control-lg', 'mb-2', 'field-gradient-custom'])
+  // appending to container
+  fieldContainer.appendChild(passwordField)
 
-//   const signUpButton = document.createElement('button')
-//   signUpButton.setAttribute('id', 'signUpButton')
-//   signUpButton.innerHTML = 'Sign Up'
-//   document.body.appendChild(signUpButton)
+  /* Password Input Field:
+      set bootstrap input class (large version)
+      adds space below
+      applies backgound gradient for 3D effect */
+  const passwordConfirmField = createInput('password', 'Confirm Password', ['form-control', 'form-control-lg', 'field-gradient-custom'])
+  // appending to container
+  fieldContainer.appendChild(passwordConfirmField)
 
-//   const signInButton = document.createElement('button')
-//   signInButton.setAttribute('id', 'signInButton')
-//   signInButton.innerHTML = 'Return to Log In'
-//   document.body.appendChild(signInButton)
-// }
+  // appending container to loginElements
+  registerElements.appendChild(fieldContainer)
+
+  /* PASSWORD VIEW CHECKBOX */
+  /* Material Checkbox/Switch:
+      sets bootstrap class
+      increases size according to loginPage-style.css
+      adds space below */
+  const switchDiv = createDiv(['form-check', 'form-switch', 'form-switch-md', 'mb-5'])
+  const viewPass = createInput('checkbox', 'viewPass', ['form-check-input'])
+  // Checkbox Text
+  const viewPassLabel = document.createElement('label')
+  viewPassLabel.classList.add(['form-check-label'])
+  viewPassLabel.innerText = 'View Password'
+
+  // appending to switch divider
+  switchDiv.appendChild(viewPass)
+  switchDiv.appendChild(viewPassLabel)
+
+  // appending to loginElements
+  registerElements.appendChild(switchDiv)
+
+  /* BUTTONS */
+  /* Grid Container For Buttons:
+      sets class to grid
+      applies gap between buttons
+      vertically stacks buttons */
+  const buttonContainer = createDiv(['d-grid', 'gap-2', 'col-2'])
+  // needed for screen reader
+  buttonContainer.setAttribute('role', 'group')
+
+  // Log In Button
+  const registerButton = document.createElement('a')
+  registerButton.setAttribute('id', 'registerButton')
+  /*  sets Bootstrap button class
+          sets button type (for colour)
+          makes button large */
+  registerButton.classList.add('btn', 'btn-success', 'btn-lg')
+  registerButton.text = 'Register Account'
+  // appending to container
+  buttonContainer.appendChild(registerButton)
+
+  // appending container to loginElements
+  registerElements.appendChild(buttonContainer)
+
+  return registerElements
+}
 
 // // Add Register Event listeners
 // const addRegisterListeners = () => {
 //   document.getElementById('signInButton').addEventListener('click', () => {
-//     addLoginElements()
+//     createLoginElements()
 //     addLoginListeners()
 //   })
 
@@ -166,7 +247,7 @@ const addLoginElements = () => {
 //           .then((code) => {
 //             // Add Login Elements if Registration Successful
 //             if (code === 'Account Registered') {
-//               addLoginElements()
+//               createLoginElements()
 //               addLoginListeners()
 //             }
 //           })
@@ -221,5 +302,7 @@ const addLoginElements = () => {
 //   })
 // }
 
-addLoginElements()
+// document.body.appendChild(createLoginElements())
 // addLoginListeners()
+
+// document.body.appendChild(createLoginElements())
