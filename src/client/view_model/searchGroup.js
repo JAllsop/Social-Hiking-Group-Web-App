@@ -1,95 +1,112 @@
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetchGroups()
-}, false);
+document.addEventListener('DOMContentLoaded', function () {
+  fetchGroups()
+}, false)
 
-function fetchGroups(){
+function fetchGroups () {
   fetch('/group/groupList')
-  .then(function(response){
+    .then(function (response) {
       return response.json()
-  })
-  .then(function(_value){
-     makeTable(_value)
-  })
+    })
+    .then(function (_value) {
+      makeTable(_value)
+    })
 }
 
+function makeTable (groups) {
+  const GroupNames = []
+  const GroupLocation = []
 
-function makeTable(groups) {
+  const tableLength = groups.length
 
-    let GroupNames = []
-    let GroupLocation = []
+  const groupsTable = document.createElement('table')
+  groupsTable.setAttribute('id', 'groupsTable')
 
-    let tableLength = groups.length
+  const headerRow = document.createElement('tr')
+  headerRow.setAttribute('class', 'header')
 
-    let groupsTable = document.createElement('table')
-    groupsTable.setAttribute('id','groupsTable')
+  const header_1 = document.createElement('th')
+  header_1.setAttribute('style', 'width:70%')
+  header_1.innerHTML = 'Name'
+  headerRow.appendChild(header_1)
 
-    let headerRow = document.createElement('tr')
-    headerRow.setAttribute('class','header')
+  const header_2 = document.createElement('th')
+  header_2.setAttribute('style', 'width:70%')
+  header_2.innerHTML = 'Location'
+  headerRow.appendChild(header_2)
 
-    let header_1 = document.createElement('th')
-    header_1.setAttribute('style','width:70%')
-    header_1.innerHTML = 'Name'
-    headerRow.appendChild(header_1)
+  groupsTable.appendChild(headerRow)
 
-    let header_2 = document.createElement('th')  
-    header_2.setAttribute('style','width:70%')
-    header_2.innerHTML = 'Location'
-    headerRow.appendChild(header_2)
+  for (i = 0; i < tableLength; ++i) {
+    const tableRows = document.createElement('tr')
 
-    groupsTable.appendChild(headerRow)
+    GroupNames[i] = `<a href = '#' onclick="(${joinGroupButton})('${groups[i].groupName}')"> ${groups[i].groupName} </a>`
+    GroupLocation[i] = groups[i].generalLocation
 
+    const nameCol = document.createElement('td')
+    nameCol.innerHTML = GroupNames[i]
 
-    for (i = 0; i < tableLength; ++i) {
+    const locationCol = document.createElement('td')
+    locationCol.innerHTML = GroupLocation[i]
 
-        let tableRows = document.createElement('tr')
+    tableRows.appendChild(nameCol)
+    tableRows.appendChild(locationCol)
 
-        GroupNames[i] = "<a href = '#'>" + groups[i].groupName + "</a>"
-        GroupLocation[i] = groups[i].generalLocation
+    groupsTable.appendChild(tableRows)
+  }
 
-        let nameCol = document.createElement('td')
-        nameCol.innerHTML = GroupNames[i]
-
-        let locationCol = document.createElement('td')
-        locationCol.innerHTML = GroupLocation[i]
-
-        tableRows.appendChild(nameCol)
-        tableRows.appendChild(locationCol)  
-        
-        groupsTable.appendChild(tableRows)
-    
-      }
-
-    document.getElementsByTagName('body')[0].appendChild(groupsTable)
+  document.getElementsByTagName('body')[0].appendChild(groupsTable)
 }
 
-function searchFunction() {
+function searchFunction () {
+  const input = document.getElementById('search-text')
+  const filter = input.value.toUpperCase()
+  const table = document.getElementById('groupsTable')
+  const tr = table.getElementsByTagName('tr')
+  let td
 
-    let input = document.getElementById("search-text")
-    let filter = input.value.toUpperCase()
-    let table = document.getElementById("groupsTable")
-    let tr = table.getElementsByTagName("tr")
-    var td
-
-    for (i = 0; i < tr.length; i++) {
-
-      switch (document.getElementById('options').value) {
-          case ('groupName'):
-            td = tr[i].getElementsByTagName("td")[0]
-              break;
+  for (i = 0; i < tr.length; i++) {
+    switch (document.getElementById('options').value) {
+      case ('groupName'):
+        td = tr[i].getElementsByTagName('td')[0]
+        break
           case ('groupLocation'):
-            td = tr[i].getElementsByTagName("td")[1]
-              break;
+        td = tr[i].getElementsByTagName('td')[1]
+        break
       }
-      if (td) {
+    if (td) {
+      textValue = td.textContent || td.innerText
 
-        textValue = td.textContent || td.innerText
-
-        if (textValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = ""
-        } else {
-          tr[i].style.display = "none"
-        }
-      }       
+      if (textValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = ''
+      } else {
+        tr[i].style.display = 'none'
+      }
     }
+  }
+}
+
+function joinGroupButton (group) {
+  if (document.getElementById('join')) {
+    document.getElementById('join').remove()
+  }
+
+  const btn = document.createElement('button')
+  btn.innerHTML = `Join ${group} `
+  btn.id = 'join'
+  btn.onclick = function () {
+    document.getElementById('join').remove()
+    logRequest(group)
+  }
+  document.body.appendChild(btn)
+}
+
+async function logRequest (groupID) {
+  console.log('In')
+  console.log(groupID)
+  console.log('Out')
+  fetch('/group/api/apply/' + `${groupID}`)
+    .then(function (response) {
+      return response.json()
+    })
 }
