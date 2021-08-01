@@ -1,0 +1,59 @@
+html {
+    height: 100%;
+}
+
+.body-gradient-custom {
+    /* alternative (fallback) standard colour */
+    background: #292929;
+
+    /* Gradient Colour */
+    /*Supported by Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(187deg, rgba(41,41,41,1) 45%, rgba(55,55,55,1) 71%, rgba(56,56,56,1) 100%);
+
+    /*Supported by: W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(187deg, rgba(41,41,41,1) 45%, rgba(55,55,55,1) 71%, rgba(56,56,56,1) 100%);
+}
+
+.field-gradient-custom {
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(227, 227, 227, 1))
+  }
+
+body {
+    height: 100%;
+    color: #fff;
+    /* background: #292929; */
+}
+
+.form-switch.form-switch-md {
+    padding-left: 4.5em;
+    height: 1.4em;
+}
+
+.form-switch.form-switch-md .form-check-input {
+    margin-left: -4.5em;
+    height: 1.4em;
+    width: 3.5em;
+    padding-bottom: 1.6em;
+}
+
+.form-switch.form-switch-md .form-check-label {
+    font-size: 1.5rem;
+    padding-top: 0em;
+}
+
+.form-switch.form-switch-lg {
+    padding-left: 8.5em;
+    height: 4.5em;
+}
+
+.form-switch.form-switch-lg .form-check-input {
+    margin-left: -8.5em;
+    height: 4em;
+    width: 8em;
+}
+
+.form-switch.form-switch-lg .form-check-label {
+    font-size: 3rem;
+    padding-top: 0em;
+}
