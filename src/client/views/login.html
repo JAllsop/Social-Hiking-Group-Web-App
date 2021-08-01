@@ -16,58 +16,58 @@
 
 <body class="body-gradient-custom">
 
-    <div class="h-100 d-flex flex-column align-items-center justify-content-center">
-        <h1 class="display-1 mb-5">Hiking Organiser</h1>
-        <div class="input-group-vertical w-25 mb-3">
-            <input type="text" id="Username" placeholder="Username"
+    <div id="login" class="h-100 d-flex flex-column align-items-center justify-content-center">
+        <h1 id="login_heading" class="display-1 mb-5">Hiking Organiser</h1>
+        <div id="login_input_container" class="input-group-vertical w-25 mb-3">
+            <input id="login_username" type="text" placeholder="Username"
                 class="form-control form-control-lg mb-2 field-gradient-custom">
-            <input type="password" id="Password" placeholder="Password"
+            <input id="login_password" type="password" placeholder="Password"
                 class="form-control form-control-lg field-gradient-custom">
         </div>
-        <div class="form-check form-switch form-switch-lg mb-5">
-            <input type="checkbox" id="viewPass" placeholder="viewPass" class="form-check-input">
-            <label class="form-check-label">View Password</label>
+        <div id="login_view_password_toggle_container" class="form-check form-switch form-switch-lg mb-5">
+            <input id="login_view_password_toggle" type="checkbox" placeholder="viewPass" class="form-check-input">
+            <label id="login_view_password_toggle_label" class="form-check-label">View Password</label>
         </div>
-        <div class="d-grid gap-2 col-2" role="group">
-            <a id="loginButton" class="btn btn-success btn-lg">Login</a>
-            <a id="registerButton" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
-                data-bs-target="#registerForm">Register A New Account</a>
+        <div id="login_buttons_container" class="d-grid gap-2 col-2" role="group">
+            <a id="login_button" class="btn btn-success btn-lg">Login</a>
+            <a id="register_open_button" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
+                data-bs-target="#register">Register A New Account</a>
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="registerForm" tabindex="-1" aria-labelledby="registerFormLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content body-gradient-custom">
-                <div class="modal-header border-0 justify-content-center mb-3 mt-3">
-                    <h5 class="modal-title display-5 position-absolute" id="registerFormLabel">Register A New Account
+    <div id="register" class="modal fade" tabindex="-1" aria-labelledby="register_FormLabel" aria-hidden="true">
+        <div id="register_format" class="modal-dialog modal-dialog-centered modal-lg">
+            <div id="register_container" class="modal-content body-gradient-custom">
+                <div id="register_header_container" class="modal-header border-0 justify-content-center mb-3 mt-3">
+                    <h5  id="register_title" class="modal-title display-5 position-absolute" id="registerFormLabel">Register A New Account
                     </h5>
-                    <button type="button" class="btn-close btn-close-lg btn-close-white me-3" data-bs-dismiss="modal"
+                    <button id="register_close_button" type="button" class="btn-close btn-close-lg btn-close-white me-3" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
-                <div class="modal-body large-font-size border-0">
-                    <div class="input-group-vertical w-50 mb-3 mx-auto">
-                        <input type="text" id="Username" placeholder="Username"
+                <div id="register_body" class="modal-body large-font-size border-0">
+                    <div id="register_input_container" class="input-group-vertical w-50 mb-3 mx-auto">
+                        <input id="register_username" type="text" placeholder="Username"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input type="text" id="Email" placeholder="Email"
+                        <input id="register_email" type="text" placeholder="Email"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input type="password" id="Password" placeholder="Password"
+                        <input id="register_password" type="password" placeholder="Password"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input type="password" id="Confirm Password" placeholder="Confirm Password"
+                        <input id="register_confirm_password" type="password" placeholder="Confirm Password"
                             class="form-control form-control-lg field-gradient-custom">
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="form-check form-switch form-switch-md mb-3">
-                            <input type="checkbox" id="viewPass" class="form-check-input">
-                            <label class="form-check-label">View Password</label>
+                    <div id="register_button_container" class="d-flex justify-content-center">
+                        <div id="register_view_password_toggle_container" class="form-check form-switch form-switch-md mb-3">
+                            <input id="register_view_password_toggle" type="checkbox" class="form-check-input">
+                            <label id="register_view_password_toggle_label" class="form-check-label">View Password</label>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer justify-content-center border-0">
-                    <button type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
+                <div id="register_footer_container" class="modal-footer justify-content-center border-0">
+                    <button  id="register_button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
                 </div>
             </div>
         </div>
