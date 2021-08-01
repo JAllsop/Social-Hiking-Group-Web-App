@@ -15,7 +15,7 @@
 </head>
 
 <body class="body-gradient-custom">
-
+    <!-- login classes needed for centering elements - html and body height required to be 100%  -->
     <div id="login" class="h-100 d-flex flex-column align-items-center justify-content-center">
         <h1 id="login_heading" class="display-1 mb-5">Hiking Organiser</h1>
         <div id="login_input_container" class="input-group-vertical w-25 mb-3">
@@ -24,10 +24,12 @@
             <input id="login_password" type="password" placeholder="Password"
                 class="form-control form-control-lg field-gradient-custom">
         </div>
+        <!-- material style toggle switch -->
         <div id="login_view_password_toggle_container" class="form-check form-switch form-switch-lg mb-5">
             <input id="login_view_password_toggle" type="checkbox" placeholder="viewPass" class="form-check-input">
             <label id="login_view_password_toggle_label" class="form-check-label">View Password</label>
         </div>
+        <!-- container stacks buttons vertically -->
         <div id="login_buttons_container" class="d-grid gap-2 col-2" role="group">
             <a id="login_button" class="btn btn-success btn-lg">Login</a>
             <a id="register_open_button" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
@@ -35,15 +37,18 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Register Popup Modal -->
     <div id="register" class="modal fade" tabindex="-1" aria-labelledby="register_FormLabel" aria-hidden="true">
         <div id="register_format" class="modal-dialog modal-dialog-centered modal-lg">
+            <!-- removed borders from elemnts to get rid of white lines -->
             <div id="register_container" class="modal-content body-gradient-custom">
+                <!-- classes and margin adjustments needed to center title and close button -->
                 <div id="register_header_container" class="modal-header border-0 justify-content-center mb-3 mt-3">
-                    <h5  id="register_title" class="modal-title display-5 position-absolute" id="registerFormLabel">Register A New Account
+                    <h5 id="register_title" class="modal-title display-5 position-absolute" id="registerFormLabel">
+                        Register A New Account
                     </h5>
-                    <button id="register_close_button" type="button" class="btn-close btn-close-lg btn-close-white me-3" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button id="register_close_button" type="button" class="btn-close btn-close-lg btn-close-white me-3"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div id="register_body" class="modal-body large-font-size border-0">
                     <div id="register_input_container" class="input-group-vertical w-50 mb-3 mx-auto">
@@ -60,14 +65,17 @@
                             class="form-control form-control-lg field-gradient-custom">
                     </div>
                     <div id="register_button_container" class="d-flex justify-content-center">
-                        <div id="register_view_password_toggle_container" class="form-check form-switch form-switch-md mb-3">
+                        <!-- material style toggle switch -->
+                        <div id="register_view_password_toggle_container"
+                            class="form-check form-switch form-switch-md mb-3">
                             <input id="register_view_password_toggle" type="checkbox" class="form-check-input">
-                            <label id="register_view_password_toggle_label" class="form-check-label">View Password</label>
+                            <label id="register_view_password_toggle_label" class="form-check-label">View
+                                Password</label>
                         </div>
                     </div>
                 </div>
                 <div id="register_footer_container" class="modal-footer justify-content-center border-0">
-                    <button  id="register_button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
+                    <button id="register_button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
                 </div>
             </div>
         </div>
