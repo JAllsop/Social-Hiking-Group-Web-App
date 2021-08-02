@@ -49,11 +49,11 @@ const addEventListeners = () => {
     // clunky implementation, will change toggle button color to red in future (bootstrap issue)
     if (viewPassToggle.checked) {
       passwordField.type = 'text'
-      viewPassToggleLabel.textContent = 'Hiding Password'
+      viewPassToggleLabel.textContent = 'Viewing Password'
       // viewPassToggleLabel.style.color = '#008756'
     } else if (!viewPassToggle.checked) {
       passwordField.type = 'password'
-      viewPassToggleLabel.textContent = 'Viewing Password'
+      viewPassToggleLabel.textContent = 'Hiding Password'
       // viewPassToggleLabel.style.color = '#d9534f'
     }
   })
@@ -106,12 +106,12 @@ const addEventListeners = () => {
     if (viewPassToggle.checked) {
       passwordField.type = 'text'
       confirmPasswordField.type = 'text'
-      viewPassToggleLabel.textContent = 'Hiding Password'
+      viewPassToggleLabel.textContent = 'Viewing Password'
       // viewPassToggleLabel.style.color = '#008756'
     } else if (!viewPassToggle.checked) {
       passwordField.type = 'password'
       confirmPasswordField.type = 'password'
-      viewPassToggleLabel.textContent = 'Viewing Password'
+      viewPassToggleLabel.textContent = 'Hiding Password'
       // viewPassToggleLabel.style.color = '#d9534f'
     }
   })

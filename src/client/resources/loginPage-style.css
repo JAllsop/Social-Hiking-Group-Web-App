@@ -39,12 +39,10 @@ input:-webkit-autofill::first-line {
 
 .spinner-space {
     height: 2em;
-    text-align: center;
 }
 
 .spinner-space-lg {
     height: 3em;
-    text-align: center;
 }
 
 /* custom margin spacing */
