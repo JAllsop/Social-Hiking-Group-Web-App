@@ -101,10 +101,11 @@ const addEventListeners = () => {
       const pass = document.getElementById('register_password').value
       const passConfirm = document.getElementById('register_confirm_password').value
       if (!username || !email || !pass || !passConfirm) {
-        showAlert('warning', 'Please enter a username and a password')
-      } else {
-      if (pass !== passConfirm) {
+        showAlert('warning', 'All fields are required', true)
+      } else if
+      (pass !== passConfirm) {
         showAlert('warning', 'The provided passwords do not match', true)
+        console.log('working')
       } else {
         postRegisterDetails(username, pass, email)
           .then((code) => {
