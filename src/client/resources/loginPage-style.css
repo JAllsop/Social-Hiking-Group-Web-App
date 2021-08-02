@@ -26,13 +26,13 @@ body {
 /* Change Autocomplete styles in Chrome*/
 
 input:-webkit-autofill::first-line, input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
-    font-family: "Helvetica Neue", "Helvetica, Arial", sans-serif !important;
+    font-family: system-ui,-apple-system,"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !important;
 }
 
 /* Change Autocomplete font size to match input field in Chrome */
 
 input:-webkit-autofill::first-line {
-    font-size: 18px
+    font-size: 20px
 }
 
 .mt-6 {
