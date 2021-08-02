@@ -1,12 +1,12 @@
 'use strict'
 
 export async function fetchUserList () {
-    const config = {
-        method: 'get', // specify method to use
-        headers: { // headers to specify the type of data needed
-            'Content-Type': 'application/json'
-        },
+  const config = {
+    method: 'get', // specify method to use
+    headers: { // headers to specify the type of data needed
+      'Content-Type': 'application/json'
     }
+  }
   try {
     const response = await fetch('/user/api/list') // Returns a Promise for the GET request
     // Check if the request returned a valid code

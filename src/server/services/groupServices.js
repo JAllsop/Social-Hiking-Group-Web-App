@@ -24,5 +24,17 @@ module.exports =
   getGroupList: async function getGroupList (callback) {
     const result = await db.getList()
     if (result.length !== 0) callback(result)
+  },
+  addToInvites: async function addToInvites (username, groupname) {
+    return await db.addToInvites(username, groupname)
+  },
+  createInvitation: async function createInvitation (username, groupname) {
+    return await db.createInvitation(username, groupname)
   }
+  // ,
+  // checkUser: async function checkUser (username, callback) {
+  //   const result = await db.checkUser(username)
+  //   if (result.length === 0) { callback(false) } else { callback(true) } // false - Not in group
+  // }
+
 }
