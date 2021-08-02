@@ -14,13 +14,16 @@ import('../model/myGroupsModel.js').then(({ fetchMyGroups }) => {
       groups.forEach(function (group) {
         // Create a new list entry
         const li = document.createElement('LI')
-        const liText = document.createTextNode(`${group.groupName}`)// : ${user.email}
+        const text = `${group.groupName}`
+        const a = document.createElement("a");
+        a.href = '/view/view-group:' + text
+        a.textContent = text
 
         // Append the class to the list element
         li.className += 'user'
 
         // Append list text to list item and list item to list
-        li.appendChild(liText)
+        li.appendChild(a)
         userList.appendChild(li)
       })
     })
