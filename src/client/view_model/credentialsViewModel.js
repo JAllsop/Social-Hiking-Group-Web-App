@@ -1,9 +1,11 @@
 'use strict'
 
-// bootstrap alert helper function
-const showAlert = (alert, message, registration = false) => {
+/* bootstrap alert helper function
+    cant
+*/
+const showAlert = (alertType, message, registration = false) => {
   const alertWindow = document.createElement('div')
-  alertWindow.classList.add('alert', `alert-${alert}`, 'alert-dismissible', 'fade', 'show')
+  alertWindow.classList.add('alert', `alert-${alertType}`, 'alert-dismissible', 'fade', 'show')
   alertWindow.classList.add('position-absolute', 'start-50', 'translate-middle')
 
   // position will change if registration form is open
@@ -13,8 +15,8 @@ const showAlert = (alert, message, registration = false) => {
 
   const boldText = document.createElement('strong')
   // appending Alert Type and Capitalizing First Letter
-  const alertType = document.createTextNode(`${alert.charAt(0).toUpperCase() + alert.slice(1)}! `)
-  boldText.appendChild(alertType)
+  const alert = document.createTextNode(`${alertType.charAt(0).toUpperCase() + alertType.slice(1)}! `)
+  boldText.appendChild(alert)
   alertWindow.appendChild(boldText)
 
   const messageText = document.createTextNode(`${message}`)
@@ -73,12 +75,16 @@ const addEventListeners = () => {
     document.getElementById('login_button').addEventListener('click', () => {
       const username = document.getElementById('login_username').value
       const password = document.getElementById('login_password').value
+      const loginSpinner = document.getElementById('login_spinner')
       if (!username || !password) {
         showAlert('warning', 'Please enter a username and a password')
       } else {
+        loginSpinner.classList.remove('visually-hidden')
         postLoginDetails(username, password)
           .then((code) => {
-            showAlert('warning', code)
+            loginSpinner.classList.add('visually-hidden')
+            console.log(code)
+            if (code instanceof Error) { showAlert('warning', code.message) } else { showAlert('success', 'You have logged in') }
           })
       }
     }, false)
@@ -127,8 +133,11 @@ const addEventListeners = () => {
         showAlert('warning', 'The provided passwords do not match', true)
         console.log('working')
       } else {
+        const registerSpinner = document.getElementById('register_spinner')
+        registerSpinner.classList.remove('visually-hidden')
         postRegisterDetails(username, pass, email)
           .then((code) => {
+            registerSpinner.classList.add('visually-hidden')
             // Add Login Elements if Registration Successful
             if (code === 'Account Registered') {
               showAlert('success', 'Account registered you can now log in')
