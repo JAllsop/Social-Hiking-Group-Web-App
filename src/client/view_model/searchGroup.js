@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }, false)
 
 function fetchGroups () {
-  fetch('/group/groupList')
+  fetch('/group/groupList') // eslint-disable-line
     .then(function (response) {
       return response.json()
     })
@@ -25,19 +25,19 @@ function makeTable (groups) {
   const headerRow = document.createElement('tr')
   headerRow.setAttribute('class', 'header')
 
-  const header_1 = document.createElement('th')
-  header_1.setAttribute('style', 'width:70%')
-  header_1.innerHTML = 'Name'
-  headerRow.appendChild(header_1)
+  const header1 = document.createElement('th')
+  header1.setAttribute('style', 'width:70%')
+  header1.innerHTML = 'Name'
+  headerRow.appendChild(header1)
 
-  const header_2 = document.createElement('th')
-  header_2.setAttribute('style', 'width:70%')
-  header_2.innerHTML = 'Location'
-  headerRow.appendChild(header_2)
+  const header2 = document.createElement('th')
+  header2.setAttribute('style', 'width:70%')
+  header2.innerHTML = 'Location'
+  headerRow.appendChild(header2)
 
   groupsTable.appendChild(headerRow)
 
-  for (i = 0; i < tableLength; ++i) {
+  for (let i = 0; i < tableLength; ++i) {
     const tableRows = document.createElement('tr')
 
     GroupNames[i] = `<a href = '#' onclick="(${joinGroupButton})('${groups[i].groupName}')"> ${groups[i].groupName} </a>`
@@ -58,24 +58,24 @@ function makeTable (groups) {
   document.getElementsByTagName('body')[0].appendChild(groupsTable)
 }
 
-function searchFunction () {
+function searchFunction () { // eslint-disable-line
   const input = document.getElementById('search-text')
   const filter = input.value.toUpperCase()
   const table = document.getElementById('groupsTable')
   const tr = table.getElementsByTagName('tr')
   let td
 
-  for (i = 0; i < tr.length; i++) {
+  for (let i = 0; i < tr.length; i++) {
     switch (document.getElementById('options').value) {
       case ('groupName'):
         td = tr[i].getElementsByTagName('td')[0]
         break
-          case ('groupLocation'):
+      case ('groupLocation'):
         td = tr[i].getElementsByTagName('td')[1]
         break
-      }
+    }
     if (td) {
-      textValue = td.textContent || td.innerText
+      const textValue = td.textContent || td.innerText
 
       if (textValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = ''
@@ -86,27 +86,41 @@ function searchFunction () {
   }
 }
 
-function joinGroupButton (group) {
-  if (document.getElementById('join')) {
-    document.getElementById('join').remove()
+async function joinGroupButton (group) {
+  await applied(group)
+  console.log(`has applied (as status): ${status}`)
+  if (!status) {
+    console.log(`has applied (IN): ${status}`)
+    if (document.getElementById('join')) {
+      document.getElementById('join').remove()
+    }
+    const btn = document.createElement('button')
+    btn.innerHTML = `Join ${group} `
+    btn.id = 'join'
+    btn.onclick = function () {
+      document.getElementById('join').remove()
+      logRequest(group)
+    }
+    document.body.appendChild(btn)
+  } else {
+    alert('Cannot join this group') // eslint-disable-line
   }
-
-  const btn = document.createElement('button')
-  btn.innerHTML = `Join ${group} `
-  btn.id = 'join'
-  btn.onclick = function () {
-    document.getElementById('join').remove()
-    logRequest(group)
-  }
-  document.body.appendChild(btn)
 }
 
 async function logRequest (groupID) {
-  console.log('In')
-  console.log(groupID)
-  console.log('Out')
-  fetch('/group/api/apply/' + `${groupID}`)
+  fetch('/group/api/apply/' + `${groupID}`) // eslint-disable-line
     .then(function (response) {
       return response.json()
+    })
+}
+let status
+async function applied (groupID) {
+  await fetch('/group/api/check/' + `${groupID}`) // eslint-disable-line
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (response) {
+      status = response
+      return status
     })
 }
