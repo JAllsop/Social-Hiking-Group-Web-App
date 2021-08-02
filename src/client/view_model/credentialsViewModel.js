@@ -73,15 +73,21 @@ const addEventListeners = () => {
   // Send Login Information via loginModel
   import('/cdn/model/loginModel.js').then(({ postLoginDetails }) => { // eslint-disable-line
     document.getElementById('login_button').addEventListener('click', () => {
+      // disabling button while request resolves
+      document.getElementById('login_button').classList.add('disabled')
+
       const username = document.getElementById('login_username').value
       const password = document.getElementById('login_password').value
       const loginSpinner = document.getElementById('login_spinner')
       if (!username || !password) {
+        document.getElementById('login_button').classList.remove('disabled')
         showAlert('warning', 'Please enter a username and a password')
       } else {
         loginSpinner.classList.remove('visually-hidden')
         postLoginDetails(username, password)
           .then((code) => {
+            document.getElementById('login_button').classList.remove('disabled')
+            // hiding spinner after request resolved
             loginSpinner.classList.add('visually-hidden')
             console.log(code)
             if (code instanceof Error) { showAlert('warning', code.message) } else { showAlert('success', 'You have logged in') }
@@ -121,6 +127,8 @@ const addEventListeners = () => {
   import('/cdn/model/registerModel.js').then(({ postRegisterDetails }) => { // eslint-disable-line
     // Send register information via registerModel
     document.getElementById('register_button').addEventListener('click', () => {
+      // disabling until request is resolved
+      document.getElementById('register_button').classList.add('disabled')
       const username = document.getElementById('register_username').value
       const email = document.getElementById('register_email').value
 
@@ -128,16 +136,21 @@ const addEventListeners = () => {
       const passConfirm = document.getElementById('register_confirm_password').value
       if (!username || !email || !pass || !passConfirm) {
         showAlert('warning', 'All fields are required', true)
+        document.getElementById('register_button').classList.remove('disabled')
       } else if
       (pass !== passConfirm) {
         showAlert('warning', 'The provided passwords do not match', true)
         console.log('working')
+        document.getElementById('register_button').classList.remove('disabled')
       } else {
         const registerSpinner = document.getElementById('register_spinner')
+        // hiding spinner after request resolves
         registerSpinner.classList.remove('visually-hidden')
         postRegisterDetails(username, pass, email)
           .then((code) => {
+            // restoring states
             registerSpinner.classList.add('visually-hidden')
+            document.getElementById('register_button').classList.remove('disabled')
             // Add Login Elements if Registration Successful
             if (code === 'Account Registered') {
               showAlert('success', 'Account registered you can now log in')
