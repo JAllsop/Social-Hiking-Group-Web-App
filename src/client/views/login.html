@@ -17,19 +17,19 @@
 
     <!-- login classes needed for centering elements - html and body height required to be 100%  -->
     <div id="login" class="h-100 d-flex flex-column align-items-center justify-content-center">
-        <h1 id="login_heading" class="display-1 mb-5">Hiking Organiser</h1>
+        <h1 id="login-heading" class="display-1 mb-5">Hiking Organiser</h1>
 
-        <div id="login_input_container" class="input-group-vertical w-25 mb-3">
-            <input id="login_username" type="text" placeholder="Username"
+        <div id="login-input-container" class="input-group-vertical w-25 mb-3">
+            <input id="login-username" type="text" placeholder="Username"
                 class="form-control form-control-lg mb-2 field-gradient-custom">
 
-            <input id="login_password" type="password" placeholder="Password"
+            <input id="login-password" type="password" placeholder="Password"
                 class="form-control form-control-lg field-gradient-custom">
         </div>
         <!-- toggle switch -->
-        <div id="login_view_password_toggle_container" class="form-check form-switch form-switch-lg mb-5">
-            <input id="login_view_password_toggle" type="checkbox" placeholder="viewPass" class="form-check-input">
-            <label id="login_view_password_toggle_label" class="form-check-label">Hiding Password</label>
+        <div id="login-view-password-toggle-container" class="form-check form-switch form-switch-lg mb-5">
+            <input id="login-view-password-toggle" type="checkbox" placeholder="viewPass" class="form-check-input">
+            <label id="login-view-password-toggle-label" class="form-check-label">Hiding Password</label>
         </div>
 
         <!-- future implementation -->
@@ -39,16 +39,16 @@
         </div> -->
 
         <!-- container stacks buttons vertically -->
-        <div id="login_buttons_container" class="d-grid gap-2 col-2" role="group">
-            <a id="login_button" class="btn btn-success btn-lg">Log In</a>
+        <div id="login-buttons-container" class="d-grid gap-2 col-2" role="group">
+            <a id="login-button" class="btn btn-success btn-lg">Log In</a>
 
-            <a id="register_open_button" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
+            <a id="register-open-button" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
                 data-bs-target="#register">Register A New Account</a>
         </div>
 
         <div class="spinner-space-lg justify-content-center mt-5">
             <!-- needs inline styling -->
-            <div id="login_spinner" style="width: 2.5rem; height: 2.5rem;"
+            <div id="login-spinner" style="width: 2.5rem; height: 2.5rem;"
                 class="spinner-lg spinner-border visually-hidden" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
@@ -56,51 +56,51 @@
     </div>
 
     <!-- Register Popup Modal -->
-    <div id="register" class="modal fade" tabindex="-1" aria-labelledby="register_FormLabel" aria-hidden="true">
-        <div id="register_format" class="modal-dialog modal-dialog-centered modal-lg">
+    <div id="register" class="modal fade" tabindex="-1" aria-labelledby="register-FormLabel" aria-hidden="true">
+        <div id="register-format" class="modal-dialog modal-dialog-centered modal-lg">
             <!-- removed borders from elemnts to get rid of white lines -->
-            <div id="register_container" class="modal-content body-gradient-custom">
+            <div id="register-container" class="modal-content body-gradient-custom">
                 <div class="spinner-space mb-4 d-flex d-flex justify-content-end">
-                    <button id="register_close_button" type="button" class="btn-close btn-close-lg btn-close-white me-4 mt-4"
+                    <button id="register-close-button" type="button" class="btn-close btn-close-lg btn-close-white me-4 mt-4"
                         data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="register_header_container" class="modal-header border-0 justify-content-center mb-5">
-                    <h5 id="register_title" class="modal-title display-5 position-absolute" id="registerFormLabel">
+                <div id="register-header-container" class="modal-header border-0 justify-content-center mb-5">
+                    <h5 id="register-title" class="modal-title display-5 position-absolute" id="registerFormLabel">
                         Register A New Account
                     </h5>
                 </div>
-                <div id="register_body" class="modal-body large-font-size border-0">
-                    <div id="register_response"></div>
-                    <div id="register_input_container" class="input-group-vertical w-50 mb-3 mx-auto">
-                        <input id="register_username" type="text" placeholder="Username"
+                <div id="register-body" class="modal-body large-font-size border-0">
+                    <div id="register-response"></div>
+                    <div id="register-input-container" class="input-group-vertical w-50 mb-3 mx-auto">
+                        <input id="register-username" type="text" placeholder="Username"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input id="register_email" type="text" placeholder="Email"
+                        <input id="register-email" type="text" placeholder="Email"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input id="register_password" type="password" placeholder="Password"
+                        <input id="register-password" type="password" placeholder="Password"
                             class="form-control form-control-lg mb-2 field-gradient-custom">
 
-                        <input id="register_confirm_password" type="password" placeholder="Confirm Password"
+                        <input id="register-confirm-password" type="password" placeholder="Confirm Password"
                             class="form-control form-control-lg field-gradient-custom">
                     </div>
                     <!-- response will be appened here as an alert -->
-                    <div id="register_button_container" class="d-flex justify-content-center">
+                    <div id="register-button-container" class="d-flex justify-content-center">
                         <!-- toggle switch -->
-                        <div id="register_view_password_toggle_container"
+                        <div id="register-view-password-toggle-container"
                             class="form-check form-switch form-switch-md mb-3">
-                            <input id="register_view_password_toggle" type="checkbox" class="form-check-input">
-                            <label id="register_view_password_toggle_label" class="form-check-label">Hiding
+                            <input id="register-view-password-toggle" type="checkbox" class="form-check-input">
+                            <label id="register-view-password-toggle-label" class="form-check-label">Hiding
                                 Password</label>
                         </div>
                     </div>
                 </div>
-                <div id="register_footer_container" class="modal-footer justify-content-center border-0">
-                    <button id="register_button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
+                <div id="register-footer-container" class="modal-footer justify-content-center border-0">
+                    <button id="register-button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
                 </div>
                 <div class="spinner-space d-flex justify-content-center mb-4">
                     <!-- needs inline styling -->
-                    <div id="register_spinner" class="spinner-border visually-hidden" role="status">
+                    <div id="register-spinner" class="spinner-border visually-hidden" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ const showAlert = (alertType, message, registration = false) => {
 
   alertWindow.appendChild(close)
   if (registration) {
-    document.getElementById('register_response').appendChild(alertWindow)
+    document.getElementById('register-response').appendChild(alertWindow)
   } else { document.body.appendChild(alertWindow) }
 
   // alert will close and delete itself after 4 seconds
@@ -41,10 +41,10 @@ const showAlert = (alertType, message, registration = false) => {
 // Add Element Event Listeners
 const addEventListeners = () => {
   // password reveal/hide via radio button
-  document.getElementById('login_view_password_toggle').addEventListener('click', () => {
-    const viewPassToggle = document.getElementById('login_view_password_toggle')
-    const viewPassToggleLabel = document.getElementById('login_view_password_toggle_label')
-    const passwordField = document.getElementById('login_password')
+  document.getElementById('login-view-password-toggle').addEventListener('click', () => {
+    const viewPassToggle = document.getElementById('login-view-password-toggle')
+    const viewPassToggleLabel = document.getElementById('login-view-password-toggle-label')
+    const passwordField = document.getElementById('login-password')
 
     // clunky implementation, will change toggle button color to red in future (bootstrap issue)
     if (viewPassToggle.checked) {
@@ -59,34 +59,34 @@ const addEventListeners = () => {
   })
 
   // Enter button press initiates login if login input field selected
-  document.getElementById('login_username').addEventListener('keyup', (event) => {
+  document.getElementById('login-username').addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
-      document.getElementById('login_button').click()
+      document.getElementById('login-button').click()
     }
   })
-  document.getElementById('login_password').addEventListener('keyup', (event) => {
+  document.getElementById('login-password').addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
-      document.getElementById('login_button').click()
+      document.getElementById('login-button').click()
     }
   })
 
   // Send Login Information via loginModel
   import('/cdn/model/loginModel.js').then(({ postLoginDetails }) => { // eslint-disable-line
-    document.getElementById('login_button').addEventListener('click', () => {
+    document.getElementById('login-button').addEventListener('click', () => {
       // disabling button while request resolves
-      document.getElementById('login_button').classList.add('disabled')
+      document.getElementById('login-button').classList.add('disabled')
 
-      const username = document.getElementById('login_username').value
-      const password = document.getElementById('login_password').value
-      const loginSpinner = document.getElementById('login_spinner')
+      const username = document.getElementById('login-username').value
+      const password = document.getElementById('login-password').value
+      const loginSpinner = document.getElementById('login-spinner')
       if (!username || !password) {
-        document.getElementById('login_button').classList.remove('disabled')
+        document.getElementById('login-button').classList.remove('disabled')
         showAlert('warning', 'Please enter a username and a password')
       } else {
         loginSpinner.classList.remove('visually-hidden')
         postLoginDetails(username, password)
           .then((code) => {
-            document.getElementById('login_button').classList.remove('disabled')
+            document.getElementById('login-button').classList.remove('disabled')
             // hiding spinner after request resolved
             loginSpinner.classList.add('visually-hidden')
             console.log(code)
@@ -96,11 +96,11 @@ const addEventListeners = () => {
     }, false)
   })
 
-  document.getElementById('register_view_password_toggle').addEventListener('click', () => {
-    const viewPassToggle = document.getElementById('register_view_password_toggle')
-    const viewPassToggleLabel = document.getElementById('register_view_password_toggle_label')
-    const passwordField = document.getElementById('register_password')
-    const confirmPasswordField = document.getElementById('register_confirm_password')
+  document.getElementById('register-view-password-toggle').addEventListener('click', () => {
+    const viewPassToggle = document.getElementById('register-view-password-toggle')
+    const viewPassToggleLabel = document.getElementById('register-view-password-toggle-label')
+    const passwordField = document.getElementById('register-password')
+    const confirmPasswordField = document.getElementById('register-confirm-password')
 
     // clunky implementation, will change toggle button color to red in future (bootstrap issue)
     if (viewPassToggle.checked) {
@@ -118,43 +118,43 @@ const addEventListeners = () => {
 
   /* Enter button press initiates registration if confirm password field is selected
       as it is the last field in the list */
-  document.getElementById('register_confirm_password').addEventListener('keyup', (event) => {
+  document.getElementById('register-confirm-password').addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
-      document.getElementById('register_button').click()
+      document.getElementById('register-button').click()
     }
   })
 
   import('/cdn/model/registerModel.js').then(({ postRegisterDetails }) => { // eslint-disable-line
     // Send register information via registerModel
-    document.getElementById('register_button').addEventListener('click', () => {
+    document.getElementById('register-button').addEventListener('click', () => {
       // disabling until request is resolved
-      document.getElementById('register_button').classList.add('disabled')
-      const username = document.getElementById('register_username').value
-      const email = document.getElementById('register_email').value
+      document.getElementById('register-button').classList.add('disabled')
+      const username = document.getElementById('register-username').value
+      const email = document.getElementById('register-email').value
 
-      const pass = document.getElementById('register_password').value
-      const passConfirm = document.getElementById('register_confirm_password').value
+      const pass = document.getElementById('register-password').value
+      const passConfirm = document.getElementById('register-confirm-password').value
       if (!username || !email || !pass || !passConfirm) {
         showAlert('warning', 'All fields are required', true)
-        document.getElementById('register_button').classList.remove('disabled')
+        document.getElementById('register-button').classList.remove('disabled')
       } else if
       (pass !== passConfirm) {
         showAlert('warning', 'The provided passwords do not match', true)
         console.log('working')
-        document.getElementById('register_button').classList.remove('disabled')
+        document.getElementById('register-button').classList.remove('disabled')
       } else {
-        const registerSpinner = document.getElementById('register_spinner')
+        const registerSpinner = document.getElementById('register-spinner')
         // hiding spinner after request resolves
         registerSpinner.classList.remove('visually-hidden')
         postRegisterDetails(username, pass, email)
           .then((code) => {
             // restoring states
             registerSpinner.classList.add('visually-hidden')
-            document.getElementById('register_button').classList.remove('disabled')
+            document.getElementById('register-button').classList.remove('disabled')
             // Add Login Elements if Registration Successful
             if (code === 'Account Registered') {
               showAlert('success', 'Account registered you can now log in')
-              document.getElementById('register_close_button').click()
+              document.getElementById('register-close-button').click()
             } else { showAlert('warning', code, true) }
           })
       }
