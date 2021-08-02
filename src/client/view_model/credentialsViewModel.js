@@ -132,7 +132,7 @@ const addEventListeners = () => {
             // Add Login Elements if Registration Successful
             if (code === 'Account Registered') {
               showAlert('success', 'Account registered you can now log in')
-              document.getElementById.length('register_close_button').click()
+              document.getElementById('register_close_button').click()
             } else { showAlert('warning', code, true) }
           })
       }
