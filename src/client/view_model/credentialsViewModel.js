@@ -73,8 +73,8 @@ const addEventListeners = () => {
     document.getElementById('login_button').addEventListener('click', () => {
       const username = document.getElementById('login_username').value
       const password = document.getElementById('login_password').value
-      if (!username || !password === '') {
-        showAlert('warning', 'Please Enter a Username and Password')
+      if (!username || !password) {
+        showAlert('warning', 'Please enter a username and a password')
       } else {
         postLoginDetails(username, password)
           .then((code) => {
@@ -100,6 +100,9 @@ const addEventListeners = () => {
 
       const pass = document.getElementById('register_password').value
       const passConfirm = document.getElementById('register_confirm_password').value
+      if (!username || !email || !pass || !passConfirm) {
+        showAlert('warning', 'Please enter a username and a password')
+      } else {
       if (pass !== passConfirm) {
         showAlert('warning', 'The provided passwords do not match', true)
       } else {
