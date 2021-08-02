@@ -84,6 +84,26 @@ const addEventListeners = () => {
     }, false)
   })
 
+  document.getElementById('register_view_password_toggle').addEventListener('click', () => {
+    const viewPassToggle = document.getElementById('register_view_password_toggle')
+    const viewPassToggleLabel = document.getElementById('register_view_password_toggle_label')
+    const passwordField = document.getElementById('register_password')
+    const confirmPasswordField = document.getElementById('register_confirm_password')
+
+    // clunky implementation, will change toggle button color to red in future (bootstrap issue)
+    if (viewPassToggle.checked) {
+      passwordField.type = 'text'
+      confirmPasswordField.type = 'text'
+      viewPassToggleLabel.textContent = 'Hiding Password'
+      // viewPassToggleLabel.style.color = '#008756'
+    } else if (!viewPassToggle.checked) {
+      passwordField.type = 'password'
+      confirmPasswordField.type = 'password'
+      viewPassToggleLabel.textContent = 'Viewing Password'
+      // viewPassToggleLabel.style.color = '#d9534f'
+    }
+  })
+
   /* Enter button press initiates registration if confirm password field is selected
       as it is the last field in the list */
   document.getElementById('register_confirm_password').addEventListener('keyup', (event) => {
