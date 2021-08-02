@@ -14,7 +14,8 @@ export async function postLoginDetails (username, password) {
   try {
     // if response redirects go to redirected page
     if (response.redirected) {
-      window.location.href = response.url
+      // waits 2 seconds before redirecting
+      setTimeout(() => { window.location.href = response.url }, 2000)
     } else {
       const result = await response.json()
       if (response.ok) {

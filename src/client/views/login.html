@@ -45,6 +45,14 @@
             <a id="register_open_button" class="btn btn-secondary btn-lg" data-bs-toggle="modal"
                 data-bs-target="#register">Register A New Account</a>
         </div>
+
+        <div class="spinner-space-lg mt-5">
+            <!-- needs inline styling -->
+            <div id="login_spinner" style="width: 2.5rem; height: 2.5rem;"
+                class="spinner-lg spinner-border visually-hidden" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
     </div>
 
     <!-- Register Popup Modal -->
@@ -52,8 +60,9 @@
         <div id="register_format" class="modal-dialog modal-dialog-centered modal-lg">
             <!-- removed borders from elemnts to get rid of white lines -->
             <div id="register_container" class="modal-content body-gradient-custom">
+                <div class="spinner-space mb-4"></div>
                 <!-- classes and margin adjustments needed to center title and close button -->
-                <div id="register_header_container" class="modal-header border-0 justify-content-center mb-3 mt-3">
+                <div id="register_header_container" class="modal-header border-0 justify-content-center mb-3">
                     <h5 id="register_title" class="modal-title display-5 position-absolute" id="registerFormLabel">
                         Register A New Account
                     </h5>
@@ -88,6 +97,12 @@
                 </div>
                 <div id="register_footer_container" class="modal-footer justify-content-center border-0">
                     <button id="register_button" type="button" class="btn btn-success btn-lg w-25 mb-3">Sign Up</button>
+                </div>
+                <div class="spinner-space mb-4">
+                    <!-- needs inline styling -->
+                    <div id="register_spinner" class="spinner-border visually-hidden" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             </div>
         </div>

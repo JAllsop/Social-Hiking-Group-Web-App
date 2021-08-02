@@ -26,7 +26,7 @@ body {
 /* Change Autocomplete styles in Chrome*/
 
 input:-webkit-autofill::first-line, input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
-    font-family: system-ui,-apple-system,"Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif !important;
 }
 
 /* Change Autocomplete font size to match input field in Chrome */
@@ -35,8 +35,26 @@ input:-webkit-autofill::first-line {
     font-size: 20px
 }
 
+/* reserve space for hiding and showing spinner (for dynamic formatting) */
+
+.spinner-space {
+    height: 2em;
+    text-align: center;
+}
+
+.spinner-space-lg {
+    height: 3em;
+    text-align: center;
+}
+
+/* custom margin spacing */
+
 .mt-6 {
     margin-top: 10em !important;
+}
+
+.mb-6 {
+    margin-bottom: 10em !important;
 }
 
 .form-switch.form-switch-md {
