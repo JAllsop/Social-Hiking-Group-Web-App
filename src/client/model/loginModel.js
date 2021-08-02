@@ -22,6 +22,6 @@ export async function postLoginDetails (username, password) {
       } else { throw new Error(result.code) }
     }
   } catch (err) {
-      alert(err)  // eslint-disable-line
+    return err.message
   }
 }
