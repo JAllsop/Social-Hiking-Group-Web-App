@@ -1,34 +1,25 @@
 'use strict'
 
-const express = require('express')
-let response = express().response
-
-const retrieveGroupMessages = async (groupID) => {
-  let results = []
-  const data = { groupID: groupID }
-  response = await fetch('http://localhost:3000/messages/get-messages', { // eslint-disable-line
+export const retrieveGroupMessages = async (groupID) => {
+  const params = { groupID: groupID }
+  const response = await fetch('http://localhost:3000/messages/get-messages', { // eslint-disable-line
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
-      .then(response => response.json())
-      .then(data => {
-        results = data
-        console.log(results)
-      })
+    body: JSON.stringify(params)
       .catch((error) => console.error('Error:', error))
   })
-  return response
+  return response.json()
 }
 
-const getUsername = async () => {
-  response = await fetch('http://localhost:3000/user/api/username', { //eslint-disable-line
+export const getUsername = async () => { // Get username based on session
+  const response = await fetch('http://localhost:3000/user/api/username', { //eslint-disable-line
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   })
-  return response
+  return response.json()
 }
 export default { retrieveGroupMessages, getUsername }

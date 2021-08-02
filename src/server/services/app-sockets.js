@@ -2,7 +2,7 @@
 const MessageService = require('../services/message-service').default
 class AppSockets {
   connection (client) {
-    client.on('sendTextMessage', (message, groupID) => {
+    client.on('sendTextMessage', async (message, groupID) => {
       const req = { messageContent: message.messageText, date: message.messageDate, sender: message.senderID }
       client.broadcast.to(groupID).emit('message', req)
       const res = []
@@ -10,7 +10,7 @@ class AppSockets {
         .then((value) => console.log(value))
     })
 
-    client.on('retrieveGroupMessages', (groupID) => { // GroupID is equivalent to Group Name.
+    client.on('retrieveGroupMessages', async (groupID) => { // GroupID is equivalent to Group Name.
       const req = { groupID: groupID }
       const res = {}
       MessageService.getGroupMessages(res, req)

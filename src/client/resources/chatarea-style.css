@@ -74,6 +74,10 @@ body{
     font: 15px Arial, sans-serif;
     text-decoration: underline;
 }
+.nm-group-heading{
+    font:45px Arial, sans-serif;
+    text-decoration: underline;
+}
 
 .namepadding{
     padding-left: 17px;
@@ -85,3 +89,26 @@ body{
     width: 580px;
     padding: 2px;
 }
+
+.message-scroll {
+    height:550px;
+    overflow-y: scroll;
+  }
+.user-list-div{
+    height: 400px;
+    overflow-y: scroll;
+}
+
+  div::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+  div::-webkit-scrollbar-track {
+    background: whitesmoke;        /* color of the tracking area */
+  }
+  
+  div::-webkit-scrollbar-thumb {
+    background-color: grey;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: 3px solid grey;  /* creates padding around scroll thumb */
+  }

@@ -7,7 +7,7 @@ class MessageRepository {
 
   async getGroupMessages (req, res) {
     try {
-      const messages = await dbQuery(`SELECT * FROM dbo.MESSAGES WHERE groupID=${req.groupID}`)
+      const messages = await dbQuery(`SELECT * FROM dbo.MESSAGES WHERE groupID=${req.body.groupID}`)
       res.send(messages)
     } catch (err) {
       console.log(err)
@@ -18,7 +18,7 @@ class MessageRepository {
   async postGroupMessage (req, res) {
     try {
       const res = await dbQuery('INSERT INTO dbo.MESSAGES(Content,messageDate,SenderID,GroupID)' +
-        `VALUES(${req.messageContent},${req.dateSent},${req.senderID},${req.groupID})`)
+        `VALUES(${req.body.messageContent},${req.body.dateSent},${req.body.senderID},${req.body.groupID})`)
       res.send(res)
     } catch (err) {
       console.log(err)
