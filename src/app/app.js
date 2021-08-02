@@ -27,7 +27,7 @@ const authRouter = require('../server/routes/authRoutes.js')
 const viewRoutes = require('../server/routes/viewGroupRoutes')
 const groupRouter = require('../server/routes/groupRoutes.js').router
 const messageRouter = require('../server/routes/message-route')
-// const screening = require('../server/routes/covidQuestionsRoutes.js').router
+const covidRouter = require('../server/routes/covidQuestionsRoutes.js')
 
 // mounting routers
 app.use('/group', groupRouter)
@@ -35,7 +35,7 @@ app.use('/view', viewRoutes)
 app.use('/', authRouter)
 app.use('/user', userRoutes)
 app.use('/messages', messageRouter)
-// app.use('/screen', screening)
+app.use('/covid-questions', covidRouter)
 
 io.on('connection', AppSockets.connection)
 io.on('error', console.error)

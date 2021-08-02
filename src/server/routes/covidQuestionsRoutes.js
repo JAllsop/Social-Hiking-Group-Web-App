@@ -1,15 +1,24 @@
 // 'use strict'
 
-const express = require('express')
 const path = require('path')
+const express = require('express')
 
-// const viewGroup = require('../services/viewGroup.js')
+const covidQuestionsService = require('../services/covidQuestionsService')
 
 const router = express.Router()
 
-router.get('/getQuestions', function (req, res) {
-    console.log('Here')
-    res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'covidQuestions.html'))
-  })
+router.get('/', function (req, res) {
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'covidQuestions.html'))
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
 
-  module.exports = router
+router.post('/save', async (req, res) => {
+  if (req.session.isLoggedIn) {
+    const answers = req.body
+    const saveResult = await covidQuestionsService.save(req.session.username, answers[0])
+    if (saveResult) { res.json({ code: 'We have saved your response' }) } else { res.json({ code: 'Response already saved for today' }) }
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+module.exports = router
