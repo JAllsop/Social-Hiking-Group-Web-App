@@ -5033,6 +5033,7 @@ const retrieveGroupMessages = async groupID => {
   return response.json();
 };
 const getUsername = async () => {
+  // Get username based on session
   const response = await fetch('http://localhost:3000/user/api/username', {
     //eslint-disable-line
     method: 'GET',
@@ -5087,21 +5088,28 @@ const sendButtonFunction = async groupValue => {
   });
 };
 
+const testUsers = ['sinomazi', 'tikoloshi', 'slade', 'beast', 'lava', 'roques', 'kitikiti', 'samoosa'];
 window.addEventListener('DOMContentLoaded', event => {
-  const groupSelect = document.getElementById('hiking-groups');
   const groupName = document.getElementById('group-name');
   const button = document.getElementById('send-button');
-  const switchButton = document.getElementById('switch-btn');
+  const groupSelect = document.getElementById('hiking-groups');
+  const userDiv = document.getElementById('user-list-div');
+  const viewMembersButton = document.getElementById('view-members');
   button.addEventListener('click', () => {
-    groupSelect.options[groupSelect.selectedIndex].value;
     sendButtonFunction();
   });
-  switchButton.addEventListener('click', event => {
-    const groupValue = groupSelect.options[groupSelect.selectedIndex].value; // Change group when name is clicked!
-
-    event.preventDefault();
-    console.log(groupValue);
-    groupName.innerHTML = groupValue;
+  groupSelect.addEventListener('change', event => {
+    // When group selection is made.
+    const value = event.target.value;
+    groupName.innerHTML = value;
+  });
+  viewMembersButton.addEventListener('click', () => {
+    // View members in a group
+    testUsers.forEach(element => {
+      const userElement = document.createElement('li');
+      userElement.innerHTML = element;
+      userDiv.appendChild(userElement);
+    });
   });
 });
 
