@@ -3,13 +3,10 @@
 // ******** Tests Group methods *******
 //
 
-// const request = require('supertest')
-// const { app } = require('../src/app/app')
-
 jest.setTimeout(10000)
 
 const groupService = require('../src/server/services/groupServices')
-const db = require('../src/server/repositories/groupRepository')
+const groupRepo = require('../src/server/repositories/groupRepository')
 
 describe('Adding group to database', () => {
   test('Group is added to database', async () => {
@@ -19,13 +16,13 @@ describe('Adding group to database', () => {
       location: 'Johannesburg Parktown North'
 
     }
-    const result_1 = await db.get(testName.groupName)
-    let result_2
+    const isGroupExisting = await groupRepo.get(testName.groupName)
+    let group
 
-    if (result_1.length === 0) { await groupService.createGroup(testName) } else {
-      result_2 = await db.get(testName.groupName)
+    if (isGroupExisting.length === 0) { await groupService.createGroup(testName) } else {
+      group = await groupRepo.get(testName.groupName)
     }
-    expect(result_2[0].groupName === testName.groupName)
+    expect(group[0].groupName === testName.groupName)
   })
 })
 
@@ -37,15 +34,15 @@ describe('Can check for existing group names', () => {
       location: 'Johannesburg Parktown North'
 
     }
-    const result_1 = await db.get(testName.groupName)
-    let result_2
+    const isGroupExisting = await groupRepo.get(testName.groupName)
+    let isGroupNameAvailable
 
-    if (result_1.length === 0) { await groupService.createGroup(testName) } else {
+    if (isGroupExisting.length === 0) { await groupService.createGroup(testName) } else {
       await groupService.isGroupNameAvailable(testName.groupName, function (result) {
-        result_2 = result
+        isGroupNameAvailable = result
       })
     }
-    expect(result_2 === true)
+    expect(isGroupNameAvailable === true)
   })
 
   test('Non-existing group names not found in database', async () => {
@@ -56,14 +53,14 @@ describe('Can check for existing group names', () => {
 
     }
     const mockName = 'Hikers B Champions'
-    const result_1 = await db.get(testName.groupName)
-    let result_2
+    const isGroupExisting = await groupRepo.get(testName.groupName)
+    let isGroupNameAvailable
 
-    if (result_1.length === 0) { await groupService.createGroup(testName.groupName) } else {
+    if (isGroupExisting.length === 0) { await groupService.createGroup(testName.groupName) } else {
       await groupService.isGroupNameAvailable(mockName, function (result) {
-        result_2 = result
+        isGroupNameAvailable = result
       })
     }
-    expect(result_2 === false)
+    expect(isGroupNameAvailable === false)
   })
 })
