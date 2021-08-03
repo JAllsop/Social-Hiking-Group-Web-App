@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 }, false)
 
 function fetchGroups () {
-  fetch('/group/groupList')
+  fetch('/group/groupList') // eslint-disable-line
     .then(function (response) {
       return response.json()
     })
@@ -25,22 +25,23 @@ function makeTable (groups) {
   const headerRow = document.createElement('tr')
   headerRow.setAttribute('class', 'header')
 
-  const header_1 = document.createElement('th')
-  header_1.setAttribute('style', 'width:70%')
-  header_1.innerHTML = 'Name'
-  headerRow.appendChild(header_1)
+  const header1 = document.createElement('th')
+  header1.setAttribute('style', 'width:70%')
+  header1.innerHTML = 'Name'
+  headerRow.appendChild(header1)
 
-  const header_2 = document.createElement('th')
-  header_2.setAttribute('style', 'width:70%')
-  header_2.innerHTML = 'Location'
-  headerRow.appendChild(header_2)
+  const header2 = document.createElement('th')
+  header2.setAttribute('style', 'width:70%')
+  header2.innerHTML = 'Location'
+  headerRow.appendChild(header2)
 
   groupsTable.appendChild(headerRow)
 
   for (let i = 0; i < tableLength; ++i) {
     const tableRows = document.createElement('tr')
 
-    GroupNames[i] = "<a href = '/group/group-homePage'>" + groups[i].groupName + '</a>'
+
+    GroupNames[i] = `<a href = '#' onclick="(${joinGroupButton})('${groups[i].groupName}')"> ${groups[i].groupName} </a>`
     GroupLocation[i] = groups[i].generalLocation
 
     const nameCol = document.createElement('td')
@@ -58,7 +59,8 @@ function makeTable (groups) {
   document.getElementsByTagName('body')[0].appendChild(groupsTable)
 }
 
-function searchFunction () {
+
+function searchFunction () { // eslint-disable-line
   const input = document.getElementById('search-text')
   const filter = input.value.toUpperCase()
   const table = document.getElementById('groupsTable')
@@ -84,4 +86,41 @@ function searchFunction () {
       }
     }
   }
+}
+
+async function joinGroupButton (group) {
+  await applied(group)
+  if (document.getElementById('join')) {
+    document.getElementById('join').remove()
+  }
+  if (!status) {
+    const btn = document.createElement('button')
+    btn.innerHTML = `Join ${group} `
+    btn.id = 'join'
+    btn.onclick = function () {
+      document.getElementById('join').remove()
+      logRequest(group)
+    }
+    document.body.appendChild(btn)
+  } else {
+    alert('Cannot join this group') // eslint-disable-line
+  }
+}
+
+async function logRequest (groupID) {
+  fetch('/group/api/apply/' + `${groupID}`) // eslint-disable-line
+    .then(function (response) {
+      return response.json()
+    })
+}
+let status
+async function applied (groupID) {
+  await fetch('/group/api/check/' + `${groupID}`) // eslint-disable-line
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (response) {
+      status = response
+      return status
+    })
 }
