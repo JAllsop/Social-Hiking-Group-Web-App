@@ -9,6 +9,7 @@ const retrieveGroupMessages = async (groupID) => {
 
   })
     .catch((error) => console.error('Error:', error))
+  console.log(response)
   return response
 }
 

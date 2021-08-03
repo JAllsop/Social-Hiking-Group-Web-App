@@ -5,6 +5,22 @@ const fetchMock = require('jest-fetch-mock')
 const { retrieveGroupMessages, getUsername } = require('../../../src/client/model/chat-functions')
 const beforeEach = require('@jest/globals').beforeEach
 
+jest.mock('../../../src/client/model/chat-functions')
+
+retrieveGroupMessages.mockImplementation((groupID) => {
+  switch (groupID) {
+    case 'Jukes':
+      return JSON.stringify([messages[2], messages[3]])
+    case 'Jimmies':
+      return JSON.stringify([messages[0]])
+    default:
+      return JSON.stringify({})
+  }
+})
+
+getUsername.mockImplementation(() => {
+  return 'sinomazi'
+})
 beforeEach(() => {
   fetchMock.resetMocks()
   fetchMock.doMock()
@@ -15,25 +31,21 @@ describe('gets chat related information', () => {
     fetchMock.mockResponseOnce(JSON.stringify([messages[2], messages[3]]))
     const requestedMessages = await retrieveGroupMessages('Jukes')
     const testMessages = JSON.stringify([messages[2], messages[3]])
-    assert(requestedMessages, testMessages)
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    assert.equal(requestedMessages, testMessages)
   })
   test('Returns a different set of messages when a different group name is used (Jimmies)', async () => {
-    fetchMock.mockResponseOnce(JSON.stringify([messages[0]]))
     const requestedMessages = await retrieveGroupMessages('Jimmies')
     const testMessages = JSON.stringify([messages[0]])
-    assert(requestedMessages, testMessages)
-    expect(fetchMock).toHaveBeenCalledTimes(1)
+    assert.equal(requestedMessages, testMessages)
   })
   test('Gets no messages when entering a group name with no saved messages (Easy Striders)', async () => {
-    fetchMock.mockResponseOnce(JSON.stringify([{}]))
-    const emptyMessageList = [{}]
+    const emptyMessageList = '{}'
     const requestedMessages = await retrieveGroupMessages('Easy Striders')
-    assert(requestedMessages, emptyMessageList)
+    assert.equal(requestedMessages, emptyMessageList)
   })
   test('Gets Username for the user currently logged in', async () => {
     const username = await getUsername()
     const testUsername = 'sinomazi'
-    assert(username, testUsername)
+    assert.equal(username, testUsername)
   })
 })
