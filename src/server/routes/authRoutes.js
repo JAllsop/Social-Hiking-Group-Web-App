@@ -30,9 +30,14 @@ router.post('/api/auth', async (req, res) => {
     req.session.isLoggedIn = true
     // save username in session
     req.session.username = username
-    // redirect to home page after log in
-    // res.status().json({ code: authResult })
-    res.redirect(301, req.baseUrl + '/home')
+    // save new session information
+    req.session.save(async (err) => {
+      if (err) {
+        res.end('session save error: ' + err)
+      }
+      // redirect to home page after log in
+      res.redirect(301, req.baseUrl + '/home')
+    })
   }
 })
 

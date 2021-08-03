@@ -32,16 +32,19 @@ router.get('/view-group::groupName', function (req, res) {
 })
 
 // added wild card to specify the name of the group when retrieving group details
-router.get('/fetch-details::groupName', function (req, res) {
+router.get('/fetch-details::groupName', async function (req, res) {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
     const groupName = req.params.groupName
-    viewGroup.getGroupDetails(function (groupDetails) {
-      res.send(groupDetails)
-    }
-    , groupName)
+    const groupDetails = await viewGroup.getGroupDetails(groupName)
+    res.send(groupDetails)
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.get('/getQuestions', function (req, res) {
+  console.log('Here')
+  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'covidQuestions.html'))
 })
 
 // /fetch-details
