@@ -2,10 +2,9 @@
 
 const db = require('../repositories/viewGroupRepository.js')
 
-async function getGroupDetails (callback) {
-  let result = await db.getDetails()
-  if(result !='') callback(result)
-  
+module.exports = {
+  getGroupDetails: async function getGroupDetails (callback, groupName) {
+    const result = await db.getDetails(groupName)
+    if (result != '') callback(result)
+  }
 }
-
-module.exports = getGroupDetails

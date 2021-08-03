@@ -10,14 +10,11 @@ module.exports =
     return await dbQuery.dbQuery(sql)
   },
 
-  // addToGroup: async function addToGroup(user,group) {
-  //   let sql_ = 'SELECT TOP (1) [groupName]  FROM [dbo].[USERS]'
-  //   let user_name = await dbQuery.dbQuery(sql_)
-  //   let sql = 'INSERT INTO dbo.USERGROUPS (username,groupName)'
-  //   sql += `VALUES ('${user_name}','${group.groupName}')`
-  //   return await dbQuery.dbQuery(sql)
-    
-  // },
+  addToGroup: async function addToGroup (user, group) {
+    let sql = 'INSERT INTO [dbo].[USERGROUPS] (username, groupName)'
+    sql += `VALUES ('${user}','${group.groupName}')`
+    return await dbQuery.dbQuery(sql)
+  },
 
   get: async function get (group) {
     let sql = 'SELECT * FROM dbo.GROUPS WHERE '
@@ -29,9 +26,9 @@ module.exports =
     const sql = 'SELECT TOP (1) [groupName]  FROM [dbo].[GROUPS]'
     return await dbQuery.dbQuery(sql)
   },
-    
+
   getList: async function getList (filter) {
-    const sql = `SELECT ${filter} FROM dbo.GROUPS`
+    const sql = `SELECT * FROM dbo.GROUPS`
     return await dbQuery.dbQuery(sql)
   }
 }

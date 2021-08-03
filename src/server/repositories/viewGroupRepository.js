@@ -1,23 +1,15 @@
 'use strict'
 
-const db = require('./db.js')
+const dbQuery = require('./dbQuery.js').dbQuery
 
-// standard query function for database
-const dbQuery = async (sql) => {
-  try {
-    const pool = await db.pools
-    const req = await pool.request().query(sql)
-    return req.recordsets[0]
-  } catch (err) {
-    console.log(err)
+module.exports = {
+  getDetails: async (groupName) => {
+    let sql = `SELECT * FROM [dbo].[GROUPS] WHERE groupName= '${groupName}'`
+    const result = await dbQuery(sql)
+
+    // fetching list of members in group and appending to result
+    sql = `SELECT username FROM [dbo].[USERGROUPS] WHERE groupName = '${groupName}'`
+    result.push(await dbQuery(sql))
+    return result
   }
 }
-
-async function getDetails() {
-  let sql = 'SELECT TOP (1) [groupName],[groupDescription],[generalLocation] FROM [dbo].[GROUPS]'
-//  sql += `groupName='${group}'`
-  return await dbQuery(sql)
-  
-}
-
-module.exports = getDetails

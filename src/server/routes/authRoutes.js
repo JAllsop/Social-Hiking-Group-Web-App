@@ -30,9 +30,14 @@ router.post('/api/auth', async (req, res) => {
     req.session.isLoggedIn = true
     // save username in session
     req.session.username = username
-    // redirect to home page after log in
-    // res.status().json({ code: authResult })
-    res.redirect(301, req.baseUrl + '/home')
+    // save new session information
+    req.session.save(async (err) => {
+      if (err) {
+        res.end('session save error: ' + err)
+      }
+      // redirect to home page after log in
+      res.redirect(301, req.baseUrl + '/home')
+    })
   }
 })
 
@@ -42,7 +47,7 @@ router.get('/home', (req, res) => {
   if (req.session.isLoggedIn) {
     res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'home.html'))
   // respond with not found if user not logged in
-  } else { res.status(404).json('not found') }
+  } else { res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error') }
 })
 
 // // Register call to create user accouint
