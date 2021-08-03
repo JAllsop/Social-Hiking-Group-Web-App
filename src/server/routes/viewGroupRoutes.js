@@ -42,5 +42,10 @@ router.get('/fetch-details::groupName', async function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
+router.get('/getQuestions', function (req, res) {
+  console.log('Here')
+  res.sendFile(path.join(__dirname, '/src/', 'client', 'views', 'covidQuestions.html'))
+})
+
 // /fetch-details
 module.exports = router
