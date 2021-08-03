@@ -1,7 +1,7 @@
 'use strict'
 
-const btnOpn = document.querySelector('.viewgroup');
+const btnOpn = document.querySelector('.viewgroup')
 
-btnOpn.addEventListener('click', function(){
+btnOpn.addEventListener('click', function () {
 
-},false);
+}, false)

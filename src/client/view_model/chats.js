@@ -1,7 +1,8 @@
 'use strict'
-const io = require('socket.io-client')
-const retrieveGroupMessages = require('../model/chat-functions')
-const format = require('./chat-formatting')
+import { io } from 'socket.io-client'
+// import retrieveGroupMessages from '../model/chat-functions'
+import { formatAMPM, formatDate } from './chat-formatting'
+import { retrieveGroupMessages, getUsername } from '../model/chat-functions'
 
 const socket = io('http://localhost:3000', { transports: ['websocket'] })
 socket.on('connection', () => {
@@ -12,31 +13,73 @@ socket.on('retrieveGroupMessages', (groupID) => {
   retrieveGroupMessages(groupID)
     .then(data => console.log(data)) // display messages for respective groups.
 })
-socket.on('sendTextMessage', (data) => {
+socket.on('message', (data) => {
+  console.log(data)
   displayRecievedMessage(data.sender, data.content, data.date)
 })
-socket.on('subscribe', (groupID) => {
-  socket.emit('groupID', groupID)
+
+socket.on('groupMessage', async (res) => {
+  const sender = await getUsername()
+  res.array.forEach(element => {
+    if (element.sender === sender) {
+      displaySentMessage(element.sender, element.content, element.date)
+    } else {
+      displayRecievedMessage(element.sender, element.content, element.date)
+    }
+  })
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('#button-addon2').onclick = () => {
-    console.log('Send Button Clicked!')
-    const message = document.querySelector('#message-content').val()
-    const dateObject = new Date()
-    const sender = 'Sino Mazibuko'
-    displaySentMessage(sender, message, dateObject)
+// const joinGroup = (groupName) => {
+//   socket.on('subscribe', (groupID) => { // groupID is equivalent to group name in this case.
+//     groupID = groupName
+//   })
+// }
 
-    socket.on('sendTextMessage', (data) => {
-      data = { sender: `${sender}`, content: `${message}`, date: dateObject }
-      socket.broadcast.emit(data)
+const sendButtonFunction = async (groupValue) => { // This event is triggered when the send button is clicked!
+  let msg = document.getElementById('content').value
+
+  console.log(`${msg}`)
+  const dateObject = new Date()
+  const sender = await getUsername()
+  displaySentMessage(sender, msg, dateObject)
+
+  msg = '' // clear message after it is sent.
+  msg.focus() // Focus on the message area when the message is sent.
+
+  socket.on('sendTextMessage', (data, groupName) => { // Send Message to respective group.
+    data = { sender: `${sender}`, content: `${msg}`, date: dateObject }
+    groupName = groupValue
+  })
+}
+const testUsers = ['sinomazi', 'tikoloshi', 'slade', 'beast', 'lava', 'roques', 'kitikiti', 'samoosa']
+window.addEventListener('DOMContentLoaded', (event) => {
+  const groupName = document.getElementById('group-name')
+  const button = document.getElementById('send-button')
+  const groupSelect = document.getElementById('hiking-groups')
+  const userDiv = document.getElementById('user-list-div')
+  const viewMembersButton = document.getElementById('view-members')
+
+  let groupID = ' '
+  button.addEventListener('click', () => {
+    sendButtonFunction(groupID)
+  })
+  groupSelect.addEventListener('change', (event) => { // When group selection is made.
+    const value = event.target.value
+    groupID = `${value}`
+    groupName.innerHTML = value
+  })
+  viewMembersButton.addEventListener('click', () => { // View members in a group
+    testUsers.forEach(element => {
+      const userElement = document.createElement('li')
+      userElement.innerHTML = element
+      userDiv.appendChild(userElement)
     })
-  }
+  })
 })
 
 const displaySentMessage = (sender, content, dateTimeObject) => {
-  const timeString = format.formatAMPM(dateTimeObject)
-  const dateString = format.formatDate(dateTimeObject)
+  const timeString = formatAMPM(dateTimeObject)
+  const dateString = formatDate(dateTimeObject)
   const messagesSection = document.getElementById('message-area')
   const messageDiv = document.createElement('div')
   messageDiv.setAttribute('class', 'ml-auto position-relative chat-right text-white')
@@ -67,9 +110,9 @@ const displaySentMessage = (sender, content, dateTimeObject) => {
   contentDiv.appendChild(messageText)
   senderDiv.appendChild(senderPTag)
 
-  messageDiv.appendChild(dateDiv)
-  messageDiv.appendChild(contentDiv)
   messageDiv.appendChild(senderPTag)
+  messageDiv.appendChild(contentDiv)
+  messageDiv.appendChild(dateDiv)
 
   const breakTag1 = document.createElement('br')
   const breakTag2 = document.createElement('br')
@@ -77,13 +120,11 @@ const displaySentMessage = (sender, content, dateTimeObject) => {
   messagesSection.appendChild(messageDiv)
   messagesSection.appendChild(breakTag1)
   messagesSection.appendChild(breakTag2)
-
-  document.body.append(messagesSection)
 }
 
 const displayRecievedMessage = (sender, content, dateTimeObject) => {
-  const timeString = format.formatAMPM(dateTimeObject)
-  const dateString = format.formatDate(dateTimeObject)
+  const timeString = formatAMPM(dateTimeObject)
+  const dateString = formatDate(dateTimeObject)
   const messagesSection = document.getElementById('message-area')
   const messageDiv = document.createElement('div')
   messageDiv.setAttribute('class', 'mr-auto position-relative chat-left text-white')
@@ -124,6 +165,4 @@ const displayRecievedMessage = (sender, content, dateTimeObject) => {
   messagesSection.appendChild(messageDiv)
   messagesSection.appendChild(breakTag1)
   messagesSection.appendChild(breakTag2)
-
-  document.body.append(messagesSection)
 }

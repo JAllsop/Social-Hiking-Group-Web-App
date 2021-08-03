@@ -26,6 +26,12 @@ router.get('/api/list', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page, Refreshing The Page Might Help') }
 })
 
+router.get('/api/username', function (req, res) {
+  if (req.session.isLoggedIn) {
+    res.json(req.session.username)
+  } else { res.status(404).json('You need to be Logged In To Access This Page, Refreshing The Page Might Help') }
+})
+
 const dummy = () => {
   return 1
 }
