@@ -40,6 +40,7 @@ function makeTable (groups) {
   for (let i = 0; i < tableLength; ++i) {
     const tableRows = document.createElement('tr')
 
+
     GroupNames[i] = `<a href = '#' onclick="(${joinGroupButton})('${groups[i].groupName}')"> ${groups[i].groupName} </a>`
     GroupLocation[i] = groups[i].generalLocation
 
@@ -57,6 +58,7 @@ function makeTable (groups) {
 
   document.getElementsByTagName('body')[0].appendChild(groupsTable)
 }
+
 
 function searchFunction () { // eslint-disable-line
   const input = document.getElementById('search-text')

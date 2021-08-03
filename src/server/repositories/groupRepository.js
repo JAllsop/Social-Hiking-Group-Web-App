@@ -28,7 +28,32 @@ module.exports =
   },
 
   getList: async function getList (filter) {
-    const sql = `SELECT * FROM dbo.GROUPS`
+    const sql = 'SELECT * FROM dbo.GROUPS'
+    return await dbQuery.dbQuery(sql)
+  },
+
+  addToInvites: async function addToInvites (username, groupname) {
+    let sql = 'INSERT INTO dbo.INVITES (GroupName, Invitee, InvitationStatus)'
+    sql += `VALUES ('${groupname}', '${username}', 'Pending')`
+
+    return await dbQuery.dbQuery(sql)
+  },
+  createInvitation: async function createInvitation (username, groupname) {
+    const message = `${username} has invited you to join the ${groupname} group!`
+    const status = 'unseen'
+
+    let sql = 'INSERT INTO dbo.INVITATIONMESSAGES (Username, Groupname, PopMessages,MessageStatus)'
+    sql += `VALUES ('${username}','${groupname}','${message}','${status}')`
+
     return await dbQuery.dbQuery(sql)
   }
+
+  // ,
+
+  // checkUser: async function checkUser (username) {
+  //   let sql = 'SELECT groupName FROM dbo.USERGROUPS WHERE '
+  //   sql += `username ='${username}'`
+  //   return await dbQuery.dbQuery(sql)
+  // }
+
 }
