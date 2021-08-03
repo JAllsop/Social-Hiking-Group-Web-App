@@ -28,7 +28,7 @@ module.exports = {
     saveUninitialized: false,
     cookie: {
       // time before session expires, set to 5 minutes
-      maxAge: 300000
+      maxAge: 30000000
     },
     store: new MSSQLStore(config, options)
   })
