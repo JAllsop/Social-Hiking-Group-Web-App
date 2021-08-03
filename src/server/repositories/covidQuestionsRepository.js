@@ -22,7 +22,7 @@ module.exports = {
       sql = sql.replace(/'yes',/g, "'true',")
       sql = sql.replace(/'no',/g, "'false',")
       sql = sql.replace(/, \)/g, ' )')
-      console.log(`covid question sql query: ${sql}`)
+      // console.log(`covid question sql query: ${sql}`)
       const result = await dbQuery(sql)
       if (result) { return true } else { return false }
     } catch (err) {
