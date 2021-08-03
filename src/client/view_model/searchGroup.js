@@ -88,12 +88,10 @@ function searchFunction () { // eslint-disable-line
 
 async function joinGroupButton (group) {
   await applied(group)
-  console.log(`has applied (as status): ${status}`)
+  if (document.getElementById('join')) {
+    document.getElementById('join').remove()
+  }
   if (!status) {
-    console.log(`has applied (IN): ${status}`)
-    if (document.getElementById('join')) {
-      document.getElementById('join').remove()
-    }
     const btn = document.createElement('button')
     btn.innerHTML = `Join ${group} `
     btn.id = 'join'
