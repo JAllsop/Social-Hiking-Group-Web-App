@@ -60,6 +60,7 @@
     "rollup": "^2.55.1",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "supertest": "6.1.4"
+    "supertest": "^6.1.4",
+    "supertest-session": "^4.1.0"
   }
 }

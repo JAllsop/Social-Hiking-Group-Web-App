@@ -5011,6 +5011,7 @@ const formatAMPM = date => {
   const strTime = hours + ':' + minutes + ' ' + ampm;
   return strTime;
 };
+
 const formatDate = date => {
   const day = date.getDate();
   const month = date.getMonth();
@@ -5018,20 +5019,22 @@ const formatDate = date => {
   return `${day}/${month}/${year}`;
 };
 
+var chatFormatting = {
+  formatAMPM,
+  formatDate
+};
+
 const retrieveGroupMessages = async groupID => {
-  const params = {
-    groupID: groupID
-  };
-  const response = await fetch('http://localhost:3000/messages/get-messages', {
+  const response = await fetch(`http://localhost:3000/messages/get-messages:${groupID}`, {
     // eslint-disable-line
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(params).catch(error => console.error('Error:', error))
-  });
-  return response.json();
+    }
+  }).catch(error => console.error('Error:', error));
+  return response;
 };
+
 const getUsername = async () => {
   // Get username based on session
   const response = await fetch('http://localhost:3000/user/api/username', {
@@ -5041,7 +5044,12 @@ const getUsername = async () => {
       'Content-Type': 'application/json'
     }
   });
-  return response.json();
+  return response;
+};
+
+var chatFunctions = {
+  retrieveGroupMessages,
+  getUsername
 };
 
 const socket = build.exports.io('http://localhost:3000', {
@@ -5052,14 +5060,14 @@ socket.on('connection', () => {
 });
 socket.on('error', console.error);
 socket.on('retrieveGroupMessages', groupID => {
-  retrieveGroupMessages(groupID).then(data => console.log(data)); // display messages for respective groups.
+  chatFunctions.retrieveGroupMessages(groupID).then(data => console.log(data)); // display messages for respective groups.
 });
 socket.on('message', data => {
   console.log(data);
   displayRecievedMessage(data.sender, data.content, data.date);
 });
 socket.on('groupMessage', async res => {
-  const sender = await getUsername();
+  const sender = await chatFunctions.getUsername();
   res.array.forEach(element => {
     if (element.sender === sender) {
       displaySentMessage(element.sender, element.content, element.date);
@@ -5078,7 +5086,7 @@ const sendButtonFunction = async groupValue => {
   let msg = document.getElementById('content').value;
   console.log(`${msg}`);
   const dateObject = new Date();
-  const sender = await getUsername();
+  const sender = await chatFunctions.getUsername();
   displaySentMessage(sender, msg, dateObject);
   msg = ''; // clear message after it is sent.
 
@@ -5114,8 +5122,8 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 const displaySentMessage = (sender, content, dateTimeObject) => {
-  const timeString = formatAMPM(dateTimeObject);
-  const dateString = formatDate(dateTimeObject);
+  const timeString = chatFormatting.formatAMPM(dateTimeObject);
+  const dateString = chatFormatting.formatDate(dateTimeObject);
   const messagesSection = document.getElementById('message-area');
   const messageDiv = document.createElement('div');
   messageDiv.setAttribute('class', 'ml-auto position-relative chat-right text-white');
@@ -5148,8 +5156,8 @@ const displaySentMessage = (sender, content, dateTimeObject) => {
 };
 
 const displayRecievedMessage = (sender, content, dateTimeObject) => {
-  const timeString = formatAMPM(dateTimeObject);
-  const dateString = formatDate(dateTimeObject);
+  const timeString = chatFormatting.formatAMPM(dateTimeObject);
+  const dateString = chatFormatting.formatDate(dateTimeObject);
   const messagesSection = document.getElementById('message-area');
   const messageDiv = document.createElement('div');
   messageDiv.setAttribute('class', 'mr-auto position-relative chat-left text-white');

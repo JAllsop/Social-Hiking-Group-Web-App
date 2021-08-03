@@ -1,31 +1,32 @@
 /* eslint-env jest */
-import { assert } from 'assert'
-import { messages } from '../../../__mocks__/message-test-data'
-import { fetch } from 'node-fetch'
-import { retrieveGroupMessages, getUsername } from '../../../src/client/model/chat-functions'
-import { beforeEach } from '@jest/globals'
+const assert = require('assert')
+const messages = require('../../../__mocks__/message-test-data')
+const fetchMock = require('jest-fetch-mock')
+const { retrieveGroupMessages, getUsername } = require('../../../src/client/model/chat-functions')
+const beforeEach = require('@jest/globals').beforeEach
 
 beforeEach(() => {
-  fetch.resetMocks()
+  fetchMock.resetMocks()
+  fetchMock.doMock()
 })
 
 describe('gets chat related information', () => {
   test('Returns all the group messages using the group name (Jukes)', async () => {
-    fetch.mockResponseOnce(JSON.stringify([messages[2], messages[3]]))
+    fetchMock.mockResponseOnce(JSON.stringify([messages[2], messages[3]]))
     const requestedMessages = await retrieveGroupMessages('Jukes')
     const testMessages = JSON.stringify([messages[2], messages[3]])
     assert(requestedMessages, testMessages)
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
   test('Returns a different set of messages when a different group name is used (Jimmies)', async () => {
-    fetch.mockResponseOnce(JSON.stringify([messages[0]]))
+    fetchMock.mockResponseOnce(JSON.stringify([messages[0]]))
     const requestedMessages = await retrieveGroupMessages('Jimmies')
     const testMessages = JSON.stringify([messages[0]])
     assert(requestedMessages, testMessages)
-    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
   })
   test('Gets no messages when entering a group name with no saved messages (Easy Striders)', async () => {
-    fetch.mockResponseOnce(JSON.stringify([{}]))
+    fetchMock.mockResponseOnce(JSON.stringify([{}]))
     const emptyMessageList = [{}]
     const requestedMessages = await retrieveGroupMessages('Easy Striders')
     assert(requestedMessages, emptyMessageList)

@@ -5,7 +5,7 @@ const MessageService = require('../services/message-service')
 const router = express.Router()
 
 // defaults to sending login/registration page
-router.get('/get-messages', (req, res) => {
+router.get('/get-messages::groupID', (req, res) => {
   // redirect to home page if confirmed user already logged in via session
   if (req.session.isLoggedIn) {
     MessageService.getGroupMessages(req, res)

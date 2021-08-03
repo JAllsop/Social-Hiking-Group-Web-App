@@ -1,4 +1,4 @@
-export const formatAMPM = (date) => {
+const formatAMPM = (date) => {
   let hours = date.getHours()
   let minutes = date.getMinutes()
   const ampm = hours >= 12 ? 'PM' : 'AM'
@@ -9,7 +9,7 @@ export const formatAMPM = (date) => {
   return strTime
 }
 
-export const formatDate = (date) => {
+const formatDate = (date) => {
   const day = date.getDate()
   const month = date.getMonth()
   const year = date.getFullYear()
@@ -17,4 +17,4 @@ export const formatDate = (date) => {
   return `${day}/${month}/${year}`
 }
 
-export default { formatAMPM, formatDate }
+module.exports = { formatAMPM, formatDate }

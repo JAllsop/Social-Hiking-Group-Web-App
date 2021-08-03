@@ -7,7 +7,7 @@ class MessageRepository {
 
   async getGroupMessages (req, res) {
     try {
-      const messages = await dbQuery(`SELECT * FROM dbo.MESSAGES WHERE groupID=${req.body.groupID}`)
+      const messages = await dbQuery(`SELECT * FROM dbo.MESSAGES WHERE groupID=${req.params.groupID}`)
       res.send(messages)
     } catch (err) {
       console.log(err)
