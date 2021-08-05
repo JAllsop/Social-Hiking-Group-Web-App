@@ -6,8 +6,8 @@ class AppSockets {
       const req = { messageContent: message.messageText, date: message.messageDate, sender: message.senderID }
       client.broadcast.to(groupID).emit('message', req)
       const res = []
-      MessageService.saveMessage(res, req)
-        .then((value) => console.log(value))
+      const results = await MessageService.saveMessage(res, req)
+      console.log(results)
     })
 
     client.on('retrieveGroupMessages', async (groupID) => { // GroupID is equivalent to Group Name.
