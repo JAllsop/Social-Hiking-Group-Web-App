@@ -12,6 +12,14 @@ module.exports =
     return await db.addToGroup(user, group)
   },
 
+  saveName: async function saveName (group) {
+    return await db.saveName(group)
+  },
+
+  deleteName: async function deleteName () {
+    return await db.deleteName()
+  },
+
   isGroupNameAvailable: async function isGroupNameAvailable (groupName, callback) {
     const result = await db.get(groupName)
     if (result.length === 0) { callback(false) } else { callback(true) }
@@ -21,6 +29,12 @@ module.exports =
     const result = await db.getLast()
     if (result) callback(result)
   },
+
+  getName: async function getName (callback) {
+    const result = await db.getName()
+    callback(result)
+  },
+
   getGroupList: async function getGroupList (callback) {
     const result = await db.getList()
     if (result.length !== 0) callback(result)
