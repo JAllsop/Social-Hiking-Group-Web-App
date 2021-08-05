@@ -8,3 +8,5 @@ router.get('/get-logs', async function (req, res) {
     res.json(await logService.getLogs())
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
+
+module.exports = router

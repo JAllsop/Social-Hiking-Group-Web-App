@@ -23,4 +23,4 @@ class LoggingRepository {
   }
 }
 
-module.exports = LoggingRepository()
+module.exports = new LoggingRepository()

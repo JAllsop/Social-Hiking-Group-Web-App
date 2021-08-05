@@ -31,6 +31,7 @@ const invitationRouter = require('../server/routes/invitationRoutes.js').router
 const myGroupsRoutes = require('../server/routes/myGroupsRoutes.js')
 const covidRouter = require('../server/routes/covidQuestionsRoutes.js')
 const applicationRouter = require('../server/routes/applicationRoutes.js')
+const loggingRouter = require('../server/routes/loggingRoute')
 
 // mounting routers
 app.use('/group', groupRouter)
@@ -42,6 +43,7 @@ app.use('/invitations', invitationRouter)
 app.use('/myGroups', myGroupsRoutes)
 app.use('/covid-questions', covidRouter)
 app.use('/group', applicationRouter)
+app.use('/logs', loggingRouter)
 io.on('connection', AppSockets.connection)
 io.on('error', console.error)
 
