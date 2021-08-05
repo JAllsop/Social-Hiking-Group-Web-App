@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Title of the document</title>
+<script src="/cdn/model/chatarea.js" ></script>
 <script src="../../dist/bundle.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -31,7 +32,7 @@
                         </div>
 
                         <div id="group-list" class="user-list-div">
-                              <h2> Search for users here... </h2>
+                              <h3> Search for users here... </h3>
                         </div>
                   
                 </div>
@@ -39,7 +40,7 @@
                 <div id="chat-area" class="col-7 div-border-msg position-relative">
                     <div id="top-bar" class="row justify-content-between">
                         <div id="chat-group-name" class="col-6">
-                           <h2 id="group-name" class="nm-group-heading"> Group name </h2>
+                           <h2 id="group-name" class="nm-group-heading"></h2>
                         </div>
                         <div id="chat-side-button" class="col-3"> 
                              <div class="dropdown">
@@ -48,8 +49,9 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" href="./home.html" id="view-members">Home</a>
+                                    <a class="dropdown-item" href="#" onclick = 'viewGroup()' id="view-description">View Group Description </a>
                                     <a class="dropdown-item" href="#" id="view-members">View Members</a>
-                                    <a class="dropdown-item" href="./searchUser.html" id="invite-user">Invite Member</=
+                                    <a class="dropdown-item" href="/user/" id="invite-user"> Invite Member </a>
                    
                                 </div>
                              </div>
