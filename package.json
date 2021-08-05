@@ -1,5 +1,5 @@
 {
-  "name": "hikinh-app",
+  "name": "hiking-app",
   "version": "1.0.0",
   "description": "Web App for organising hiking sessions, group laboratory for Software Developement III",
   "main": "./src/server.js",
