@@ -37,7 +37,7 @@ router.post('/add-group', async function (req, res) {
   if (req.session.isLoggedIn) {
     await groupService.createGroup(req.body)
     await groupService.addToGroup(req.session.username, req.body)
-    res.redirect('/group/group-homePage' + `${req.body.groupName}`)
+    res.redirect('/group/group-homePage/' + `${req.body.groupName}`)
     // redirects to group's webpage to view newly created group details
     // res.redirect(`/view/view-group:${req.body.groupName}`)
     // respond with not found if user not logged in
