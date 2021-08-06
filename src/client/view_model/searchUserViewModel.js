@@ -46,7 +46,7 @@ import('../model/searchUserModel.js').then(({ fetchUserList }) => {
         // Create a new list entry
         const li = document.createElement('LI')
         // onfocusout='javascript:hide()'
-        const temp = "<a href ='javascript:void(0)' onclick='inviteUser(this.text)'>" + `${user.username}` + '</a>'
+        const temp = "<a href ='javascript:void(0)' onclick='checkUser(this.text)'>" + `${user.username}` + '</a>'
         li.innerHTML = temp
 
         // Append the class to the list element
@@ -68,20 +68,37 @@ function hide () {
 
 // --- For checking if user already in the group ---
 
-// function checkUser(username){
-//   fetch('/group/check-user/' + `${username}`)
-//   .then(function (response) {
-//     return response.json()
-//   })
-//   .then(function (_value){
-//     if(_value === true) {inviteUser(_value)}
-//     else {
-//       console.log('User already part of group')
-//     }
-//   }
-// }
+function checkUser (username) {
+  fetch('/group/groupName')
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (groupName) {
+      const groupname = groupName[0].Groupname
 
-function inviteUser (username) {
+      fetch('/group/check-user', {
+        // Adding method type
+        method: 'POST',
+        // Adding body or contents to send
+        body: JSON.stringify({
+          username: `${username}`,
+          groupname: `${groupname}`
+        }),
+        // Adding headers to the request
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8'
+        }
+      })
+        .then(function (result) {
+          return result.json()
+        })
+        .then(function (result) {
+          if (result) { alert('User already a member of this group') } else { inviteUser(username, groupname) }
+        })
+    })
+}
+
+function inviteUser (username, groupname) {
   alert('Invite sent')
 
   fetch('/group/add-user', {
@@ -91,10 +108,28 @@ function inviteUser (username) {
 
     // Adding body or contents to send
     body: JSON.stringify({
-      username: `${username}`
-      // groupName: '',
+      username: `${username}`,
+      groupName: `${groupname}`
     }),
+    // Adding headers to the request
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8'
+    }
+  })
+    .then(createInvites(username, groupname))
+}
 
+function createInvites (username, groupname) {
+  fetch('/group/send-invitation', {
+
+    // Adding method type
+    method: 'POST',
+
+    // Adding body or contents to send
+    body: JSON.stringify({
+      username: `${username}`,
+      groupName: `${groupname}`
+    }),
     // Adding headers to the request
     headers: {
       'Content-type': 'application/json; charset=UTF-8'

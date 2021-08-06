@@ -10,10 +10,9 @@ module.exports =
   },
   sendResponse: async function sendResponse (groupID) {
     await db.sendResponse(groupID)
+  },
+  addToApplications: async function addToApplications (username, groupID) {
+    await db.addToApplications(username)
   }
-  // ,
-  // addToApplications: async function addToApplications (username) {
-  //   await db.addToApplications(username)
-  // }
 
 }

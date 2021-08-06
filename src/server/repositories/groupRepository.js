@@ -62,14 +62,24 @@ module.exports =
     sql += `VALUES ('${username}','${groupname}','${message}','${status}')`
 
     return await dbQuery.dbQuery(sql)
+  },
+
+  removeUser: async function removeUser (removeRequest) {
+    let sql = 'INSERT INTO dbo.REMOVEREQUEST (Username, Reason) '
+    sql += `VALUES ('${removeRequest.username}', '${removeRequest.reason}')`
+    return await dbQuery.dbQuery(sql)
+  },
+
+  leaveGroup: async function leaveGroup (groupname, username) {
+    let sql = 'DELETE FROM dbo.USERGROUPS WHERE '
+    sql += `username = '${username}' AND groupName = '${groupname}'`
+    return await dbQuery.dbQuery(sql)
+  },
+
+  checkUser: async function checkUser (username, groupname) {
+    let sql = 'SELECT * FROM dbo.USERGROUPS WHERE '
+    sql += `username ='${username}' AND groupName = '${groupname}'`
+    return await dbQuery.dbQuery(sql)
   }
-
-  // ,
-
-  // checkUser: async function checkUser (username) {
-  //   let sql = 'SELECT groupName FROM dbo.USERGROUPS WHERE '
-  //   sql += `username ='${username}'`
-  //   return await dbQuery.dbQuery(sql)
-  // }
 
 }
