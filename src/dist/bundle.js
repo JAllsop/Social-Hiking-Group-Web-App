@@ -5032,6 +5032,7 @@ const retrieveGroupMessages = async groupID => {
       'Content-Type': 'application/json'
     }
   }).catch(error => console.error('Error:', error));
+  console.log(response);
   return response;
 };
 
@@ -5052,7 +5053,7 @@ var chatFunctions = {
   getUsername
 };
 
-const socket = build.exports.io('http://localhost:3000', {
+const socket = build.exports.io('http://localhost:5000', {
   transports: ['websocket']
 });
 socket.on('connection', () => {
@@ -5081,19 +5082,26 @@ socket.on('groupMessage', async res => {
 //   })
 // }
 
-const sendButtonFunction = async groupValue => {
-  // This event is triggered when the send button is clicked!
-  let msg = document.getElementById('content').value;
-  console.log(`${msg}`);
-  const dateObject = new Date();
-  const sender = await chatFunctions.getUsername();
-  displaySentMessage(sender, msg, dateObject);
-  msg = ''; // clear message after it is sent.
-
-  msg.focus(); // Focus on the message area when the message is sent.
-
+const sendTextMessage = (msg, sender, dateObject, groupValue) => {
+  console.log('Entered Send message block');
   socket.on('sendTextMessage', (data, groupName) => {
   });
+};
+
+const sendButtonFunction = groupValue => {
+  // This event is triggered when the send button is clicked!
+  const msgTag = document.getElementById('content');
+  let msg = msgTag.value;
+  console.log('Entered Message Block');
+  console.log(`${msg}`);
+  const dateObject = new Date();
+  const sender = 'sino'; // await getUsername()
+
+  displaySentMessage(sender, msg, dateObject); // msgTag.focus() // Focus on the message area when the message is sent.
+
+  msg = ' '; // clear message after it is sent.
+
+  sendTextMessage(); // Call function to transmit message data
 };
 
 const testUsers = ['sinomazi', 'tikoloshi', 'slade', 'beast', 'lava', 'roques', 'kitikiti', 'samoosa'];
@@ -5103,13 +5111,14 @@ window.addEventListener('DOMContentLoaded', event => {
   const groupSelect = document.getElementById('hiking-groups');
   const userDiv = document.getElementById('user-list-div');
   const viewMembersButton = document.getElementById('view-members');
-  button.addEventListener('click', () => {
-    sendButtonFunction();
-  });
   groupSelect.addEventListener('change', event => {
     // When group selection is made.
     const value = event.target.value;
     groupName.innerHTML = value;
+  });
+  button.addEventListener('click', () => {
+    console.log('Message Sent!');
+    sendButtonFunction();
   });
   viewMembersButton.addEventListener('click', () => {
     // View members in a group

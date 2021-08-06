@@ -34,22 +34,26 @@ socket.on('groupMessage', async (res) => {
 //     groupID = groupName
 //   })
 // }
-
-const sendButtonFunction = async (groupValue) => { // This event is triggered when the send button is clicked!
-  let msg = document.getElementById('content').value
-
-  console.log(`${msg}`)
-  const dateObject = new Date()
-  const sender = await getUsername()
-  displaySentMessage(sender, msg, dateObject)
-
-  msg = '' // clear message after it is sent.
-  msg.focus() // Focus on the message area when the message is sent.
-
+const sendTextMessage = (msg, sender, dateObject, groupValue) => {
+  console.log('Entered Send message block')
   socket.on('sendTextMessage', (data, groupName) => { // Send Message to respective group.
     data = { sender: `${sender}`, content: `${msg}`, date: dateObject }
     groupName = groupValue
   })
+}
+
+const sendButtonFunction = (groupValue) => { // This event is triggered when the send button is clicked!
+  const msgTag = document.getElementById('content')
+  let msg = msgTag.value
+  console.log('Entered Message Block')
+  console.log(`${msg}`)
+  const dateObject = new Date()
+  const sender = 'sino'// await getUsername()
+  displaySentMessage(sender, msg, dateObject)
+
+  msgTag.focus() // Focus on the message area when the message is sent.
+  msg = '' // clear message after it is sent.
+  sendTextMessage(msg, sender, dateObject, groupValue) // Call function to transmit message data
 }
 const testUsers = ['sinomazi', 'tikoloshi', 'slade', 'beast', 'lava', 'roques', 'kitikiti', 'samoosa']
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -60,13 +64,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const viewMembersButton = document.getElementById('view-members')
 
   let groupID = ' '
-  button.addEventListener('click', () => {
-    sendButtonFunction(groupID)
-  })
+
   groupSelect.addEventListener('change', (event) => { // When group selection is made.
     const value = event.target.value
     groupID = `${value}`
     groupName.innerHTML = value
+    socket.emit('join group', groupID)
+  })
+  button.addEventListener('click', () => {
+    console.log('Message Sent!')
+
+    sendButtonFunction(groupID)
   })
   viewMembersButton.addEventListener('click', () => { // View members in a group
     testUsers.forEach(element => {
