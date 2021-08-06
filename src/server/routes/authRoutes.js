@@ -5,7 +5,6 @@ const express = require('express')
 const loginService = require('../services/loginService')
 const registerService = require('../services/registerService')
 const logservice = require('../services/logging-service')
-
 const router = express.Router()
 
 // defaults to sending login/registration page
