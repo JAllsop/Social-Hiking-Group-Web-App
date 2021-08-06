@@ -1,7 +1,7 @@
 'use strict'
 
 import('../model/myActivitiesModel.js').then(({ fetchMyActivities }) => {
-  fetchMyActivities()
+  fetchMyActivities() // Fetching user activities
     .then(function (response) {
       return response
     })
@@ -9,7 +9,7 @@ import('../model/myActivitiesModel.js').then(({ fetchMyActivities }) => {
       const userList = document.getElementById('myActivities')
       userList.innerHTML = ''
 
-      // Iterate through all students
+      // Iterate through all user activities
       activities.forEach(function (action) {
         // Create a new list entry
         const li = document.createElement('LI')
