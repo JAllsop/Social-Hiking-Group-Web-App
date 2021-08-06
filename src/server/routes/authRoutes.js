@@ -83,7 +83,6 @@ router.get('/logout', (req, res) => {
       res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'login.html'))
     })
   }
-
   // respond with not found if user not logged in
   else {
     res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error')
