@@ -62,6 +62,20 @@ module.exports =
     sql += `VALUES ('${username}','${groupname}','${message}','${status}')`
 
     return await dbQuery.dbQuery(sql)
+  },
+
+  removeUser: async function removeUser (removeRequest) {
+    let sql = 'INSERT INTO dbo.REMOVEREQUEST (Username, Reason) '
+    sql += `VALUES ('${removeRequest.username}', '${removeRequest.reason}')`
+    return await dbQuery.dbQuery(sql)
+  },
+
+  leaveGroup: async function leaveGroup (groupname, username) {
+    console.log('db')
+    console.log(groupname)
+    console.log(username)
+    let sql = 'DELETE FROM [dbo.USERGROUPS WHERE '
+    sql += `username = ${username} AND groupName = ${groupname}`
   }
 
   // ,

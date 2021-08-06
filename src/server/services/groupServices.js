@@ -44,6 +44,14 @@ module.exports =
   },
   createInvitation: async function createInvitation (username, groupname) {
     return await db.createInvitation(username, groupname)
+  },
+  removeUser: async function removeUser (removeRequest) {
+    return await db.removeUser(removeRequest)
+  },
+  leaveGroup: async function leaveGroup (groupname, username) {
+    console.log(username)
+    console.log(groupname)
+    return await db.leaveGroup(groupname, username)
   }
   // ,
   // checkUser: async function checkUser (username, callback) {
