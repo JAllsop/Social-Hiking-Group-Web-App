@@ -4,6 +4,7 @@ const path = require('path')
 const express = require('express')
 const loginService = require('../services/loginService')
 const registerService = require('../services/registerService')
+// const logoutService = require('../services/loginOut')
 
 const router = express.Router()
 
@@ -62,6 +63,15 @@ router.post('/api/register', async (req, res) => {
     // return result of attempt to register
     res.json({ code: 'Account Registered' })
   }
+})
+
+// Logging out of the app.
+router.get('/logout', (req, res) => {
+  // confirm user is logged in via session
+  if (req.session.isLoggedIn) {
+    res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'login.html'))
+  // respond with not found if user not logged in
+  } else { res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error') }
 })
 
 module.exports = router
