@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // loading routers
 const userRoutes = require('../server/routes/userRoutes.js').router
+const activityRoutes = require('../server/routes/activityRoutes.js')
 const authRouter = require('../server/routes/authRoutes.js')
 const viewRoutes = require('../server/routes/viewGroupRoutes')
 const groupRouter = require('../server/routes/groupRoutes.js').router
@@ -38,12 +39,12 @@ app.use('/group', groupRouter)
 app.use('/view', viewRoutes)
 app.use('/', authRouter)
 app.use('/user', userRoutes)
+app.use('/activities', activityRoutes)
 app.use('/messages', messageRouter)
 app.use('/invitations', invitationRouter)
 app.use('/myGroups', myGroupsRoutes)
 app.use('/covid-questions', covidRouter)
 app.use('/group', applicationRouter)
-app.use('/logs', loggingRouter)
 io.on('connection', AppSockets.connection)
 io.on('error', console.error)
 
