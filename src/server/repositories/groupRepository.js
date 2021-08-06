@@ -71,11 +71,9 @@ module.exports =
   },
 
   leaveGroup: async function leaveGroup (groupname, username) {
-    console.log('db')
-    console.log(groupname)
-    console.log(username)
-    let sql = 'DELETE FROM [dbo.USERGROUPS WHERE '
-    sql += `username = ${username} AND groupName = ${groupname}`
+    let sql = 'DELETE FROM dbo.USERGROUPS WHERE '
+    sql += `username = '${username}' AND groupName = '${groupname}'`
+    return await dbQuery.dbQuery(sql)
   }
 
   // ,

@@ -28,10 +28,10 @@ function getUsers (groupName) {
       for (let i = 0; i < username.length; ++i) {
       // Create a new list entry
         const li = document.createElement('LI')
-        // onfocusout='javascript:hide()'
-        const temp = `<a href = '#' onclick="(${removeMember})('${username[i].username}')"> ${username[i].username} </a>`
-        li.innerHTML = temp
 
+        const temp = `<a href = '#' onclick="(${removeMember})('${username[i].username}')"> ${username[i].username} </a>`
+        const rating = `${username[i].rating}`
+        li.innerHTML = temp + ' ------- Rating = ' + rating
         // Append the class to the list element
         li.className += 'user'
 
