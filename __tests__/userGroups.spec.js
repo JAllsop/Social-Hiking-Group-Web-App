@@ -15,7 +15,7 @@ describe('Fetching Group Details', () => {
       groupDescription: 'We like to run and are very relaxed about it',
       generalLocation: 'Johannesburg area and surroundings'
     },
-    [{ username: 'JAllsop', rating: 50 }, { username: 'BabyLue', rating: 50 }]]
+    [{ username: 'BabyLue', rating: 50 }, { username: 'JAllsop', rating: 50 }]]
     expect(fetchedGroupDetails).toStrictEqual(expectedGroupDetails)
   })
 })
