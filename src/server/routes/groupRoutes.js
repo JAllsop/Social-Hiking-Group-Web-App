@@ -54,6 +54,12 @@ router.get('/validate-groupName/:group_name', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
+router.get('/leave/:groupname', function (req, res) {
+  console.log(req.params.groupname)
+  groupService.leaveGroup(req.params.groupname, req.session.username)
+  res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'myGroups.html'))
+})
+
 router.get('/group-homePage/:group_name', (req, res) => {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
@@ -89,6 +95,10 @@ router.get('/groupList', function (req, res) {
     })
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.post('/remove', function (req, res) {
+  groupService.removeUser(req.body)
 })
 
 router.get('/groupName', function (req, res) {
