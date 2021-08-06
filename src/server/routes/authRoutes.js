@@ -69,9 +69,20 @@ router.post('/api/register', async (req, res) => {
 router.get('/logout', (req, res) => {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
-    res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'login.html'))
+    res.header('Cache-Control', 'no-cache')
+
+    req.session.destroy((err) => {
+      if (err) {
+        return console.log(err)
+      }
+      res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'login.html'))
+    })
+  }
+
   // respond with not found if user not logged in
-  } else { res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error') }
+  else {
+    res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error')
+  }
 })
 
 module.exports = router
