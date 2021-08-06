@@ -6,7 +6,6 @@ const loginService = require('../services/loginService')
 const registerService = require('../services/registerService')
 // const logoutService = require('../services/loginOut')
 const logservice = require('../services/logging-service')
-
 const router = express.Router()
 
 // defaults to sending login/registration page
@@ -32,6 +31,9 @@ router.post('/api/auth', async (req, res) => {
     req.session.isLoggedIn = true
     // save username in session
     req.session.username = username
+    // save user login activity
+    const operationDate = new Date()
+    logservice.logOperation(req.session.username, 'logged in', operationDate)
     // save new session information
     req.session.save(async (err) => {
       if (err) {
@@ -63,6 +65,8 @@ router.post('/api/register', async (req, res) => {
   } else {
     // return result of attempt to register
     res.json({ code: 'Account Registered' })
+    const operationDate = new Date()
+    logservice.logOperation(username, 'Created an account', operationDate)
   }
 })
 
@@ -78,10 +82,7 @@ router.get('/logout', (req, res) => {
       }
       res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'login.html'))
     })
-  }
-
-  // respond with not found if user not logged in
-  else {
+  } else { // respond with not found if user not logged in
     res.status(404).json('You need to be Logged In To Access This Page, Refresh the page if you think this is an error')
   }
 })
