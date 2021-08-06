@@ -80,9 +80,10 @@
           const members = groupDetails[1]
 
           // for each members create a list item and append it to the group members list
-          members.forEach((item) => {
+          members.forEach((member) => {
             let members = document.createElement("li")
-            members.innerText = item.username
+            members.innerText = `Username: ${member.username}`
+            members.innerText += ', Rating: ' + member.rating
             membersList.appendChild(members)
           })
 

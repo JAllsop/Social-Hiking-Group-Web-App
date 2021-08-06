@@ -16,9 +16,25 @@ module.exports =
     return await dbQuery.dbQuery(sql)
   },
 
+  saveName: async function saveName (group) {
+    let sql = 'INSERT INTO [dbo].[GROUPNAME] (Groupname)'
+    sql += `VALUES ('${group}')`
+    return await dbQuery.dbQuery(sql)
+  },
+
+  deleteName: async function deleteName () {
+    const sql = 'DELETE FROM [dbo].[GROUPNAME]'
+    return await dbQuery.dbQuery(sql)
+  },
+
   get: async function get (group) {
     let sql = 'SELECT * FROM dbo.GROUPS WHERE '
     sql += `groupName='${group}'`
+    return await dbQuery.dbQuery(sql)
+  },
+
+  getName: async function getName (group) {
+    const sql = 'SELECT * FROM dbo.GROUPNAME'
     return await dbQuery.dbQuery(sql)
   },
 
