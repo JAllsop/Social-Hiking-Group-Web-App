@@ -4,7 +4,6 @@ const path = require('path')
 const express = require('express')
 const loginService = require('../services/loginService')
 const registerService = require('../services/registerService')
-const logservice = require('../services/logging-service')
 
 const router = express.Router()
 
@@ -31,9 +30,6 @@ router.post('/api/auth', async (req, res) => {
     req.session.isLoggedIn = true
     // save username in session
     req.session.username = username
-    // save user login activity
-    const operationDate = new Date()
-    loginService.logOperation(req.session.username, 'logged in', operationDate)
     // save new session information
     req.session.save(async (err) => {
       if (err) {
