@@ -31,7 +31,7 @@ const invitationRouter = require('../server/routes/invitationRoutes.js').router
 const myGroupsRoutes = require('../server/routes/myGroupsRoutes.js')
 const covidRouter = require('../server/routes/covidQuestionsRoutes.js')
 const applicationRouter = require('../server/routes/applicationRoutes.js')
-const loggingRouter = require('../server/routes/loggingRoute')
+const loggingRouter = require('../server/routes/loggingRoute.js')
 
 // mounting routers
 app.use('/group', groupRouter)
