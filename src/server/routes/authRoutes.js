@@ -33,7 +33,7 @@ router.post('/api/auth', async (req, res) => {
     req.session.username = username
     // save user login activity
     const operationDate = new Date()
-    loginService.logOperation(req.session.username, 'logged in', operationDate)
+    logservice.logOperation(req.session.username, 'logged in', operationDate)
     // save new session information
     req.session.save(async (err) => {
       if (err) {
@@ -65,6 +65,8 @@ router.post('/api/register', async (req, res) => {
   } else {
     // return result of attempt to register
     res.json({ code: 'Account Registered' })
+    const operationDate = new Date()
+    logservice.logOperation(username, 'Created an account', operationDate)
   }
 })
 
