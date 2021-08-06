@@ -50,11 +50,10 @@ module.exports =
   },
   leaveGroup: async function leaveGroup (groupname, username) {
     return await db.leaveGroup(groupname, username)
+  },
+  checkUser: async function checkUser (username, groupname, callback) {
+    const result = await db.checkUser(username, groupname)
+    if (result.length === 0) { callback(false) } else { callback(true) } // false - Not in group
   }
-  // ,
-  // checkUser: async function checkUser (username, callback) {
-  //   const result = await db.checkUser(username)
-  //   if (result.length === 0) { callback(false) } else { callback(true) } // false - Not in group
-  // }
 
 }

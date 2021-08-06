@@ -114,20 +114,23 @@ router.get('/groupName', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
-// router.get('/check-user/:username', function (req, res) {
-//   groupService.checkUser(req.params.username, function (isPartOfGroup) {
-//     if (isPartOfGroup) { res.send(true) } else { res.send(false) }
-//   })
-// })
-
-router.post('/add-user', function (req, res) {
-  const groupname = 'groupHolder'
-  groupService.addToInvites(req.body.username, groupname)
-  res.redirect('/group/send-invitation/' + `${req.body.username}`)
+router.post('/check-user', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.checkUser(req.body.username, req.body.groupname, function (isPartOfGroup) {
+      if (isPartOfGroup) { res.send(true) } else { res.send(false) }
+    })
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
-router.get('/send-invitation/:username', function (req, res) {
-  const groupname = 'groupHolder'
-  groupService.createInvitation(req.params.username, groupname)
+router.post('/add-user', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.addToInvites(req.body.username, req.body.groupName)
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.post('/send-invitation', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.createInvitation(req.body.username, req.body.groupname)
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 module.exports = { router, dummy }
