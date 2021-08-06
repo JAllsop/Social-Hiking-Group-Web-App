@@ -49,8 +49,6 @@ module.exports =
     return await db.removeUser(removeRequest)
   },
   leaveGroup: async function leaveGroup (groupname, username) {
-    console.log(username)
-    console.log(groupname)
     return await db.leaveGroup(groupname, username)
   }
   // ,
