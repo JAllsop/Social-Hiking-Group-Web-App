@@ -13,11 +13,11 @@ module.exports =
     let sql = 'DELETE FROM dbo.INVITATIONMESSAGES WHERE '
     sql += `ID = '${groupID}'`
     return await dbQuery.dbQuery(sql)
+  },
+  addToApplications: async function addToApplications (username, groupID) {
+    const status = 0
+    let sql = 'INSERT INTO dbo.GROUPAPPLICATIONS (APPLICANT, GroupID, ApplicationStatus) '
+    sql += `VALUES ('${username}','${groupID}','${status}')`
+    return await dbQuery.dbQuery(sql)
   }
-  // ,
-  // addToApplications: async function addToApplications (username) {
-  //   const status = 0
-  //   let sql = 'INSERT INTO dbo.GROUPAPPLICATIONS (APPLICANT, GroupID, ApplicationStatus) '
-  //   sql += `VALUES ('${username}','${groupID}','${status}')`
-  // }
 }

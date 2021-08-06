@@ -32,9 +32,9 @@ router.get('/get-invitations', function (req, res) {
 router.post('/respond', function (req, res) {
   if (req.session.isLoggedIn) {
     inviteService.sendResponse(req.body.groupID)
-    // if (req.body.response === 'approve') {
-    //   inviteService.addToApplications(req.session.username)
-    // }
+    if (req.body.response === 'approve') {
+      inviteService.addToApplications(req.session.username, req.body.groupID)
+    }
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
