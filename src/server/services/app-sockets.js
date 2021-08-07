@@ -4,6 +4,7 @@ class AppSockets {
   connection (client) {
     client.on('sendTextMessage', async (message, groupID) => {
       const req = { messageContent: message.messageText, date: message.messageDate, sender: message.senderID }
+      client.join(groupID)
       client.broadcast.to(groupID).emit('message', req)
       const res = []
       MessageService.saveMessage(res, req)
@@ -18,12 +19,8 @@ class AppSockets {
           client.emit('groupMessage', res)
         })
     })
-    client.on('subscribe', (groupID) => {
-      client.join(groupID)
-    })
-
-    client.on('initiateVote', () => {
-
+    client.on('join group', (parameter) => {
+      client.join(parameter)
     })
   }
 }
