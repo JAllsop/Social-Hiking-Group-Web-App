@@ -5,6 +5,7 @@ const path = require('path')
 const fs = require('fs')
 
 const viewGroup = require('../services/viewGroup.js')
+const groupService = require('../services/groupServices.js')
 
 const router = express.Router()
 
@@ -27,6 +28,7 @@ router.get('/view-group::groupName', function (req, res) {
       // sends the edited groupPage.html to client
       res.send(data)
     }
+    // groupService.deleteName()
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
@@ -40,6 +42,10 @@ router.get('/fetch-details::groupName', async function (req, res) {
     res.send(groupDetails)
     // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.get('/view-members', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'groupMembers.html'))
 })
 
 router.get('/getQuestions', function (req, res) {

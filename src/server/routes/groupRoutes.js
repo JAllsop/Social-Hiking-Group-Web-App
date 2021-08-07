@@ -28,12 +28,16 @@ router.get('/search-group', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
+router.get('/deleteName', async function (req, res) {
+  groupService.deleteName()
+})
+
 router.post('/add-group', async function (req, res) {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
     await groupService.createGroup(req.body)
     await groupService.addToGroup(req.session.username, req.body)
-    res.redirect('/group/group-homePage')
+    res.redirect('/group/group-homePage/' + `${req.body.groupName}`)
     // redirects to group's webpage to view newly created group details
     // res.redirect(`/view/view-group:${req.body.groupName}`)
     // respond with not found if user not logged in
@@ -50,9 +54,19 @@ router.get('/validate-groupName/:group_name', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
-router.get('/group-homePage', (req, res) => {
+router.get('/leave/:groupname', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.leaveGroup(req.params.groupname, req.session.username)
+    res.sendFile(path.join(__dirname, '../../', 'client', 'views', 'myGroups.html'))
+
+  // respond with not found if user not logged in
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.get('/group-homePage/:group_name', (req, res) => {
   // confirm user is logged in via session
   if (req.session.isLoggedIn) {
+    groupService.saveName(req.params.group_name)
     res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'chatarea.html'))
   // respond with not found if user not logged in
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
@@ -86,20 +100,37 @@ router.get('/groupList', function (req, res) {
   } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 
-// router.get('/check-user/:username', function (req, res) {
-//   groupService.checkUser(req.params.username, function (isPartOfGroup) {
-//     if (isPartOfGroup) { res.send(true) } else { res.send(false) }
-//   })
-// })
-
-router.post('/add-user', function (req, res) {
-  const groupname = 'groupHolder'
-  groupService.addToInvites(req.body.username, groupname)
-  res.redirect('/group/send-invitation/' + `${req.body.username}`)
+router.post('/remove', function (req, res) {
+  groupService.removeUser(req.body)
 })
 
-router.get('/send-invitation/:username', function (req, res) {
-  const groupname = 'groupHolder'
-  groupService.createInvitation(req.params.username, groupname)
+router.get('/groupName', function (req, res) {
+  // confirm user is logged in via session
+  if (req.session.isLoggedIn) {
+    groupService.getName(function (groupname) {
+      res.send(groupname)
+    })
+    // respond with not found if user not logged in
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.post('/check-user', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.checkUser(req.body.username, req.body.groupname, function (isPartOfGroup) {
+      if (isPartOfGroup) { res.send(true) } else { res.send(false) }
+    })
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.post('/add-user', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.addToInvites(req.body.username, req.body.groupName)
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
+})
+
+router.post('/send-invitation', function (req, res) {
+  if (req.session.isLoggedIn) {
+    groupService.createInvitation(req.body.username, req.body.groupname)
+  } else { res.status(404).json('You need to be Logged In To Access This Page') }
 })
 module.exports = { router, dummy }

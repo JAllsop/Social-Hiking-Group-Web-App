@@ -3,8 +3,10 @@
 
 <head>
     <title>Group Chat Home Page</title>
-    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/cdn/view_model/createGroup.js" ></script>
+    <link href="/cdn/resources/covidQuestions.css" rel="stylesheet" />
 
 </head>
 
@@ -31,13 +33,21 @@
     description{
       height:250px;
       width: 150px;
-    }
-
-    
-
+    }    
 </style>
 
 <body >
+
+  <div class="navbar">
+    <a href='/myGroups'><i class="fa fa-fw fa-group"></i> Your Groups</a> 
+    <a href='/group/create-group'><i class="fa fa-fw fa-plus"></i> Create Group</a> 
+    <a href='/group/search-group'><i class="fa fa-fw fa-search"></i> Search Groups</a> 
+    <a href='/invitations/'><i class="fa fa-fw fa-bell"></i> Invitations</a> 
+    <a href='/covid-questions/'><i class="fa fa-fw fa-stethoscope"></i> COVID-19 Screening</a> 
+    <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+    <a href='/activities/'><i class="fa fa-fw fa-list"></i> Activity Log</a> 
+  </div>
+
     <form id = "group-details" name='group-info' action="/group/add-group" method="post">
         <label for="groupName"class="error" >Group Name:</label><br>
         <input type="text" id="groupName_" name = "groupName" placeholder="Enter group name ..." class="form-control" size = '25' minlength="2" maxlength="20"  pattern="[a-zA-Z'-'\s]*" onkeyup="manage(this)" onfocusout="validateName()" ><br>
@@ -50,6 +60,12 @@
 
         <input type="submit" id="submit-groupDetails" value="Submit" disabled >
     </form> 
+
+    <div class="footer">
+      <form id = "log_Out" name='logout' action="/logout" method="get">
+        <input type="submit" id="log_Out" value="Logout" >
+      </form>
+    </div>
 
 </body>
 
