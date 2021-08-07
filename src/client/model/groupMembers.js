@@ -92,6 +92,9 @@ fetch('/user/api/username') // eslint-disable-line
           const submitBtn = document.createElement('input')
           submitBtn.setAttribute('type', 'submit')
           submitBtn.setAttribute('value', 'Submit')
+          submitBtn.onclick = function () {
+            alert('Your request has been submited')
+          }
           reasonForm.appendChild(submitBtn)
           document.body.appendChild(reasonForm)
         }

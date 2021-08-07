@@ -102,6 +102,7 @@ router.get('/groupList', function (req, res) {
 
 router.post('/remove', function (req, res) {
   groupService.removeUser(req.body)
+  res.sendFile(path.join(__dirname, '../', '../', 'client', 'views', 'chatarea.html'))
 })
 
 router.get('/groupName', function (req, res) {
